@@ -158,61 +158,61 @@
 	<%--	导入外部的js代码--%>
 	<jsp:include page="/commons/js.jsp"/>
 
-		<script>
-			$(document).ready(function() {
-				// 选择框
-				$(".select2").select2();
+	<script>
+		$(document).ready(function () {
+			// 选择框
+			$(".select2").select2();
 
-				// WYSIHTML5编辑器
-				$(".textarea").wysihtml5({
-					locale : 'zh-CN'
-				});
+			// WYSIHTML5编辑器
+			$(".textarea").wysihtml5({
+				locale: 'zh-CN'
 			});
+		});
 
-			// 设置激活菜单
-			function setSidebarActive(tagUri) {
-				var liObj = $("#" + tagUri);
-				if (liObj.length > 0) {
-					liObj.parent().parent().addClass("active");
-					liObj.addClass("active");
-				}
+		// 设置激活菜单
+		function setSidebarActive(tagUri) {
+			var liObj = $("#" + tagUri);
+			if (liObj.length > 0) {
+				liObj.parent().parent().addClass("active");
+				liObj.addClass("active");
 			}
+		}
 
-			$(document)
-					.ready(
-							function() {
+		$(document)
+				.ready(
+						function () {
 
-								// 激活导航位置
-								setSidebarActive("admin-datalist");
+							// 激活导航位置
+							setSidebarActive("admin-datalist");
 
-								// 列表按钮 
-								$("#dataList td input[type='checkbox']")
-										.iCheck(
-												{
-													checkboxClass : 'icheckbox_square-blue',
-													increaseArea : '20%'
-												});
-								// 全选操作 
-								$("#selall")
-										.click(
-												function() {
-													var clicks = $(this).is(
-															':checked');
-													if (!clicks) {
-														$(
-																"#dataList td input[type='checkbox']")
-																.iCheck(
-																		"uncheck");
-													} else {
-														$(
-																"#dataList td input[type='checkbox']")
-																.iCheck("check");
-													}
-													$(this).data("clicks",
-															!clicks);
-												});
-							});
-		</script>
+							// 列表按钮
+							$("#dataList td input[type='checkbox']")
+									.iCheck(
+											{
+												checkboxClass: 'icheckbox_square-blue',
+												increaseArea: '20%'
+											});
+							// 全选操作
+							$("#selall")
+									.click(
+											function () {
+												var clicks = $(this).is(
+														':checked');
+												if (!clicks) {
+													$(
+															"#dataList td input[type='checkbox']")
+															.iCheck(
+																	"uncheck");
+												} else {
+													$(
+															"#dataList td input[type='checkbox']")
+															.iCheck("check");
+												}
+												$(this).data("clicks",
+														!clicks);
+											});
+						});
+	</script>
 </body>
 
 </html>

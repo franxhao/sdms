@@ -18,7 +18,7 @@ public class Student implements Serializable {
     private String stuMajor;
     private String stuClass;
     private String stuAddress;
-    private Integer stuTel;
+    private String stuTel;
     private String stuState;
     private String stuDes;
 
@@ -121,11 +121,11 @@ public class Student implements Serializable {
         this.stuAddress = stuAddress;
     }
 
-    public Integer getStuTel() {
+    public String getStuTel() {
         return stuTel;
     }
 
-    public void setStuTel(Integer stuTel) {
+    public void setStuTel(String stuTel) {
         this.stuTel = stuTel;
     }
 
