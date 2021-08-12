@@ -11,7 +11,7 @@ public class Goods implements Serializable {
     private Integer goodsId;
     private String goodsName;
     private String goodsPerson;
-    private Integer personPhone;
+    private String personPhone;
     private Date goodsIn;
     private Date goodsOut;
     private String goodsDes;
@@ -53,11 +53,11 @@ public class Goods implements Serializable {
         this.goodsPerson = goodsPerson;
     }
 
-    public Integer getPersonPhone() {
+    public String getPersonPhone() {
         return personPhone;
     }
 
-    public void setPersonPhone(Integer personPhone) {
+    public void setPersonPhone(String personPhone) {
         this.personPhone = personPhone;
     }
 

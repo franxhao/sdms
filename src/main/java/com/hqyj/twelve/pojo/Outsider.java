@@ -14,7 +14,7 @@ public class Outsider implements Serializable {
     private Integer outAge;
     private Date recordIn;
     private Date recordOut;
-    private Integer outPhone;
+    private String outPhone;
     private String outDes;
 
     @Override
@@ -79,11 +79,11 @@ public class Outsider implements Serializable {
         this.recordOut = recordOut;
     }
 
-    public Integer getOutPhone() {
+    public String getOutPhone() {
         return outPhone;
     }
 
-    public void setOutPhone(Integer outPhone) {
+    public void setOutPhone(String outPhone) {
         this.outPhone = outPhone;
     }
 
