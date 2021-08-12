@@ -6,7 +6,7 @@
     <cache/>
     <select id="queryAll" resultType="com.hqyj.twelve.pojo.Dorm" useCache="true">
         <!--写sql语句-->
-        select dor_id as dorId,build_id,dor_sex,dor_num,dor_fact,dor_price
+        select dor_id dorId,dor_sex dorSex,dor_num dorNum,dor_fact dorFact,dor_price dorPrice
         from dorm
     </select>
 </mapper>
