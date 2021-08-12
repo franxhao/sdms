@@ -26,7 +26,7 @@
         FROM goods
     </select>
 
-    <select id="queryGoodsByName" resultMap="goodsBaseResultMap">
+    <select id="queryGoodsByNameAndPhone" resultMap="goodsBaseResultMap">
         SELECT
         <include refid="goodsColumnSql"/>
         FROM goods where goods_person = #{name} and person_phone = #{phone}
@@ -58,5 +58,9 @@
         where goods_id = #{goodsId}
     </update>
 
+    <insert id="insertGoods" parameterType="com.hqyj.twelve.pojo.Goods">
+        insert into goods (goods_name,goods_person,person_phone,goods_in,goods_out,goods_des)
+        values (#{goodsName},#{goodsPerson},#{personPhone},#{goodsIn},#{goodsOut},#{goodsDes})
+    </insert>
 
 </mapper>
