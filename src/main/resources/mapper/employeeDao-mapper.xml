@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hqyj.twelve.dao.EmployeeDao">
     <cache/>
-    <select id="queryAll" resultType="com.hqyj.twelve.pojo.Employee" useCache="true">
+    <select id="queryAll" resultType="com.hqyj.twelve.pojo.Dorm" useCache="true">
         <!--写sql语句-->
         select emp_id as empId,emp_username empUsername,emp_password empPassword,emp_name empName,
         emp_sex empSex,emp_age empAge,emp_job empJob,emp_phone empPhone,
@@ -12,14 +12,14 @@
         from employee
     </select>
 <!--添加一个员工-->
-    <insert id="insertOne" parameterType="com.hqyj.twelve.pojo.Employee" useGeneratedKeys="true" keyColumn="emp_id" keyProperty="empId">
+    <insert id="insertOne" parameterType="com.hqyj.twelve.pojo.Dorm" useGeneratedKeys="true" keyColumn="dor_id" keyProperty="DormId">
         insert into employee
         (emp_username,emp_password,emp_name,emp_sex,emp_age,emp_job,emp_phone,emp_address,role_id,build_id,emp_des)
         values(#{empUsername},#{empPassword},#{empName},#{empSex},#{empAge},#{empJob},
         #{empPhone},#{empAddress},#{roleId},#{buildId},#{empDes});
     </insert>
 <!--    修改操作-->
-    <update id="updateOne" parameterType="com.hqyj.twelve.pojo.Employee">
+    <update id="updateOne" parameterType="com.hqyj.twelve.pojo.Dorm">
         update employee<set>
         emp_id=#{empId},
         <if test="empUsername != null and empUsername != ''">
@@ -58,69 +58,7 @@
     </set>
         where emp_id = #{empId}
     </update>
-    <delete id="deleteById" parameterType="com.hqyj.twelve.pojo.Employee">
+    <delete id="deleteById" parameterType="com.hqyj.twelve.pojo.Dorm">
         delete from employee where emp_id= #{empId};
     </delete>
-<!--    &lt;!&ndash;删除一个用户，入参是user对象&ndash;&gt;-->
-<!--    <delete id="deleteByUser" parameterType="com.hqyj.twelve.pojo.Employee">-->
-<!--        delete from user where user_id=#{userId}-->
-<!--    </delete>-->
-<!--    &lt;!&ndash;登录  resultType指定的返回类型&ndash;&gt;-->
-<!--    <select id="login" resultType="com.hqyj.twelve.pojo.Employee">-->
-<!--        select <include refid="userColumnSql"/> from user-->
-<!--    where username=#{username} and password=#{password}-->
-<!--    </select>-->
-<!--    <select id="queryByNameOrPhone" resultType="com.hqyj.twelve.pojo.Employee">-->
-<!--        select <include refid="userColumnSql" /> from user-->
-<!--        <where>-->
-<!--            <if test="name != null and name != ''">-->
-<!--                name like #{name}-->
-<!--            </if>-->
-<!--            <if test="phone != null and phone !=''">-->
-<!--                or phone like #{phone}-->
-<!--            </if>-->
-<!--        </where>-->
-<!--    </select>-->
-<!--    &lt;!&ndash; foreach 循环控制-->
-<!--   collection属性指定要遍历的集合变量-->
-<!--   item属性指定循环变量，自行命名 在标签体中使用#{}-->
-<!--   使用open属性来指定循环开始之前要拼接的内容-->
-<!--    使用close属性来指定循环结束要拼接的内容-->
-<!--    使用separator属性来指定循环中要拼接的内容-->
-<!--    &ndash;&gt;-->
-<!--    <select id="querySomeByIds" resultType="com.hqyj.twelve.pojo.Employee">-->
-<!--        select <include refid="userColumnSql" /> from user-->
-<!--        <foreach collection="ids" item="id" open="where user_id in (" close=")" separator=",">-->
-<!--            ${id}-->
-<!--        </foreach>-->
-<!--    </select>-->
-<!--    &lt;!&ndash; #{参数名} 写法 ：按照PreparedStatement解析sql语句时所使用的?占位符-->
-<!--       ${参数名} 传参写法：传什么参数，就安字符串拼接方式进行填充&ndash;&gt;-->
-<!--    &lt;!&ndash; select * from user where column1 like '%王%' or column2 like '%888%'-->
-<!--      这时只能通过${参数名} 方式来传参 来动态的设置 column1和column2&ndash;&gt;-->
-<!--    &lt;!&ndash;动态sql相关的标签-->
-<!--    if：条件判断  使用test属性进行逻辑判断，如果条件满足，保留标签体中的内容-->
-<!--    如果条件不满足，不保留标签体中的内容-->
-<!--    where：帮助开发者简化where条件查询sql语句的编写-->
-<!--    动态的生成where字句，主要和if标签搭配使用-->
-<!--    帮助我们处理where字句中 靠近where关键字的and和 or sql关键字-->
-<!--    当标签体中由内容时，生成where关键字，没有内容时，不会生成where关键字-->
-<!--    set：帮助开发者简化更新操作的sql语句的编写-->
-<!--    帮助我们动态处理sql update操作中set子语句-->
-<!--    会自动帮我们处理结尾处多出的逗号-->
-<!--     如果标签体中没有内容，set关键字也不会生成-->
-<!--            可以提供id=#{id}规避sql语法错误-->
-<!--    foreach：循环-->
-<!--   &ndash;&gt;-->
-<!--    <select id="queryById" resultType="com.hqyj.twelve.pojo.Employee">-->
-<!--        select <include refid="userColumnSql"/> from user-->
-<!--        where user_id = #{id}-->
-<!--    </select>-->
-<!--    &lt;!&ndash;使用sql标签定义一段sql语句，在映射语句中可以反复引用-->
-<!--    id指定唯一标识&ndash;&gt;-->
-<!--    <sql id="userColumnSql">-->
-<!--        user_id as userId,name,sex,address,phone,email,username,password,deleted-->
-<!--    </sql>-->
-<!--    &lt;!&ndash;#{参数名} 写法“按照PreparedStatement解析sql语句时所使用的？占字符-->
-<!--    ${参数名} 传参写法：传什么参数，就按字符串拼接方式进行填充&ndash;&gt;-->
 </mapper>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqyj.twelve.dao.DormDao">
+    <cache/>
+    <select id="queryAll" resultType="com.hqyj.twelve.pojo.Dorm" useCache="true">
+        <!--写sql语句-->
+        select dor_id as dorId,build_id,dor_sex,dor_num,dor_fact,dor_price
+        from dorm
+    </select>
+</mapper>
