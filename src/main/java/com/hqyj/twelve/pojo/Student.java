@@ -18,7 +18,7 @@ public class Student implements Serializable {
     private String stuMajor;
     private String stuClass;
     private String stuAddress;
-    private Integer stuTel;
+    private String stuTel;
     private String stuState;
     private String stuDes;
 
@@ -35,10 +35,18 @@ public class Student implements Serializable {
                 ", stuMajor='" + stuMajor + '\'' +
                 ", stuClass='" + stuClass + '\'' +
                 ", stuAddress='" + stuAddress + '\'' +
-                ", stuTel=" + stuTel +
+                ", stuTel='" + stuTel + '\'' +
                 ", stuState='" + stuState + '\'' +
                 ", stuDes='" + stuDes + '\'' +
                 '}';
+    }
+
+    public String getStuTel() {
+        return stuTel;
+    }
+
+    public void setStuTel(String stuTel) {
+        this.stuTel = stuTel;
     }
 
     public Integer getStuId() {
@@ -121,13 +129,6 @@ public class Student implements Serializable {
         this.stuAddress = stuAddress;
     }
 
-    public Integer getStuTel() {
-        return stuTel;
-    }
-
-    public void setStuTel(Integer stuTel) {
-        this.stuTel = stuTel;
-    }
 
     public String getStuState() {
         return stuState;

@@ -11,10 +11,11 @@ public class Goods implements Serializable {
     private Integer goodsId;
     private String goodsName;
     private String goodsPerson;
-    private Integer personPhone;
+    private String personPhone;
     private Date goodsIn;
     private Date goodsOut;
     private String goodsDes;
+
 
     @Override
     public String toString() {
@@ -22,11 +23,19 @@ public class Goods implements Serializable {
                 "goodsId=" + goodsId +
                 ", goodsName='" + goodsName + '\'' +
                 ", goodsPerson='" + goodsPerson + '\'' +
-                ", personPhone=" + personPhone +
+                ", personPhone='" + personPhone + '\'' +
                 ", goodsIn=" + goodsIn +
                 ", goodsOut=" + goodsOut +
                 ", goodsDes='" + goodsDes + '\'' +
                 '}';
+    }
+
+    public String getPersonPhone() {
+        return personPhone;
+    }
+
+    public void setPersonPhone(String personPhone) {
+        this.personPhone = personPhone;
     }
 
     public Integer getGoodsId() {
@@ -53,13 +62,6 @@ public class Goods implements Serializable {
         this.goodsPerson = goodsPerson;
     }
 
-    public Integer getPersonPhone() {
-        return personPhone;
-    }
-
-    public void setPersonPhone(Integer personPhone) {
-        this.personPhone = personPhone;
-    }
 
     public Date getGoodsIn() {
         return goodsIn;
