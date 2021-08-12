@@ -10,12 +10,5 @@
         <setting name="cacheEnabled" value="true"/>
     </settings>
 
-    <!-- 给类型别名
-      mybatis给若干的基本数据类型取好了别名
-      java.lang.Integer - int
-     -->
-    <typeAliases>
-
-    </typeAliases>
 
 </configuration>
