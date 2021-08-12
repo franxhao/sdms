@@ -17,7 +17,6 @@ public class Outsider implements Serializable {
     private String outPhone;
     private String outDes;
 
-
     @Override
     public String toString() {
         return "Outsider{" +
@@ -27,17 +26,9 @@ public class Outsider implements Serializable {
                 ", outAge=" + outAge +
                 ", recordIn=" + recordIn +
                 ", recordOut=" + recordOut +
-                ", outPhone='" + outPhone + '\'' +
+                ", outPhone=" + outPhone +
                 ", outDes='" + outDes + '\'' +
                 '}';
-    }
-
-    public String getOutPhone() {
-        return outPhone;
-    }
-
-    public void setOutPhone(String outPhone) {
-        this.outPhone = outPhone;
     }
 
     public Integer getOutId() {
@@ -88,6 +79,13 @@ public class Outsider implements Serializable {
         this.recordOut = recordOut;
     }
 
+    public String getOutPhone() {
+        return outPhone;
+    }
+
+    public void setOutPhone(String outPhone) {
+        this.outPhone = outPhone;
+    }
 
     public String getOutDes() {
         return outDes;

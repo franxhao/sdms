@@ -16,26 +16,17 @@ public class Goods implements Serializable {
     private Date goodsOut;
     private String goodsDes;
 
-
     @Override
     public String toString() {
         return "Goods{" +
                 "goodsId=" + goodsId +
                 ", goodsName='" + goodsName + '\'' +
                 ", goodsPerson='" + goodsPerson + '\'' +
-                ", personPhone='" + personPhone + '\'' +
+                ", personPhone=" + personPhone +
                 ", goodsIn=" + goodsIn +
                 ", goodsOut=" + goodsOut +
                 ", goodsDes='" + goodsDes + '\'' +
                 '}';
-    }
-
-    public String getPersonPhone() {
-        return personPhone;
-    }
-
-    public void setPersonPhone(String personPhone) {
-        this.personPhone = personPhone;
     }
 
     public Integer getGoodsId() {
@@ -62,6 +53,13 @@ public class Goods implements Serializable {
         this.goodsPerson = goodsPerson;
     }
 
+    public String getPersonPhone() {
+        return personPhone;
+    }
+
+    public void setPersonPhone(String personPhone) {
+        this.personPhone = personPhone;
+    }
 
     public Date getGoodsIn() {
         return goodsIn;

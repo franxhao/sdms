@@ -30,20 +30,12 @@ public class Employee implements Serializable {
                 ", empSex='" + empSex + '\'' +
                 ", empAge=" + empAge +
                 ", empJob='" + empJob + '\'' +
-                ", empPhone='" + empPhone + '\'' +
+                ", empPhone=" + empPhone +
                 ", empAddress='" + empAddress + '\'' +
                 ", roleId=" + roleId +
                 ", buildId='" + buildId + '\'' +
                 ", empDes='" + empDes + '\'' +
                 '}';
-    }
-
-    public String getEmpPhone() {
-        return empPhone;
-    }
-
-    public void setEmpPhone(String empPhone) {
-        this.empPhone = empPhone;
     }
 
     public Integer getEmpId() {
@@ -102,7 +94,13 @@ public class Employee implements Serializable {
         this.empJob = empJob;
     }
 
+    public String getEmpPhone() {
+        return empPhone;
+    }
 
+    public void setEmpPhone(String empPhone) {
+        this.empPhone = empPhone;
+    }
 
     public String getEmpAddress() {
         return empAddress;
