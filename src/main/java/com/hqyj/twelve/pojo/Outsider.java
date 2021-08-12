@@ -2,6 +2,7 @@ package com.hqyj.twelve.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 外来人员POJO
