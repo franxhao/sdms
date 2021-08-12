@@ -14,7 +14,7 @@ public class Administrator implements Serializable {
     private String adSex;
     private Integer adAge;
     private String adJob;
-    private Integer adPhone;
+    private String adPhone;
     private String adAddress;
     private Integer roleId;
     private String adDes;
@@ -29,7 +29,7 @@ public class Administrator implements Serializable {
                 ", adSex='" + adSex + '\'' +
                 ", adAge=" + adAge +
                 ", adJob='" + adJob + '\'' +
-                ", adPhone=" + adPhone +
+                ", adPhone='" + adPhone + '\'' +
                 ", adAddress='" + adAddress + '\'' +
                 ", roleId=" + roleId +
                 ", adDes='" + adDes + '\'' +
@@ -92,11 +92,11 @@ public class Administrator implements Serializable {
         this.adJob = adJob;
     }
 
-    public Integer getAdPhone() {
+    public String getAdPhone() {
         return adPhone;
     }
 
-    public void setAdPhone(Integer adPhone) {
+    public void setAdPhone(String adPhone) {
         this.adPhone = adPhone;
     }
 
@@ -123,4 +123,5 @@ public class Administrator implements Serializable {
     public void setAdDes(String adDes) {
         this.adDes = adDes;
     }
+
 }

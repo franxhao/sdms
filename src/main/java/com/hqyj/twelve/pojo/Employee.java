@@ -14,7 +14,7 @@ public class Employee implements Serializable {
     private String empSex;
     private Integer empAge;
     private String empJob;
-    private Integer empPhone;
+    private String empPhone;
     private String empAddress;
     private Integer roleId;
     private String buildId;
@@ -30,7 +30,7 @@ public class Employee implements Serializable {
                 ", empSex='" + empSex + '\'' +
                 ", empAge=" + empAge +
                 ", empJob='" + empJob + '\'' +
-                ", empPhone=" + empPhone +
+                ", empPhone='" + empPhone + '\'' +
                 ", empAddress='" + empAddress + '\'' +
                 ", roleId=" + roleId +
                 ", buildId='" + buildId + '\'' +
@@ -94,11 +94,11 @@ public class Employee implements Serializable {
         this.empJob = empJob;
     }
 
-    public Integer getEmpPhone() {
+    public String getEmpPhone() {
         return empPhone;
     }
 
-    public void setEmpPhone(Integer empPhone) {
+    public void setEmpPhone(String empPhone) {
         this.empPhone = empPhone;
     }
 
