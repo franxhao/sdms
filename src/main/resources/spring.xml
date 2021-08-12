@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+
+<!--    导入其他框架spring整合配置文件-->
+    <import resource="spring-shiro.xml"/>
+    <import resource="spring-mybatis.xml"/>
+
+    <!--    开启spring容器的组件扫描-->
+    <context:component-scan base-package="com.hqyj.twelve">
+        <!--        排除创建控制器相关的bean-->
+        <!--          type指定按注解全类名排除-->
+        <!--          expression指定注解的全类名-->
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+
+
+
+
+</beans>

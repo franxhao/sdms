@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 这里配置mybatis-->
+    <settings>
+        <!-- 开打mybatis二级缓存配置 默认打开-->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
+    <!-- 给类型别名
+      mybatis给若干的基本数据类型取好了别名
+      java.lang.Integer - int
+     -->
+    <typeAliases>
+
+    </typeAliases>
+
+</configuration>
