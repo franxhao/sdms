@@ -10,8 +10,11 @@ public interface GoodsService {
     List<Goods> getAllGoods();
 
     //通过 登记人姓名和电话 查询存储物品信息
-    List<Goods> getGoodsByName(String goodsPerson,String personPhone);
+    List<Goods> getGoodsByName(String goodsPerson, String personPhone);
 
     //修改 登记 信息
     int modifyInformation(Goods goods);
+
+    //添加 存储物品信息
+    int addGoods(Goods goods);
 }

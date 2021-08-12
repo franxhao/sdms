@@ -24,7 +24,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public List<Goods> getGoodsByName(String goodsPerson, String personPhone) {
         System.out.println("通过登记人姓名和电话查询存储物品信息");
-        List<Goods> goods = goodsDao.queryGoodsByName(goodsPerson, personPhone);
+        List<Goods> goods = goodsDao.queryGoodsByNameAndPhone(goodsPerson, personPhone);
         return goods;
     }
 
@@ -32,6 +32,12 @@ public class GoodsServiceImpl implements GoodsService {
     public int modifyInformation(Goods goods) {
         System.out.println("修改登记信息");
         int result = goodsDao.updateInformation(goods);
+        return result;
+    }
+
+    @Override
+    public int addGoods(Goods goods) {
+        int result = goodsDao.insertGoods(goods);
         return result;
     }
 }

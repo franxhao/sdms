@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+
+import java.sql.DatabaseMetaData;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -46,6 +49,22 @@ public class GoodsServiceImplTest {
             System.out.println("修改成功");
         }else {
             System.out.println("修改失败");
+        }
+    }
+
+    @Test
+    public void addGoodsTest(){
+        Goods goods = new Goods();
+        goods.setGoodsName("零食");
+        goods.setGoodsPerson("王五");
+        goods.setPersonPhone("14914687136");
+        goods.setGoodsIn(new Date());
+        goods.setGoodsDes("存五天");
+        int result = goodsService.addGoods(goods);
+        if(result>0){
+            System.out.println("储存成功");
+        }else {
+            System.out.println("储存失败");
         }
     }
 }
