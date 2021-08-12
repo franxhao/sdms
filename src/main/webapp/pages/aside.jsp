@@ -45,6 +45,10 @@
 						href="${pageContext.request.contextPath}/pages/syslog-list.jsp"> <i
 							class="fa fa-circle-o"></i> 访问日志
 					</a></li>
+					<li><a
+							href="${pageContext.request.contextPath}/pages/outsider.jsp"> <i
+							class="fa fa-circle-o"></i> 来访人员信息登记
+					</a></li>
 				</ul></li>
 			<li class="treeview"><a href="#"> <i class="fa fa-cube"></i>
 					<span>基础数据</span> <span class="pull-right-container"> <i
