@@ -4,4 +4,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hqyj.twelve.dao.AdminDao">
 
+    <insert id="insertAdmin" parameterType="com.hqyj.twelve.pojo.Administrator">
+        insert into administrator
+        (ad_username,ad_password,ad_name,ad_sex,ad_age,ad_job,ad_phone,ad_address,role_id,ad_des)
+        values(#{adUsername},#{adPassword},#{adName},#{adSex},#{adAge},#{adJob},
+        #{adPhone},#{adAddress},#{roleId},#{adDes});
+    </insert>
+    
+    <insert id="insertEmployee" parameterType="com.hqyj.twelve.pojo.Employee">
+        insert into employee
+        (emp_username,emp_password,emp_name,emp_sex,emp_age,emp_job,emp_phone,emp_address,role_id,build_id,emp_des)
+        values(#{empUsername},#{empPassword},#{empName},#{empSex},#{empAge},#{empJob},
+        #{empPhone},#{empAddress},#{roleId},#{buildId},#{empDes});
+    </insert>
+    
 </mapper>
