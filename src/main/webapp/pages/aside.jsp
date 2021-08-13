@@ -45,6 +45,10 @@
 						href="${pageContext.request.contextPath}/pages/syslog-list.jsp">
 						<i	class="fa fa-circle-o"></i> 访问日志
 					</a></li>
+                    <li><a
+                            href="${pageContext.request.contextPath}/admin/list">
+                        <i class="fa fa-circle-o"></i> 管理员管理
+                    </a></li>
 					<li><a
 							href="${pageContext.request.contextPath}/pages/outsider.jsp"> <i
 							class="fa fa-circle-o"></i> 来访人员信息登记

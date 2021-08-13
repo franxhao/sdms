@@ -82,3 +82,4 @@
         src="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.min.js"></script>
 <script
         src="${pageContext.request.contextPath}/plugins/bootstrap-slider/bootstrap-slider.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/plugins/layer-3.5.1/layer.js"/>

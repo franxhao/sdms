@@ -129,4 +129,17 @@ public class AdminDaoTest {
         Employee employee = adminDao.queryEmpByUsername("阳%");
         System.out.println(employee);
     }
+
+    @Test
+    public void queryAdminById(){
+        Administrator administrator = adminDao.queryAdminById(1);
+        System.out.println(administrator);
+    }
+
+    @Test
+    public void updateAdminByid(){
+        Administrator administrator = adminDao.queryAdminById(20);
+        administrator.setAdUsername("梁桑花");
+        adminDao.updateAdminById(administrator);
+    }
 }
