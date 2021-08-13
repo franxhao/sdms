@@ -45,15 +45,15 @@
 						href="${pageContext.request.contextPath}/stuManagement/findAll"> <i
 							class="fa fa-circle-o"></i> 学生信息管理
 					</a></li>
-<<<<<<< HEAD
+
                     <li><a
                             href="${pageContext.request.contextPath}/admin/list">
                         <i class="fa fa-circle-o"></i> 管理员管理
                     </a></li>
-=======
+
 					<li><a href="${pageContext.request.contextPath}/pages/syslog-list.jsp"> 
-						<i class="fa fa-circle-o"></i> 访问日志 </li>
->>>>>>> c6726cd39e23d513e056532e590d0da60281c322
+						<i class="fa fa-circle-o"></i> 访问日志 </a></li>
+
 					<li><a
 							href="${pageContext.request.contextPath}/outsider/getAll"> <i
 							class="fa fa-circle-o"></i> 来访人员信息登记

@@ -24,7 +24,6 @@
         <property name="mapperLocations" value="classpath:mapper/*.xml"/>
         <!--        配置的是mybatis的配置文件所在位置-->
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
-        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
         <!--        配置mybatis的分页插件-->
         <property name="plugins">
             <array>
