@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 对某个java接口文件进行描述，两者之间的关系一一对应-->
+<!-- namespace属性指明对应的java接口文件，全类名 -->
+<mapper namespace="com.hqyj.twelve.dao.OutSiderDao">
+
+    <sql id="outsiderColumnSql">
+        out_id, out_name, out_sex, out_age, recordin, recordout, out_phone, out_des
+    </sql>
+
+    <resultMap id="outsiderBaseResultMap" type="com.hqyj.twelve.pojo.Outsider">
+        <id column="out_id" property="outId"/>
+        <result column="out_name" property="outName"/>
+        <result column="out_sex" property="outSex"/>
+        <result column="out_age" property="outAge"/>
+        <result column="recordin" property="recordIn"/>
+        <result column="recordout" property="recordOut"/>
+        <result column="out_phone" property="outPhone"/>
+        <result column="out_des" property="outDes"/>
+    </resultMap>
+
+    <select id="queryAllOutsider" resultMap="outsiderBaseResultMap">
+        SELECT
+        <include refid="outsiderColumnSql"/>
+        FROM outsider
+    </select>
+
+    <select id="queryOutsiderByNameAndPhone" resultMap="outsiderBaseResultMap">
+        SELECT
+        <include refid="outsiderColumnSql"/>
+        FROM outsider where out_name = #{name} and out_phone = #{phone}
+    </select>
+
+    <insert id="insertOutsider" parameterType="com.hqyj.twelve.pojo.Outsider">
+        insert into outsider (out_name,out_sex,out_age,recordin,recordout,out_phone,out_des)
+        values (#{outName},#{outSex},#{outAge},#{recordIn},#{recordOut},#{outPhone},#{outDes})
+    </insert>
+
+    <update id="updateOutsiderById" parameterType="com.hqyj.twelve.pojo.Outsider">
+        update outsider
+        <set>
+            out_id=#{outId},
+            <if test="outName != null and outName != ''">
+                out_name=#{outName},
+            </if>
+            <if test="outSex != null and outSex != ''">
+                out_sex=#{outSex},
+            </if>
+            <if test="outAge !=null and outAge != ''">
+                out_age=#{outAge},
+            </if>
+            <if test="recordIn !=null and recordIn != ''">
+                recordin=#{recordIn},
+            </if>
+            <if test="recordOut !=null and recordOut != ''">
+                recordout=#{recordOut},
+            </if>
+            <if test="outPhone !=null and outPhone != ''">
+                out_phone=#{outPhone},
+            </if>
+            <if test="outDes !=null and outDes != ''">
+                out_des=#{outDes},
+            </if>
+        </set>
+        where out_id = #{outId}
+    </update>
+
+    <delete id="deleteById">
+        delete from outsider where out_id = #{outId}
+    </delete>
+
+
+</mapper>

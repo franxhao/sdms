@@ -29,7 +29,7 @@ public class Administrator implements Serializable {
                 ", adSex='" + adSex + '\'' +
                 ", adAge=" + adAge +
                 ", adJob='" + adJob + '\'' +
-                ", adPhone=" + adPhone +
+                ", adPhone='" + adPhone + '\'' +
                 ", adAddress='" + adAddress + '\'' +
                 ", roleId=" + roleId +
                 ", adDes='" + adDes + '\'' +
@@ -123,4 +123,5 @@ public class Administrator implements Serializable {
     public void setAdDes(String adDes) {
         this.adDes = adDes;
     }
+
 }

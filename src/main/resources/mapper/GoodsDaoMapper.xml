@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 对某个java接口文件进行描述，两者之间的关系一一对应-->
+<!-- namespace属性指明对应的java接口文件，全类名 -->
+<mapper namespace="com.hqyj.twelve.dao.GoodsDao">
+
+    <sql id="goodsColumnSql">
+        goods_id, goods_name, goods_person, person_phone, goods_in, goods_out, goods_des
+    </sql>
+
+    <resultMap id="goodsBaseResultMap" type="com.hqyj.twelve.pojo.Goods">
+        <id column="goods_id" property="goodsId"/>
+        <result column="goods_name" property="goodsName"/>
+        <result column="goods_person" property="goodsPerson"/>
+        <result column="person_phone" property="personPhone"/>
+        <result column="goods_in" property="goodsIn"/>
+        <result column="goods_out" property="goodsOut"/>
+        <result column="goods_des" property="goodsDes"/>
+    </resultMap>
+
+    <select id="queryAllGoods" resultMap="goodsBaseResultMap">
+        SELECT
+        <include refid="goodsColumnSql"/>
+        FROM goods
+    </select>
+
+    <select id="queryGoodsByNameAndPhone" resultMap="goodsBaseResultMap">
+        SELECT
+        <include refid="goodsColumnSql"/>
+        FROM goods where goods_person = #{name} and person_phone = #{phone}
+    </select>
+
+    <update id="updateById" parameterType="com.hqyj.twelve.pojo.Goods">
+        update goods
+        <set>
+            goods_id=#{goodsId},
+            <if test="goodsName != null and goodsName != ''">
+                goods_name=#{goodsName},
+            </if>
+            <if test="goodsPerson != null and goodsPerson != ''">
+                goods_person=#{goodsPerson},
+            </if>
+            <if test="personPhone !=null and personPhone != ''">
+                person_phone=#{personPhone},
+            </if>
+            <if test="goodsIn !=null and goodsIn != ''">
+                goods_in=#{goodsIn},
+            </if>
+            <if test="goodsOut !=null and goodsOut != ''">
+                goods_out=#{goodsOut},
+            </if>
+            <if test="goodsDes !=null and goodsDes != ''">
+                goods_des=#{goodsDes},
+            </if>
+        </set>
+        where goods_id=#{goodsId}
+    </update>
+
+    <insert id="insertGoods" parameterType="com.hqyj.twelve.pojo.Goods">
+        insert into goods (goods_name,goods_person,person_phone,goods_in,goods_out,goods_des)
+        values (#{goodsName},#{goodsPerson},#{personPhone},#{goodsIn},#{goodsOut},#{goodsDes})
+    </insert>
+
+    <delete id="deleteById">
+        delete from goods where goods_id = #{goodsId}
+    </delete>
+
+</mapper>

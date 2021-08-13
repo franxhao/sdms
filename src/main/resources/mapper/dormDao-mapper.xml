@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqyj.twelve.dao.DormDao">
+    <cache/>
+    <select id="queryAll" resultType="com.hqyj.twelve.pojo.Dorm" useCache="true">
+        <!--写sql语句-->
+        select dor_id dorId,dor_sex dorSex,dor_num dorNum,dor_fact dorFact,dor_price dorPrice
+        from dorm
+    </select>
+    <update id="updateOne" parameterType="com.hqyj.twelve.pojo.Dorm">
+        update dorm <set>
+        dor_id=#{dorId},
+        <if test="dorSex != null and dorSex != ''">
+            dor_sex = #{dorSex},
+        </if>
+        <if test="dorNum != null and dorNum != ''">
+            dor_num = #{dorNum},
+        </if>
+        <if test="dorFact != null and dorFact != ''">
+            dor_fact = #{dorFact},
+        </if>
+        <if test="dorPrice != null and dorPrice != ''">
+            dor_price = #{dorPrice}
+        </if>
+    </set>
+    where dor_id=#{dorId}
+    </update>
+
+    <insert id="insertOne" parameterType="com.hqyj.twelve.pojo.Dorm">
+        insert into dorm (dor_sex,dor_num,dor_fact,dor_price) value
+        (#{dorSex},#{dorNum},#{dorFact},#{dorPrice});
+    </insert>
+
+    <delete id="deleteById">
+        delete from dorm where dor_id=#{dorId};
+    </delete>
+</mapper>

@@ -3,4 +3,23 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!--    配置凭证匹配器-->
+    <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+        <!--        这里配置的算法和迭代次数 和MD5Util中使用的算法和迭代次数是一直的-->
+        <property name="hashAlgorithmName" value="MD5"></property>
+        <property name="hashIterations" value="1024"></property>
+    </bean>
+
+
+    <!--    MyShiroRealm bean配置-->
+    <bean id="myShiroRealm" class="com.hqyj.twelve.realm.MyShiroRealm">
+        <property name="credentialsMatcher" ref="credentialsMatcher"></property>
+    </bean>
+
+    <!--    配置shiro的核心组件，SecurityManager-->
+    <bean id="defaultWebSecurityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <!--        我们自定义的认证域对象注入到SecurityManager对象中-->
+        <property name="realm" ref="myShiroRealm"/>
+    </bean>
+
 </beans>
