@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<script
-        src="${pageContext.request.contextPath}/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<%--<script src="${pageContext.request.contextPath}/plugins/jQuery/jquery-2.2.3.min.js"></script>--%>
+<script src="${pageContext.request.contextPath}/plugins/jQuery/jquery360.js"></script>
 <script
         src="${pageContext.request.contextPath}/plugins/jQueryUI/jquery-ui.min.js"></script>
 <script>
@@ -82,3 +82,4 @@
         src="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.min.js"></script>
 <script
         src="${pageContext.request.contextPath}/plugins/bootstrap-slider/bootstrap-slider.js"></script>
+<script src="${pageContext.request.contextPath}/plugins/bootstrap-select/js/bootstrap-select-v1.13.9.min.js"></script>
