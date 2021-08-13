@@ -13,9 +13,22 @@ public class Dorm implements Serializable {
     private String dorSex;  //居住性别
     private Integer dorNum;  //应住人数
     private Integer dorFact;  //实住人数
-    private BigDecimal dorPrice;  //住宿费用
+    private double dorPrice;  //住宿费用
 
     private List<Student> students;
+
+    public Dorm() {
+    }
+
+    public Dorm(Integer dorId, String dorSex, Integer dorNum, Integer dorFact, double dorPrice, List<Student> students) {
+        this.dorId = dorId;
+        this.dorSex = dorSex;
+        this.dorNum = dorNum;
+        this.dorFact = dorFact;
+        this.dorPrice = dorPrice;
+        this.students = students;
+    }
+
 
     @Override
     public String toString() {
@@ -61,11 +74,11 @@ public class Dorm implements Serializable {
         this.dorFact = dorFact;
     }
 
-    public BigDecimal getDorPrice() {
+    public double getDorPrice() {
         return dorPrice;
     }
 
-    public void setDorPrice(BigDecimal dorPrice) {
+    public void setDorPrice(double dorPrice) {
         this.dorPrice = dorPrice;
     }
 
