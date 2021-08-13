@@ -21,6 +21,7 @@ public class Student implements Serializable {
     private String stuTel;
     private String stuState;
     private String stuDes;
+    private Integer romId;
 
     @Override
     public String toString() {
@@ -35,10 +36,19 @@ public class Student implements Serializable {
                 ", stuMajor='" + stuMajor + '\'' +
                 ", stuClass='" + stuClass + '\'' +
                 ", stuAddress='" + stuAddress + '\'' +
-                ", stuTel=" + stuTel +
+                ", stuTel='" + stuTel + '\'' +
                 ", stuState='" + stuState + '\'' +
                 ", stuDes='" + stuDes + '\'' +
+                ", romId=" + romId +
                 '}';
+    }
+
+    public Integer getRomId() {
+        return romId;
+    }
+
+    public void setRomId(Integer romId) {
+        this.romId = romId;
     }
 
     public Integer getStuId() {

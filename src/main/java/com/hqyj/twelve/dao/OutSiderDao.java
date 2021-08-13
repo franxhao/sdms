@@ -17,4 +17,10 @@ public interface OutSiderDao {
     //添加 来访人员信息
     int insertOutsider(Outsider outsider);
 
+    //修改 来访人员信息
+    int updateOutsiderById(Outsider outsider);
+
+    //删除 来访人员信息
+    int deleteById(int outId);
+
 }

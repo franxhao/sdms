@@ -4,22 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hqyj.twelve.dao.EmployeeDao">
     <cache/>
-    <select id="queryAll" resultType="com.hqyj.twelve.pojo.Dorm" useCache="true">
+    <select id="queryAll" resultType="com.hqyj.twelve.pojo.Employee" useCache="true">
         <!--写sql语句-->
         select emp_id as empId,emp_username empUsername,emp_password empPassword,emp_name empName,
         emp_sex empSex,emp_age empAge,emp_job empJob,emp_phone empPhone,
-        emp_address empAddress,role_id roleId,build_id buildId,emp_des emoDes
+        emp_address empAddress,role_id roleId,build_id buildId,emp_des empDes
         from employee
     </select>
-<!--添加一个员工-->
-    <insert id="insertOne" parameterType="com.hqyj.twelve.pojo.Dorm" useGeneratedKeys="true" keyColumn="dor_id" keyProperty="DormId">
+    <!--添加一个员工-->
+    <insert id="insertOne" parameterType="com.hqyj.twelve.pojo.Employee" useGeneratedKeys="true" keyColumn="emp_id" keyProperty="empId">
         insert into employee
         (emp_username,emp_password,emp_name,emp_sex,emp_age,emp_job,emp_phone,emp_address,role_id,build_id,emp_des)
         values(#{empUsername},#{empPassword},#{empName},#{empSex},#{empAge},#{empJob},
         #{empPhone},#{empAddress},#{roleId},#{buildId},#{empDes});
     </insert>
-<!--    修改操作-->
-    <update id="updateOne" parameterType="com.hqyj.twelve.pojo.Dorm">
+    <!--    修改操作-->
+    <update id="updateOne" parameterType="com.hqyj.twelve.pojo.Employee">
         update employee<set>
         emp_id=#{empId},
         <if test="empUsername != null and empUsername != ''">
@@ -58,7 +58,7 @@
     </set>
         where emp_id = #{empId}
     </update>
-    <delete id="deleteById" parameterType="com.hqyj.twelve.pojo.Dorm">
+    <delete id="deleteById" parameterType="com.hqyj.twelve.pojo.Employee">
         delete from employee where emp_id= #{empId};
     </delete>
 </mapper>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqyj.twelve.dao.buildDao">
+    <cache/>
+    <resultMap id="buildBaseResultMap" type="com.hqyj.twelve.pojo.Building">
+        <id column="buildId" property="buildId"/>
+        <result column="buildName" property="buildName"/>
+        <result column="romAmount" property="romAmount"/>
+        <result column="floorAmount" property="floorAmount"/>
+        <result column="personAmount" property="personAmount"/>
+        <collection property="dorms" ofType="com.hqyj.twelve.pojo.Dorm">
+            <id column="dId" property="dorId"/>
+            <result column="dSex" property="dorSex"/>
+            <result column="dNum" property="dorNum"/>
+            <result column="dFact" property="dorFact"/>
+            <result column="dPrice" property="dorPrice"/>
+        </collection>
+    </resultMap>
+    <select id="queryAll" resultMap="buildBaseResultMap" useCache="true">
+        <!--写sql语句-->
+        select b.build_id buildId,b.build_name buildName,b.rom_amount romAmount,
+        b.floor_amount floorAmount,b.person_amount personAmount,d.dor_id dId,
+        d.dor_sex dSex,d.dor_num dNum,d.dor_fact dFact,d.dor_price dPrice
+        from building b
+        left join build_dorm bd on bd.build_id = b.build_id
+        left join dorm d on d.dor_id = bd.dor_id
+    </select>
+    <update id="updateOne" parameterType="com.hqyj.twelve.pojo.Building">
+        update building <set>
+        build_id=#{buildId},
+        <if test="buildName != null and buildName != ''">
+            build_name = #{buildName},
+        </if>
+        <if test="romAmount != null">
+            rom_amount = #{romAmount},
+        </if>
+        <if test="floorAmount != null">
+            floor_amount = #{floorAmount},
+        </if>
+        <if test="personAmount != null">
+            person_amount = #{personAmount}
+        </if>
+    </set>
+        where build_id=#{buildId};
+    </update>
+
+    <insert id="insertOne" parameterType="com.hqyj.twelve.pojo.Building">
+        insert into building (build_name,rom_amount,floor_amount,person_amount) value
+        (#{buildName},#{romAmount},#{floorAmount},#{personAmount});
+    </insert>
+
+    <delete id="deleteById">
+        delete from building where build_id=#{buildId};
+    </delete>
+</mapper>

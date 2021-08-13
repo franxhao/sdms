@@ -30,8 +30,8 @@ public class GoodsServiceImplTest {
     }
 
     @Test
-    public void getGoodsByNameTest() {
-        List<Goods> goodsByName = goodsService.getGoodsByName("张三", "16698422568");
+    public void getGoodsByNameAndPhoneTest() {
+        List<Goods> goodsByName = goodsService.getGoodsByNameAndPhone("张三", "16698422685");
         for (Goods goods : goodsByName) {
             System.out.println(goods);
         }
@@ -40,20 +40,21 @@ public class GoodsServiceImplTest {
     @Test
     public void modifyInformationTest() {
         Goods goods = new Goods();
-        goods.setGoodsId(2);
-        goods.setGoodsName("背包");
+        goods.setGoodsId(1);
+        goods.setGoodsPerson("张三");
+        goods.setPersonPhone("16698422685");
+        goods.setGoodsName("书包");
         //goods.setGoodsOut("2021-7-15");
-        goods.setGoodsDes("希望继续存放四天");
         int result = goodsService.modifyInformation(goods);
-        if(result>0){
+        if (result > 0) {
             System.out.println("修改成功");
-        }else {
+        } else {
             System.out.println("修改失败");
         }
     }
 
     @Test
-    public void addGoodsTest(){
+    public void addGoodsTest() {
         Goods goods = new Goods();
         goods.setGoodsName("零食");
         goods.setGoodsPerson("王五");
@@ -61,10 +62,20 @@ public class GoodsServiceImplTest {
         goods.setGoodsIn(new Date());
         goods.setGoodsDes("存五天");
         int result = goodsService.addGoods(goods);
-        if(result>0){
+        if (result > 0) {
             System.out.println("储存成功");
-        }else {
+        } else {
             System.out.println("储存失败");
+        }
+    }
+
+    @Test
+    public void removeByIdTest() {
+        int result = goodsService.removeById(5);
+        if (result > 0) {
+            System.out.println("删除成功");
+        } else {
+            System.out.println("删除失败");
         }
     }
 }

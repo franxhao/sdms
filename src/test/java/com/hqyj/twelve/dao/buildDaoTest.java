@@ -1,5 +1,6 @@
 package com.hqyj.twelve.dao;
 
+import com.hqyj.twelve.pojo.Building;
 import com.hqyj.twelve.pojo.Dorm;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,33 +12,32 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring.xml")
-public class DormDaoTest {
-@Autowired
-private DormDao dormDao;
+@ContextConfiguration(locations = "classpath:spring.xml")
+public class buildDaoTest {
+    @Autowired
+    private buildDao buildDao;
     @Test
     public void queryAll() {
-        List<Dorm> dormList = dormDao.queryAll();
-        for (Dorm dorms:dormList){
-            System.out.println(dorms);
+        List<Building> buildingList = buildDao.queryAll();
+        for (Building buildings:buildingList){
+            System.out.println(buildings);
         }
     }
-
     @Test
     public void updateOne() {
-        Dorm dorm = new Dorm(6,"女",1000,4,10,null);
-        int rs = dormDao.updateOne(dorm);
+        Building build = new Building(13,"海棠苑2",200,5,2000,null);
+        int rs = buildDao.updateOne(build);
         System.out.println("返回结果："+rs);
     }
     @Test
     public void insertOne() {
-        Dorm dorm = new Dorm(0,"女",100,4,10,null);
-        int rs = dormDao.insertOne(dorm);
+        Building build = new Building(0,"海棠苑2",100,4,1000,null);
+        int rs = buildDao.insertOne(build);
         System.out.println("返回结果："+rs);
     }
     @Test
     public void deleteById(){
-        int rs = dormDao.deleteById(5);
+        int rs = buildDao.deleteById(10);
         System.out.println("返回结果："+rs);
     }
 }

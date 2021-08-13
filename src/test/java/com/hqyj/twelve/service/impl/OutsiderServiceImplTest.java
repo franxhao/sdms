@@ -29,30 +29,48 @@ public class OutsiderServiceImplTest {
 
     @Test
     public void getGoodsByNameAndPhoneTest() {
-        List<Outsider> byNameAndPhone = outsiderService.getGoodsByNameAndPhone("张三", "16698422568");
+        List<Outsider> byNameAndPhone = outsiderService.getOutsiderByNameAndPhone("张三", "16698422965");
         for (Outsider outsider : byNameAndPhone) {
             System.out.println(outsider);
         }
     }
 
     @Test
-    public void addOutsiderTest(){
+    public void addOutsiderTest() {
         Outsider outsider = new Outsider();
-        outsider.setOutName("王五");
+        outsider.setOutName("朱八");
         outsider.setOutSex("男");
-        outsider.setOutAge(22);
+        outsider.setOutAge(30);
         outsider.setRecordIn(new Date());
         Date date = new Date();
         /*long time = date.getTime();
         long outtime = time+10000000;
         outsider.setRecordOut(new Date(outtime));*/
-        outsider.setOutPhone("13458461358");
-        outsider.setOutDes("入住");
+        outsider.setOutPhone("14729871098");
+        outsider.setOutDes("探亲");
         int result = outsiderService.addOutsider(outsider);
-        if (result>0){
+        if (result > 0) {
             System.out.println("添加成功");
-        }else {
+        } else {
             System.out.println("添加失败");
+        }
+    }
+
+    @Test
+    public void modifyInformationTest() {
+        Outsider outsider = new Outsider();
+        outsider.setOutId(1);
+        outsider.setOutPhone("16698422957");
+        outsiderService.modifyInformation(outsider);
+    }
+
+    @Test
+    public void removeByIdTest() {
+        int result = outsiderService.removeById(9);
+        if (result > 0) {
+            System.out.println("删除成功");
+        } else {
+            System.out.println("删除失败");
         }
     }
 }

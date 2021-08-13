@@ -25,8 +25,8 @@
 					class="fa fa-dashboard"></i> <span>首页</span></a></li>
 
 			<li class="treeview"><a href="#"> <i class="fa fa-cogs"></i>
-					<span>系统管理</span> <span class="pull-right-container"> <i
-						class="fa fa-angle-left pull-right"></i>
+				<span>系统管理</span> <span class="pull-right-container">
+					<i class="fa fa-angle-left pull-right"></i>
 				</span>
 
 
@@ -42,15 +42,20 @@
 						<i	class="fa fa-circle-o"></i> 角色管理
 					</a></li>
 					<li><a
-						href="${pageContext.request.contextPath}/pages/syslog-list.jsp">
-						<i	class="fa fa-circle-o"></i> 访问日志
+						href="${pageContext.request.contextPath}/stuManagement/findAll"> <i
+							class="fa fa-circle-o"></i> 学生信息管理
 					</a></li>
+<<<<<<< HEAD
                     <li><a
                             href="${pageContext.request.contextPath}/admin/list">
                         <i class="fa fa-circle-o"></i> 管理员管理
                     </a></li>
+=======
+					<li><a href="${pageContext.request.contextPath}/pages/syslog-list.jsp"> 
+						<i class="fa fa-circle-o"></i> 访问日志 </li>
+>>>>>>> c6726cd39e23d513e056532e590d0da60281c322
 					<li><a
-							href="${pageContext.request.contextPath}/pages/outsider.jsp"> <i
+							href="${pageContext.request.contextPath}/outsider/getAll"> <i
 							class="fa fa-circle-o"></i> 来访人员信息登记
 					</a></li>
 				</ul></li>

@@ -32,7 +32,7 @@
         FROM goods where goods_person = #{name} and person_phone = #{phone}
     </select>
 
-    <update id="updateInformation" parameterType="com.hqyj.twelve.pojo.Goods">
+    <update id="updateById" parameterType="com.hqyj.twelve.pojo.Goods">
         update goods
         <set>
             goods_id=#{goodsId},
@@ -55,12 +55,16 @@
                 goods_des=#{goodsDes},
             </if>
         </set>
-        where goods_id = #{goodsId}
+        where goods_id=#{goodsId}
     </update>
 
     <insert id="insertGoods" parameterType="com.hqyj.twelve.pojo.Goods">
         insert into goods (goods_name,goods_person,person_phone,goods_in,goods_out,goods_des)
         values (#{goodsName},#{goodsPerson},#{personPhone},#{goodsIn},#{goodsOut},#{goodsDes})
     </insert>
+
+    <delete id="deleteById">
+        delete from goods where goods_id = #{goodsId}
+    </delete>
 
 </mapper>
