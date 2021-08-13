@@ -20,6 +20,24 @@ public class Employee implements Serializable {
     private String buildId;
     private String empDes;
 
+    public Employee() {
+    }
+
+    public Employee(Integer empId, String empUsername, String empPassword, String empName, String empSex, Integer empAge, String empJob, String empPhone, String empAddress, Integer roleId, String buildId, String empDes) {
+        this.empId = empId;
+        this.empUsername = empUsername;
+        this.empPassword = empPassword;
+        this.empName = empName;
+        this.empSex = empSex;
+        this.empAge = empAge;
+        this.empJob = empJob;
+        this.empPhone = empPhone;
+        this.empAddress = empAddress;
+        this.roleId = roleId;
+        this.buildId = buildId;
+        this.empDes = empDes;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +

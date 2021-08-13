@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqyj.twelve.dao.EmployeeDao">
+    <cache/>
+    <select id="queryAll" resultType="com.hqyj.twelve.pojo.Dorm" useCache="true">
+        <!--写sql语句-->
+        select emp_id as empId,emp_username empUsername,emp_password empPassword,emp_name empName,
+        emp_sex empSex,emp_age empAge,emp_job empJob,emp_phone empPhone,
+        emp_address empAddress,role_id roleId,build_id buildId,emp_des emoDes
+        from employee
+    </select>
+<!--添加一个员工-->
+    <insert id="insertOne" parameterType="com.hqyj.twelve.pojo.Dorm" useGeneratedKeys="true" keyColumn="dor_id" keyProperty="DormId">
+        insert into employee
+        (emp_username,emp_password,emp_name,emp_sex,emp_age,emp_job,emp_phone,emp_address,role_id,build_id,emp_des)
+        values(#{empUsername},#{empPassword},#{empName},#{empSex},#{empAge},#{empJob},
+        #{empPhone},#{empAddress},#{roleId},#{buildId},#{empDes});
+    </insert>
+<!--    修改操作-->
+    <update id="updateOne" parameterType="com.hqyj.twelve.pojo.Dorm">
+        update employee<set>
+        emp_id=#{empId},
+        <if test="empUsername != null and empUsername != ''">
+            emp_Username=#{empUsername},
+        </if>
+        <if test="empPassword !=null and empPassword !=''">
+            emp_Password=#{empPassword},
+        </if>
+        <if test="empName!=null and empName != ''">
+            emp_name=#{empName},
+        </if>
+        <if test="empSex!=null and empSex != ''">
+            emp_sex=#{empSex},
+        </if>
+        <if test="empAge!=null">
+            emp_age=#{empAge},
+        </if>
+        <if test="empJob!=null and empJob != ''">
+            emp_job=#{empJob},
+        </if>
+        <if test="empPhone!=null and empPhone != ''">
+            emp_phone=#{empPhone},
+        </if>
+        <if test="empAddress!=null and empAddress != ''">
+            emp_address=#{empAddress},
+        </if>
+        <if test="roleId!=null and roleId != ''">
+            role_id=#{roleId},
+        </if>
+        <if test="buildId!=null and buildId != ''">
+            build_id=#{buildId},
+        </if>
+        <if test="empDes!=null and empDes != ''">
+            emp_des=#{empDes}
+        </if>
+    </set>
+        where emp_id = #{empId}
+    </update>
+    <delete id="deleteById" parameterType="com.hqyj.twelve.pojo.Dorm">
+        delete from employee where emp_id= #{empId};
+    </delete>
+</mapper>
