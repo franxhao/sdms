@@ -68,7 +68,7 @@
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default" title="刷新"
                                             onclick="window.location.reload();">
-                                        <i class="fa fa-refresh"></i> 刷新
+                                        <i class="fa fa-refresh"></i> 刷新(添加信息)
                                     </button>
                                 </div>
                             </div>

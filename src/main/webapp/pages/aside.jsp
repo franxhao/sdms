@@ -46,7 +46,7 @@
 							class="fa fa-circle-o"></i> 访问日志
 					</a></li>
 					<li><a
-							href="${pageContext.request.contextPath}/pages/outsider.jsp"> <i
+							href="${pageContext.request.contextPath}/outsider/getAll"> <i
 							class="fa fa-circle-o"></i> 来访人员信息登记
 					</a></li>
 				</ul></li>

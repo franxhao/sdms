@@ -38,5 +38,38 @@
         values (#{outName},#{outSex},#{outAge},#{recordIn},#{recordOut},#{outPhone},#{outDes})
     </insert>
 
+    <update id="updateOutsiderById" parameterType="com.hqyj.twelve.pojo.Outsider">
+        update outsider
+        <set>
+            out_id=#{outId},
+            <if test="outName != null and outName != ''">
+                out_name=#{outName},
+            </if>
+            <if test="outSex != null and outSex != ''">
+                out_sex=#{outSex},
+            </if>
+            <if test="outAge !=null and outAge != ''">
+                out_age=#{outAge},
+            </if>
+            <if test="recordIn !=null and recordIn != ''">
+                recordin=#{recordIn},
+            </if>
+            <if test="recordOut !=null and recordOut != ''">
+                recordout=#{recordOut},
+            </if>
+            <if test="outPhone !=null and outPhone != ''">
+                out_phone=#{outPhone},
+            </if>
+            <if test="outDes !=null and outDes != ''">
+                out_des=#{outDes},
+            </if>
+        </set>
+        where out_id = #{outId}
+    </update>
+
+    <delete id="deleteById">
+        delete from outsider where out_id = #{outId}
+    </delete>
+
 
 </mapper>

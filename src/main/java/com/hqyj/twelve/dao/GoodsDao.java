@@ -13,7 +13,11 @@ public interface GoodsDao {
     List<Goods> queryGoodsByNameAndPhone(@Param("name") String goodsPerson, @Param("phone") String personPhone);
 
     //修改 登记 信息（注：未实现 修改 存入和取出时间的修改）
-    int updateInformation(Goods goods);
+    int updateById(Goods goods);
 
+    //添加 物品信息
     int insertGoods(Goods goods);
+
+    //删除 物品信息通过物品id
+    int deleteById(int goodsId);
 }

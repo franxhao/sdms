@@ -23,7 +23,7 @@ public class OutsiderServiceImpl implements OutsiderService {
     }
 
     @Override
-    public List<Outsider> getGoodsByNameAndPhone(String outName, String outPhone) {
+    public List<Outsider> getOutsiderByNameAndPhone(String outName, String outPhone) {
         List<Outsider> outsiders = outSiderDao.queryOutsiderByNameAndPhone(outName, outPhone);
         return outsiders;
     }
@@ -31,6 +31,18 @@ public class OutsiderServiceImpl implements OutsiderService {
     @Override
     public int addOutsider(Outsider outsider) {
         int result = outSiderDao.insertOutsider(outsider);
+        return result;
+    }
+
+    @Override
+    public int modifyInformation(Outsider outsider) {
+        int result = outSiderDao.updateOutsiderById(outsider);
+        return result;
+    }
+
+    @Override
+    public int removeById(int outId) {
+        int result = outSiderDao.deleteById(outId);
         return result;
     }
 
@@ -58,4 +70,5 @@ public class OutsiderServiceImpl implements OutsiderService {
         pageData.setList(pageInfo.getList());
         return pageData;
     }
+
 }
