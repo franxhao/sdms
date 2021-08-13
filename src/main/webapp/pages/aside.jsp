@@ -25,8 +25,8 @@
 					class="fa fa-dashboard"></i> <span>首页</span></a></li>
 
 			<li class="treeview"><a href="#"> <i class="fa fa-cogs"></i>
-					<span>系统管理</span> <span class="pull-right-container"> <i
-						class="fa fa-angle-left pull-right"></i>
+				<span>系统管理</span> <span class="pull-right-container">
+					<i class="fa fa-angle-left pull-right"></i>
 				</span>
 
 
@@ -42,7 +42,11 @@
 							class="fa fa-circle-o"></i> 角色管理
 					</a></li>
 					<li><a
-						href="${pageContext.request.contextPath}/pages/syslog-list.jsp"> <i
+						href="${pageContext.request.contextPath}/stuManagement/findAll"> <i
+							class="fa fa-circle-o"></i> 学生信息管理
+					</a></li>
+					<li><a
+							href="${pageContext.request.contextPath}/pages/syslog-list.jsp"> <i
 							class="fa fa-circle-o"></i> 访问日志
 					</a></li>
 				</ul></li>

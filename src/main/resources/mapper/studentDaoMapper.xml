@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <!-- 对某个Java接口文件进行描述，两者之间的关系一一对应 -->
+        <!-- namespace属性指明对应的Java接口文件，全类名的写法 -->
+<mapper namespace="com.hqyj.twelve.dao.StudentDao">
+<!-- 映射语句 一一对应接口文件中的一个接口方法
+ id属性指定接口方法的名称
+ resultType指定结果集要将封装的Java pojo对象的全类名  -->
+
+    <!-- 查询学生表所有字段的sql片段 -->
+    <sql id="studentField">
+        select stu_id,stu_key,stu_name,stu_sex,stu_enr,stu_birth,stu_college,stu_major,
+        stu_class,stu_address,stu_tel,stu_state,stu_des
+    </sql>
+
+    <resultMap id="baseStudentResultMap" type="com.hqyj.twelve.pojo.Student">
+        <result column="stu_key" property="stuKey"/>
+        <result column="stu_name" property="stuName"/>
+        <result column="stu_sex" property="stuSex"/>
+        <result column="dor_id" property="romId"/>
+        <result column="stu_class" property="stuClass"/>
+        <result column="stu_state" property="stuState"/>
+        <result column="stu_tel" property="stuTel"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="baseStudentResultMap">
+        select s.stu_key,s.stu_name,s.stu_sex,d.dor_id,s.stu_class,s.stu_state,s.stu_tel
+        from student s,dorm d,stu_dor sd
+        where s.stu_id=sd.stu_id and sd.dor_id=d.dor_id
+    </select>
+
+    <!-- 根据学号和姓名查询学生 -->
+    <select id="queryStuByKeyAndName" resultType="map" parameterType="string">
+        <include refid="studentField"/>
+        from student where stu_key=#{stuKey} and stu_name=#{stuName}
+    </select>
+
+    <!-- 添加学生信息 -->
+    <insert id="addStu" parameterType="map">
+        insert into student (stu_key,stu_name,stu_sex,stu_enr,stu_birth,stu_college,stu_major,stu_class,stu_address,stu_tel,stu_state) values (#{stuKey},#{stuName},#{stuSex},#{stuEnr},#{stuBirth},#{stuCollege},#{stuMajor},#{stuClass},#{stuAddress},#{stuTel},'未入住')
+        <!--测试用
+        insert into student (stu_key,stu_name) values (#{stuKey},#{stuName})
+        -->
+    </insert>
+
+</mapper>
