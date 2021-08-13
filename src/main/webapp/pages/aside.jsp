@@ -34,16 +34,16 @@
 				<ul class="treeview-menu">
 
 					<li><a
-						href="${pageContext.request.contextPath}/pages/user-list.jsp"> <i
-							class="fa fa-circle-o"></i> 用户管理
+						href="${pageContext.request.contextPath}/pages/user-list.jsp">
+						<i class="fa fa-circle-o"></i> 用户管理
 					</a></li>
 					<li><a
-						href="${pageContext.request.contextPath}/pages/role-list.jsp"> <i
-							class="fa fa-circle-o"></i> 角色管理
+						href="${pageContext.request.contextPath}/pages/role-list.jsp">
+						<i	class="fa fa-circle-o"></i> 角色管理
 					</a></li>
 					<li><a
-						href="${pageContext.request.contextPath}/pages/syslog-list.jsp"> <i
-							class="fa fa-circle-o"></i> 访问日志
+						href="${pageContext.request.contextPath}/pages/syslog-list.jsp">
+						<i	class="fa fa-circle-o"></i> 访问日志
 					</a></li>
 				</ul></li>
 			<li class="treeview"><a href="#"> <i class="fa fa-cube"></i>
