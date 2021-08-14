@@ -41,6 +41,14 @@ public class AdminController {
         return  administrator;
     }
 
+    @RequestMapping("/queryEmpById")
+    @ResponseBody
+    //通过id查询单个管理员用户（返回json数据）
+    public  Employee queryEmpById(int id,ModelMap map){
+        Employee employee = adminService.queryEmpById(id);
+        return  employee;
+    }
+
 
     @RequestMapping("/addAdmin")
     @ResponseBody
@@ -61,7 +69,7 @@ public class AdminController {
         }
     }
 
-    @RequestMapping("deleteAdmin")
+    @RequestMapping("/deleteAdmin")
     @ResponseBody
     //删除管理员用户
     public void deleteAdmin(int id){
@@ -69,7 +77,7 @@ public class AdminController {
     }
 
 
-    @RequestMapping("updateAdmin")
+    @RequestMapping("/updateAdmin")
     @ResponseBody
     //修改管理员信息
     public void updateAdmin(Administrator admin){
@@ -82,10 +90,50 @@ public class AdminController {
 
 
     @RequestMapping("/listEmp")
+    //查询所有普通员工
     public String listEmp(ModelMap modelMap){
         List<Employee> employees = adminService.queryAllEmp();
         modelMap.addAttribute("employees",employees);
         return "EmpManagement";
     }
+
+    @RequestMapping("/deleteEmp")
+    @ResponseBody
+    //删除一个员工
+    public  void deleteEmp(int id){
+        int i = adminService.deleteEmp(id);
+    }
+
+
+     @RequestMapping("/addEmp")
+     @ResponseBody
+     //添加一个员工信息
+     public void addEmp(Employee emp){
+         ModelMap map=new ModelMap();
+         //通过shiro框架加密密码
+         String hashPassword = MD5Util.Md5Hash(emp.getEmpPassword(), emp.getEmpUsername());
+         //将加密密码再次存入emp中。
+         emp.setEmpPassword(hashPassword);
+         int num = adminService.addEmp(emp);
+         if(num>0){
+             //添加成功
+             map.addAttribute("message","ok");
+         }else{
+             //添加失败
+             map.addAttribute("message","fail");
+         }
+     }
+
+    @RequestMapping("/updateEmp")
+    @ResponseBody
+    //修改管理员信息
+    public void updateEmp(Employee emp){
+        //通过shiro框架加密密码
+        String hashPassword = MD5Util.Md5Hash(emp.getEmpPassword(), emp.getEmpUsername());
+        //将加密密码再次存入emp中。
+        emp.setEmpPassword(hashPassword);
+        int num = adminService.updateEmpById(emp);
+    }
+
 
 }

@@ -19,6 +19,7 @@
 	<!--导入外部的css样式文件-->
 	<jsp:include page="/commons/css.jsp"/>
 
+	<script type="text/javascript" src="../commons/layer_gp.js"></script>
    <style type="text/css">
 	   .modal-dialog {
 		   position: absolute;
@@ -100,7 +101,7 @@
 							<div class="pull-left">
 								<div class="form-group form-inline">
 									<div class="btn-group">
-										<a  class="btn btn-success add"  href="javascript:;">
+										<a  class="btn btn-success add"  href="javascript:;" onclick="layer_show('添加员工','${pageContext.request.contextPath}/pages/addEmp.jsp',600,600)">
 											<i class="fa fa-file-o"></i> 新建
 										</a>
 										<a  class="btn btn-success " href="javascript:location.reload()">
@@ -156,8 +157,9 @@
 											<td>${one.empDes}</td>
 											<td class="text-center">
 												<span style="display: none">${one.empId}</span>
-												<a href="javascript:;" class="btn bg-olive btn-xs aUpdate">修改</a>
-												<a href="javascript:;" class="btn bg-olive btn-xs aDelete" >删除</a>
+												<a href="javascript:;" class="btn bg-olive btn-xs eUpdate"
+												   onclick="layer_show('修改员工信息','${pageContext.request.contextPath}/pages/updateEmp.jsp?empId='+${one.empId},600,600)">修改</a>
+												<a href="javascript:;" class="btn bg-olive btn-xs eDelete" >删除</a>
 											</td>
 										</tr>
 								  </c:forEach>
@@ -176,135 +178,6 @@
 
 				</section>
 				<!-- 正文区域 /-->
-
-				<!--添加用的模态框 -->
-				<div class="modal fade" id="addModal" style="top:20px"   tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					<div class="modal-dialog"  >
-						<div class="modal-content" >
-							<div class="modal-header">
-								<h3 class="modal-title">添加用户</h3>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<form  method="post" onsubmit="return false;">
-									<div class="form-group">
-										<label>用户名</label>
-										<input id="adUserName" type="text" name="adUserName" value="阳桑"  class="form-control"><br/>
-									</div>
-									<div class="form-group">
-										<label>用户密码</label>
-										<input id="adPassword" type="text" name="adPassword" value="123456"
-											   class="form-control"><br/>
-									</div>
-									<div class="form-group">
-										<label>姓名</label>
-										<input id="adName" type="text" name="adName" value="阳东林" class="form-control"><br/>
-									</div>
-									<div class="form-group">
-										<label>性别</label>
-										<input id="adSex" type="text" name="adSex" value="男" class="form-control"><br/>
-									</div>
-									<div class="form-group">
-										<label>年龄</label>
-										<input id="adAge" type="text" name="adAge" value="22" class="form-control"><br/>
-									</div>
-									<div class="form-group">
-										<label>职位</label>
-										<input id="adJob" type="text" name="adJob" value="管理员" class="form-control"><br/>
-									</div>
-									<div class="form-group">
-										<label>联系电话</label>
-										<input id="adPhone" type="text" name="adPhone" value="13456897531"  class="form-control"><br/>
-									</div>
-									<div class="form-group">
-										<label>家庭住址</label>
-										<input id="adAddress" type="text" name="adAddress" value="金牛区九里提"  class="form-control"><br/>
-									</div>
-									<div class="form-group">
-										<label>角色</label> <br/>
-										<input id="roleId" type="radio" name="roleId" value="1" checked >管理员<br/>
-									</div>
-									<div class="form-group">
-										<label>备注</label>
-										<input id="adDes" type="text" name="adDes" value="啥也没有"  class="form-control"><br/>
-									</div>
-									<%--                      <input class="btn btn-success" type="submit" value="提交">--%>
-								</form>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary btn1" data-dismiss="modal">取消</button>
-								<button id="addAjax" type="button" class="btn btn-primary">提交</button>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			<!--修改用的模态框 -->
-			<div class="modal fade" id="updateModal" style="top:20px"   tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog"  >
-					<div class="modal-content" >
-						<div class="modal-header">
-							<h3 class="modal-title">修改用户</h3>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<form  method="post" onsubmit="return false;">
-								<div class="form-group">
-									<label>用户名</label>
-									<input id="adUserName1" type="text" name="adUserName" value="${admin.adUsername}"  class="form-control"><br/>
-								</div>
-								<div class="form-group">
-									<label>用户密码</label>
-									<input id="adPassword1" type="text" name="adPassword" value="${admin.adPassword}"
-										   class="form-control"><br/>
-								</div>
-								<div class="form-group">
-									<label>姓名</label>
-									<input id="adName1" type="text" name="adName"  class="form-control"><br/>
-								</div>
-								<div class="form-group">
-									<label>性别</label>
-									<input id="adSex1" type="text" name="adSex"  class="form-control"><br/>
-								</div>
-								<div class="form-group">
-									<label>年龄</label>
-									<input id="adAge1" type="text" name="adAge"  class="form-control"><br/>
-								</div>
-								<div class="form-group">
-									<label>职位</label>
-									<input id="adJob1" type="text" name="adJob"  class="form-control"><br/>
-								</div>
-								<div class="form-group">
-									<label>联系电话</label>
-									<input id="adPhone1" type="text" name="adPhone"   class="form-control"><br/>
-								</div>
-								<div class="form-group">
-									<label>家庭住址</label>
-									<input id="adAddress1" type="text" name="adAddress"   class="form-control"><br/>
-								</div>
-								<div class="form-group">
-									<label>角色</label> <br/>
-									<input id="roleId1" type="radio" name="roleId"  checked >管理员<br/>
-								</div>
-								<div class="form-group">
-									<label>备注</label>
-									<input id="adDes1" type="text" name="adDes"   class="form-control"><br/>
-								</div>
-								<%--                      <input class="btn btn-success" type="submit" value="提交">--%>
-							</form>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary btn1" data-dismiss="modal">取消</button>
-							<button id="updateAjax" type="button" class="btn btn-primary">提交</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
 			</div>
 			<!-- @@close -->
 			<!-- 内容区域 /-->
@@ -378,53 +251,20 @@
 
 	<script>
 
+
 		$(function () {
-			//给添加功能绑定单击事件
-			$(".add").click(function () {
-				$("#addModal").modal("show");
-				//给添加(Ajax)管理员按钮绑定单击事件
-				$("#addAjax").click(function () {
-					$.ajax({
-						url:"${pageContext.request.contextPath}/admin/addAdmin",
-						type: "post",
-						data:{
-							adUsername: $("#adUserName").val(),
-							adPassword: $("#adPassword").val(),
-							adName: $("#adName").val(),
-							adSex: $("#adSex").val(),
-							adAge: $("#adAge").val(),
-							adJob: $("#adJob").val(),
-							adPhone: $("#adPhone").val(),
-							roleId: $("#roleId").val(),
-							adAddress: $("#adAddress").val(),
-							adDes: $("#adDes").val(),
-						},
-						success:function(data) {
-							alert("添加成功");
-							location.reload();
-						},
-						error:function (data) {
-							console.log("通信错误");
-							alert("通信失败");
-						}
-					});
-				});
-
-
-			});
-
 			//删除按钮的
 			//询问框
-			$(".aDelete").click(function () {
-				var adId=$(this).parent().find("span").text();
+			$(".eDelete").click(function () {
+				var empId=$(this).parent().find("span").text();
 				layer.confirm("你确定要删除[" + $(this).parent().parent().find("td:eq(1)").text() + "]吗？", {
 					btn: ['确定', '取消'] //按钮
 				}, function () {
 					$.ajax({
-						url:"${pageContext.request.contextPath}/admin/deleteAdmin",
+						url:"${pageContext.request.contextPath}/admin/deleteEmp",
 						type: "post",
 						data:{
-							id:adId,
+							id:empId,
 						},
 						success:function (data) {
 							layer.msg('删除成功', {icon: 1});
@@ -439,31 +279,16 @@
 				});
 			});
 
+
+
+
+
+
+
 			//修改管理员操作
-			$(".aUpdate").click(function () {
-				//获取到该id对应的用户信息填充到修改模态框中
-				var adId=$(this).parent().find("span").text();
-				$.ajax({
-					url:"${pageContext.request.contextPath}/admin/queryAdminById",
-					type:"post",
-					dataType:"json",
-					data:{
-						id:adId,
-					},
-					success:function (data) {
-                       console.log("数据获取成功");
-                      $("#adUserName1").val(data.adUsername);
-                      // $("#adPassword1").val(data.adPassword);
-                      $("#adName1").val(data.adName);
-                      $("#adSex1").val(data.adSex);
-                      $("#adAge1").val(data.adAge);
-                      $("#adJob1").val(data.adJob);
-                      $("#adPhone1").val(data.adPhone);
-                      $("#adAddress1").val(data.adAddress);
-                      $("#roleId1").val(data.roleId);
-                      $("#adDes1").val(data.adDes);
-					}
-				});
+			$(".eUpdate").click(function () {
+
+
 				$("#updateModal").modal("show");
 
 				//提交修改的操作
