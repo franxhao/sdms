@@ -66,7 +66,7 @@
                         <div class="pull-left">
                             <div class="form-group form-inline">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-default" title="刷新"
+                                    <button type="button" class="btn btn-primary" title="刷新"
                                             onclick="window.location.reload();">
                                         <i class="fa fa-refresh"></i> 刷新(添加信息)
                                     </button>
@@ -114,7 +114,8 @@
                                     <td>${one.outPhone}</td>
                                     <td>${one.outDes}</td>
                                     <td>
-                                        <button>修改</button>
+                                        <button type="button" class="btn btn-success">修改</button>
+                                        <button type="button" class="btn btn-danger">删除</button>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -140,16 +141,16 @@
                     <div class="box-tools pull-right">
                         <ul class="pagination">
                             <li>
-                                <button onclick="firstPage()">首页</button>
+                                <button type="button" class="btn bg-primary" onclick="firstPage()">首页</button>
                             </li>
                             <li>
-                                <button onclick="previousPage()">上一页</button>
+                                <button type="button" class="btn bg-primary" onclick="previousPage()">上一页</button>
                             </li>
                             <li>
-                                <button onclick="nextPage()">下一页</button>
+                                <button type="button" class="btn bg-primary" onclick="nextPage()">下一页</button>
                             </li>
                             <li>
-                                <button onclick="lastPage()">尾页</button>
+                                <button type="button" class="btn bg-primary" onclick="lastPage()">尾页</button>
                             </li>
                         </ul>
                     </div>

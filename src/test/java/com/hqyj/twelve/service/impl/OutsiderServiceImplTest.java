@@ -42,10 +42,7 @@ public class OutsiderServiceImplTest {
         outsider.setOutSex("男");
         outsider.setOutAge(30);
         outsider.setRecordIn(new Date());
-        Date date = new Date();
-        /*long time = date.getTime();
-        long outtime = time+10000000;
-        outsider.setRecordOut(new Date(outtime));*/
+        outsider.setRecordOut(null);
         outsider.setOutPhone("14729871098");
         outsider.setOutDes("探亲");
         int result = outsiderService.addOutsider(outsider);
