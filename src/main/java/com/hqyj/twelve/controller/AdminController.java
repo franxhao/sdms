@@ -1,6 +1,7 @@
 package com.hqyj.twelve.controller;
 
 import com.hqyj.twelve.pojo.Administrator;
+import com.hqyj.twelve.pojo.Employee;
 import com.hqyj.twelve.service.AdminService;
 import com.hqyj.twelve.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/admin")
-public class adminController {
+public class AdminController {
 
     @Autowired
     private AdminService adminService;
@@ -80,6 +81,11 @@ public class adminController {
     }
 
 
-
+    @RequestMapping("/listEmp")
+    public String listEmp(ModelMap modelMap){
+        List<Employee> employees = adminService.queryAllEmp();
+        modelMap.addAttribute("employees",employees);
+        return "EmpManagement";
+    }
 
 }
