@@ -83,3 +83,4 @@
 <script
         src="${pageContext.request.contextPath}/plugins/bootstrap-slider/bootstrap-slider.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/bootstrap-select/js/bootstrap-select-v1.13.9.min.js"></script>
+<script src="${pageContext.request.contextPath}/plugins/layer-3.5.1/layer.js"></script>

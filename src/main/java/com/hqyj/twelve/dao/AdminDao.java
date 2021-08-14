@@ -28,6 +28,17 @@ public interface AdminDao {
     //根据用户名查询普通员工
     Employee queryEmpByUsername(String username);
 
+    //根据用户名查询管理员
+    Administrator queryAdminById(int id);
+
+    //根据用户名查询普通员工
+    Employee queryEmpById(int id);
+
+    //修改管理员信息(可以修改除了id的所有属性)
+    int updateAdminById(Administrator admin);
+
+    //修改普通员工用户信息(可以修改除了id的所有属性)
+    int updateEmpById(Employee emp);
 
     //根据id修改普通用户密码
     int updateEmpPasswordById(Employee emp);
@@ -35,10 +46,10 @@ public interface AdminDao {
     //根据id修改管理员用户密码
     int  updateAdminPasswordById(Administrator admin);
 
-    //根据id修改普通用户密码
+    //根据id删除普通用户
     int deleteEmpById(Integer id);
 
-    //根据id修改管理员用户密码
+    //根据id删除管理员用户
     int deleteAdminById(Integer id);
 
 

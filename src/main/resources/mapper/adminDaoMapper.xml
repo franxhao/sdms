@@ -19,7 +19,7 @@
     </insert>
 
     <sql id="admin">
-        select ad_username  adUsername,ad_password adPassword,ad_name adName ,ad_sex adSex,
+        select ad_Id adId,ad_username  adUsername,ad_password adPassword,ad_name adName ,ad_sex adSex,
         ad_age adAge,ad_job adJob,ad_phone adPhone,ad_address adAddress,role_id roleId,ad_des adDes from administrator
     </sql>
 
@@ -31,9 +31,13 @@
         <include refid="admin"/> where ad_username like #{adUsername}
     </select>
 
+    <select id="queryAdminById" resultType="com.hqyj.twelve.pojo.Administrator">
+        <include refid="admin"/> where ad_id =#{adId}
+    </select>
+
 
     <sql id="emp">
-        select emp_username  empUsername,emp_password empPassword,emp_name empName ,emp_sex empSex,
+        select emp_Id empId,emp_username  empUsername,emp_password empPassword,emp_name empName ,emp_sex empSex,
         emp_age empAge,emp_job empJob,emp_phone empPhone,emp_address empAddress,role_id roleId,build_id buildId,emp_des empDes from employee
     </sql>
 
@@ -45,13 +49,32 @@
         <include refid="emp"/> where emp_username like #{empUsername}
     </select>
 
+    <select id="queryEmpById"  resultType="com.hqyj.twelve.pojo.Employee">
+        <include refid="emp"/> where emp_id = #{empId};
+    </select>
+
+
+    <update id="updateEmpById" parameterType="com.hqyj.twelve.pojo.Employee">
+        update employee set emp_username=#{empUsername},emp_password=#{empPassword},
+        emp_name=#{empName},emp_sex=#{empSex},emp_age=#{empAge},emp_Job=#{empJob},
+        emp_phone=#{empPhone},emp_address=#{empAddress},role_id=#{roleId},build_id=#{buildId},
+        emp_des=#{empDes} where emp_id=#{empId}
+    </update>
+
 
     <update id="updateEmpPasswordById" parameterType="com.hqyj.twelve.pojo.Employee">
         update employee set emp_password=#{empPassword} where emp_id=#{empId}
     </update>
 
+
+    <update id="updateAdminById" parameterType="com.hqyj.twelve.pojo.Administrator">
+                update  administrator set ad_username=#{adUsername},ad_password=#{adPassword},
+                ad_name=#{adName},ad_sex=#{adSex},ad_age=#{adAge},ad_job=#{adJob},ad_phone=#{adPhone},
+                ad_address=#{adAddress},role_id=#{roleId},ad_des=#{adDes} where ad_id=#{adId}
+    </update>
+
     <update id="updateAdminPasswordById" parameterType="com.hqyj.twelve.pojo.Administrator">
-        update  administrator set ad_password=#{adPassword}   where ad_id=#{adId}
+                update  administrator set ad_password=#{adPassword} where ad_id=#{adId}
     </update>
 
 
