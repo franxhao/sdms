@@ -19,6 +19,47 @@
     <!--导入外部的css样式文件-->
     <jsp:include page="/commons/css.jsp"/>
 
+    <%--	导入外部的js代码--%>
+    <jsp:include page="/commons/js.jsp"/>
+
+
+    <%--模态框样式--%>
+    <style type="text/css">
+        .modal-dialog {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .modal-content {
+            /*overflow-y: scroll; */
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .modal-body {
+            overflow-y: scroll;
+            position: absolute;
+            top: 55px;
+            bottom: 65px;
+            width: 100%;
+        }
+
+        .modal-header .close {
+            margin-right: 15px;
+        }
+
+        .modal-footer {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+
 <body class="hold-transition skin-blue sidebar-mini">
 
 <div class="wrapper">
@@ -51,7 +92,7 @@
         <!-- 内容头部 /-->
 
         <!-- 正文区域 -->
-        <section class="content"> <!-- .box-body -->
+        <section class="content">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">详细信息</h3>
@@ -66,9 +107,12 @@
                         <div class="pull-left">
                             <div class="form-group form-inline">
                                 <div class="btn-group">
+                                    <a class="btn btn-primary add" href="javascript:;">
+                                        <i class="fa fa-address-book-o"></i> 添加
+                                    </a>
                                     <button type="button" class="btn btn-primary" title="刷新"
                                             onclick="window.location.reload();">
-                                        <i class="fa fa-refresh"></i> 刷新(添加信息)
+                                        <i class="fa fa-refresh"></i> 刷新
                                     </button>
                                 </div>
                             </div>
@@ -80,6 +124,7 @@
                                     class="glyphicon glyphicon-search form-control-feedback"></span>
                             </div>
                         </div>
+
                         <!--工具栏/-->
 
                         <!--数据列表-->
@@ -114,7 +159,8 @@
                                     <td>${one.outPhone}</td>
                                     <td>${one.outDes}</td>
                                     <td>
-                                        <button type="button" class="btn btn-success">修改</button>
+                                        <button type="button" class="btn btn-success" onclick="edit(${one.outId})">修改
+                                        </button>
                                         <button type="button" class="btn btn-danger">删除</button>
                                     </td>
                                 </tr>
@@ -128,9 +174,8 @@
                     <!-- 数据表格 /-->
 
                 </div>
-                <!-- /.box-body -->
 
-                <!-- .box-footer-->
+                <!--分页-->
                 <div class="box-footer">
                     <div class="pull-left">
                         <div class="form-group form-inline">
@@ -156,25 +201,146 @@
                     </div>
 
                 </div>
-                <!-- /.box-footer-->
+                <!--分页-->
 
             </div>
 
         </section>
         <!-- 正文区域 /-->
 
+        <!--添加用的模态框 -->
+        <div class="modal fade" id="addModal" style="top:20px" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">添加用户</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" onsubmit="return false;">
+                            <div class="form-group">
+                                <label>姓名</label>
+                                <input id="outName" type="text" name="outName"
+                                       class="form-control"><br/>
+                            </div>
+                            <div class="form-group">
+                                <label>性别</label>
+                                <input id="outSex" type="text" name="outSex"
+                                       class="form-control"><br/>
+                            </div>
+                            <div class="form-group">
+                                <label>年龄</label>
+                                <input id="outAge" type="text" name="outAge"
+                                       class="form-control"><br/>
+                            </div>
+                            <div class="form-group">
+                                <label>进入时间</label>
+                                <input id="recordIn" type="text" name="recordIn"
+                                       class="form-control"><br/>
+                            </div>
+                            <div class="form-group">
+                                <label>离开时间</label>
+                                <input id="recordOut" type="text" name="recordOut"
+                                       class="form-control"><br/>
+                            </div>
+                            <div class="form-group">
+                                <label>电话</label>
+                                <input id="outPhone" type="text" name="outPhone"
+                                       class="form-control"><br/>
+                            </div>
+                            <div class="form-group">
+                                <label>备注</label>
+                                <input id="outDes" type="text" name="outDes"
+                                       class="form-control"><br/>
+                            </div>
+                            <%-- <input class="btn btn-success" type="submit" value="提交">--%>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn1" data-dismiss="modal">取消</button>
+                        <button id="addAjax" type="button" class="btn btn-primary">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--修改用的模态框 -->
+        <div class="modal fade" id="updateModal" style="top:20px" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">修改登记信息</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" onsubmit="return false;">
+                            <div class="form-group">
+                                <label>用户名</label>
+                                <input id="adUserName1" type="text" name="adUserName"
+                                       class="form-control"><br/>
+                            </div>
+                            <div class="form-group">
+                                <label>用户密码</label>
+                                <input id="adPassword1" type="text" name="adPassword"
+                                       class="form-control"><br/>
+                            </div>
+                            <div class="form-group">
+                                <label>姓名</label>
+                                <input id="adName1" type="text" name="adName" class="form-control"><br/>
+                            </div>
+                            <div class="form-group">
+                                <label>性别</label>
+                                <input id="adSex1" type="text" name="adSex" class="form-control"><br/>
+                            </div>
+                            <div class="form-group">
+                                <label>年龄</label>
+                                <input id="adAge1" type="text" name="adAge" class="form-control"><br/>
+                            </div>
+                            <div class="form-group">
+                                <label>职位</label>
+                                <input id="adJob1" type="text" name="adJob" class="form-control"><br/>
+                            </div>
+                            <div class="form-group">
+                                <label>联系电话</label>
+                                <input id="adPhone1" type="text" name="adPhone" class="form-control"><br/>
+                            </div>
+                            <div class="form-group">
+                                <label>家庭住址</label>
+                                <input id="adAddress1" type="text" name="adAddress" class="form-control"><br/>
+                            </div>
+                            <div class="form-group">
+                                <label>角色</label> <br/>
+                                <input id="roleId1" type="radio" name="roleId" checked>管理员<br/>
+                            </div>
+                            <div class="form-group">
+                                <label>备注</label>
+                                <input id="adDes1" type="text" name="adDes" class="form-control"><br/>
+                            </div>
+                            <%--                      <input class="btn btn-success" type="submit" value="提交">--%>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn1" data-dismiss="modal">取消</button>
+                        <button id="updateAjax" type="button" class="btn btn-primary">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <!-- 内容区域 /-->
 
     <!-- 底部导航 -->
     <jsp:include page="/commons/foot.jsp"/>
-    <!-- 底部导航 /-->
 
 </div>
 
-<%--	导入外部的js代码--%>
-<jsp:include page="/commons/js.jsp"/>
-
+<%--默认--%>
 <script>
     $(document).ready(function () {
         // 选择框
@@ -218,6 +384,7 @@
     });
 </script>
 
+<%--分页--%>
 <script>
     var pageNumber = ${pageData.currentPage};
     var pageSize = ${pageData.pageSize};
@@ -259,6 +426,61 @@
             pageNumber = totalPage;
             goto();
         }
+    }
+</script>
+
+<%--模态框点击事件--%>
+<script>
+    $(function () {
+        //给添加功能绑定单击事件
+        $(".add").click(function () {
+            $("#addModal").modal("show");
+            //给添加(Ajax)管理员按钮绑定单击事件
+            $("#addAjax").click(function () {
+                var outsider = {
+                    outName: $("#outName").val(),
+                    outSex: $("#outSex").val(),
+                    outAge: $("#outAge").val(),
+                    recordIn: $("#recordIn").val(),
+                    recordOut: $("#recordOut").val(),
+                    outPhone: $("#outPhone").val(),
+                    outDes: $("#outDes").val(),
+                }
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/outsider/addOutsider",
+                    type: "post",
+                    contentType: "application/json",
+                    data: JSON.stringify(outsider),
+                    dataType: "json",
+                    success: function (result) {
+                        alert("添加成功");
+                        location.reload();
+                    },
+                    error: function (result) {
+                        alert("添加失败");
+                    }
+                });
+            });
+        });
+    })
+
+    function edit(id) {
+        $("#updateModal").modal("show")
+/*
+        $.ajax({
+            url: "back/bood/edit",
+            method: "GET",
+            data: {
+                "id": id
+            },
+            success: function (data) {
+                $("#id2").val(data.id)
+                $("#name2").val(data.name)
+                $("#author2").val(data.author)
+                $("#price2").val(data.price)
+            },
+            dataType: "json"
+        })*/
     }
 </script>
 </body>
