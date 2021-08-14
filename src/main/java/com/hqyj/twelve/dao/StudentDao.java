@@ -10,7 +10,9 @@ import java.util.Map;
  * 学生信息
  */
 public interface StudentDao {
-    //获取所有学生的信息
+    /**
+     * 获取所有学生的信息（含未分配入住）
+     */
     List<Student> findAll();
 
     /**
@@ -33,4 +35,11 @@ public interface StudentDao {
      * @return
      */
     Map<String, Object> queryStuByKeyAndName(@Param("stuKey") String stuKey, @Param("stuName") String stuName);
+
+    /**
+     * 在学生寝室表中添加数据
+     * @param stuId
+     * @param stuSex
+     */
+    void addStuIdToAD(@Param("stuId") Integer stuId, @Param("stuSex") String stuSex);
 }

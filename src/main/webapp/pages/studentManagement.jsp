@@ -157,7 +157,7 @@
 											<i class="fa fa-file-o"></i> 添加
 										</button>
 										
-										<button type="button" class="btn btn-default" title="刷新">
+										<button type="button" class="btn btn-default" onclick="location.reload()" title="刷新">
 											<i class="fa fa-refresh"></i> 刷新
 										</button>
 									</div>
@@ -304,7 +304,7 @@
 				url:"${pageContext.request.contextPath}/stuManagement/addStu",
 				method:"post",
 				contentType:"application/json;charset=utf-8",
-				dataType:"json",
+				dataType:"text",
 				data:JSON.stringify({
 					stuKey:$("#stuKey").val(),
 					stuName:$("#stuName").val(),
@@ -330,7 +330,6 @@
 					if ("exist" == data){
 						alert("该学生已存在，请勿重新上传")
 					}
-					//alert(data);
 				},
 				error:function (err) {
 					console.log(err);
