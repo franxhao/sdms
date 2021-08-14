@@ -21,6 +21,9 @@ public interface AdminService {
     //查询所有普通用户
     List<Employee> queryAllEmp();
 
+    //通过id查询指定的员工用户
+    Employee queryEmpById(int id);
+
     //添加一个管理员用户
     int  addAdmin(Administrator admin);
 
@@ -29,4 +32,14 @@ public interface AdminService {
 
     //修改管理员用户信息
     int updateAdminById(Administrator admin);
+
+    //添加一个员工用户
+    int addEmp(Employee emp);
+
+    //删除一个员工用户
+    int deleteEmp(int id);
+
+    //修改员工用户信息
+    int updateEmpById(Employee emp);
+
 }

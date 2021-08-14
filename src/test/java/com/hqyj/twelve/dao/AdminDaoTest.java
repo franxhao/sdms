@@ -142,4 +142,11 @@ public class AdminDaoTest {
         administrator.setAdUsername("梁桑花");
         adminDao.updateAdminById(administrator);
     }
+
+    @Test
+    public void updateEmpById(){
+        Employee employee =adminDao.queryEmpById(2);
+        employee.setEmpUsername("梁桑花");
+        adminDao.updateEmpById(employee);
+    }
 }

@@ -34,7 +34,7 @@ public class adminController {
 
     @RequestMapping("/queryAdminById")
     @ResponseBody
-    //通过id查询单个用户（返回json数据）
+    //通过id查询单个管理员用户（返回json数据）
     public  Administrator queryById(int id,ModelMap map){
         Administrator administrator = adminService.queryAdminById(id);
         return  administrator;
@@ -70,7 +70,7 @@ public class adminController {
 
     @RequestMapping("updateAdmin")
     @ResponseBody
-    //修改用户信息
+    //修改管理员信息
     public void updateAdmin(Administrator admin){
         //通过shiro框架加密密码
         String hashPassword = MD5Util.Md5Hash(admin.getAdPassword(), admin.getAdUsername());
@@ -78,6 +78,8 @@ public class adminController {
         admin.setAdPassword(hashPassword);
         int num = adminService.updateAdminById(admin);
     }
+
+
 
 
 }

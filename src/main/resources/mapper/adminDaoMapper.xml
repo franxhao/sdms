@@ -54,6 +54,14 @@
     </select>
 
 
+    <update id="updateEmpById" parameterType="com.hqyj.twelve.pojo.Employee">
+        update employee set emp_username=#{empUsername},emp_password=#{empPassword},
+        emp_name=#{empName},emp_sex=#{empSex},emp_age=#{empAge},emp_Job=#{empJob},
+        emp_phone=#{empPhone},emp_address=#{empAddress},role_id=#{roleId},build_id=#{buildId},
+        emp_des=#{empDes} where emp_id=#{empId}
+    </update>
+
+
     <update id="updateEmpPasswordById" parameterType="com.hqyj.twelve.pojo.Employee">
         update employee set emp_password=#{empPassword} where emp_id=#{empId}
     </update>
@@ -63,6 +71,10 @@
                 update  administrator set ad_username=#{adUsername},ad_password=#{adPassword},
                 ad_name=#{adName},ad_sex=#{adSex},ad_age=#{adAge},ad_job=#{adJob},ad_phone=#{adPhone},
                 ad_address=#{adAddress},role_id=#{roleId},ad_des=#{adDes} where ad_id=#{adId}
+    </update>
+
+    <update id="updateAdminPasswordById" parameterType="com.hqyj.twelve.pojo.Administrator">
+                update  administrator set ad_password=#{adPassword} where ad_id=#{adId}
     </update>
 
 

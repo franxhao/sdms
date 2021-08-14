@@ -210,7 +210,7 @@
 									</div>
 									<div class="form-group">
 										<label>职位</label>
-										<input id="adJob" type="text" name="adJob" value="宿管" class="form-control"><br/>
+										<input id="adJob" type="text" name="adJob" value="管理员" class="form-control"><br/>
 									</div>
 									<div class="form-group">
 										<label>联系电话</label>
