@@ -47,7 +47,7 @@
 					</a></li>
 
                     <li><a
-                            href="${pageContext.request.contextPath}/admin/list">
+                            href="${pageContext.request.contextPath}/admin/page">
                         <i class="fa fa-circle-o"></i> 管理员管理
                     </a></li>
 

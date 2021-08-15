@@ -2,6 +2,7 @@ package com.hqyj.twelve.service;
 
 import com.hqyj.twelve.pojo.Administrator;
 import com.hqyj.twelve.pojo.Employee;
+import com.hqyj.twelve.pojo.PageData;
 
 import java.util.List;
 
@@ -49,5 +50,8 @@ public interface AdminService {
 
     //修改员工用户信息
     int updateEmpById(Employee emp);
+
+    //通过分页返回管理员数据
+    PageData<Administrator> queryAllAdminByPage(Integer pageNumber, Integer pageSize);
 
 }
