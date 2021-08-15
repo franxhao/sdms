@@ -20,7 +20,18 @@
     <!--mvc注解驱动:让springmvc框架解析它定义的注解-->
     <mvc:annotation-driven/>
 
-<!--    开启静态资源访问-->
+    <!--    开启静态资源访问-->
     <mvc:default-servlet-handler/>
+
+    <!--声明转换器-->
+    <bean id="conversionServiceDiy" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <list>
+                <bean class="com.hqyj.twelve.utils.DateConverter"/>
+            </list>
+        </property>
+    </bean>
+    <!--注解驱动引用转换器-->
+    <mvc:annotation-driven conversion-service="conversionServiceDiy"/>
 
 </beans>

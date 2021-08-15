@@ -14,6 +14,8 @@ public interface OutSiderDao {
     //根据 姓名和手机号码 查询个人来访信息
     List<Outsider> queryOutsiderByNameAndPhone(@Param("name") String outName, @Param("phone") String outPhone);
 
+    Outsider queryOutsiderById(Integer outId);
+
     //添加 来访人员信息
     int insertOutsider(Outsider outsider);
 

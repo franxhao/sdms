@@ -46,7 +46,16 @@ public class StudentDaoTest {
         String stuName = "zs";
         map.put("stuKey",stuKey);
         map.put("stuName",stuName);
-        boolean b = studentDao.addStu(map);
-        System.out.println(b);
+        //boolean b = studentDao.addStu(map);
+        boolean result = studentDao.addStu(map);
+        System.out.println(result);
+        System.out.println(map.get("stuId"));
+    }
+
+    @Test
+    public void addStuIdToAD() {
+        Integer stuId = 17;
+        String stuSex = "男";
+        studentDao.addStuIdToAD(stuId,stuSex);
     }
 }

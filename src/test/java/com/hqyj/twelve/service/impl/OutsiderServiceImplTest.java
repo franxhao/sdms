@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -28,11 +30,17 @@ public class OutsiderServiceImplTest {
     }
 
     @Test
-    public void getGoodsByNameAndPhoneTest() {
+    public void getOutsiderByNameAndPhoneTest() {
         List<Outsider> byNameAndPhone = outsiderService.getOutsiderByNameAndPhone("张三", "16698422965");
         for (Outsider outsider : byNameAndPhone) {
             System.out.println(outsider);
         }
+    }
+
+    @Test
+    public void getOutsiderByIdTest(){
+        Outsider outsiderById = outsiderService.getOutsiderById(1);
+        System.out.println(outsiderById);
     }
 
     @Test
@@ -41,11 +49,18 @@ public class OutsiderServiceImplTest {
         outsider.setOutName("朱八");
         outsider.setOutSex("男");
         outsider.setOutAge(30);
-        outsider.setRecordIn(new Date());
-        Date date = new Date();
-        /*long time = date.getTime();
-        long outtime = time+10000000;
-        outsider.setRecordOut(new Date(outtime));*/
+        String strDate = "2021-8-9";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateTime;
+        try {
+            dateTime = simpleDateFormat.parse(strDate);
+            java.sql.Date sqlTime = new java.sql.Date(dateTime.getTime());
+            outsider.setRecordIn(sqlTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        //outsider.setRecordIn(new Date());
+        outsider.setRecordOut(null);
         outsider.setOutPhone("14729871098");
         outsider.setOutDes("探亲");
         int result = outsiderService.addOutsider(outsider);
@@ -59,8 +74,18 @@ public class OutsiderServiceImplTest {
     @Test
     public void modifyInformationTest() {
         Outsider outsider = new Outsider();
-        outsider.setOutId(1);
+        outsider.setOutId(26);
         outsider.setOutPhone("16698422957");
+        String strDate = "2021-8-9";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateTime;
+        try {
+            dateTime = simpleDateFormat.parse(strDate);
+            java.sql.Date sqlTime = new java.sql.Date(dateTime.getTime());
+            outsider.setRecordIn(sqlTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         outsiderService.modifyInformation(outsider);
     }
 

@@ -33,6 +33,12 @@
         FROM outsider where out_name = #{name} and out_phone = #{phone}
     </select>
 
+    <select id="queryOutsiderById" resultMap="outsiderBaseResultMap">
+        SELECT
+        <include refid="outsiderColumnSql"/>
+        FROM outsider where out_id = #{outId}
+    </select>
+
     <insert id="insertOutsider" parameterType="com.hqyj.twelve.pojo.Outsider">
         insert into outsider (out_name,out_sex,out_age,recordin,recordout,out_phone,out_des)
         values (#{outName},#{outSex},#{outAge},#{recordIn},#{recordOut},#{outPhone},#{outDes})
@@ -51,10 +57,10 @@
             <if test="outAge !=null and outAge != ''">
                 out_age=#{outAge},
             </if>
-            <if test="recordIn !=null and recordIn != ''">
+            <if test="recordIn !=null">
                 recordin=#{recordIn},
             </if>
-            <if test="recordOut !=null and recordOut != ''">
+            <if test="recordOut !=null">
                 recordout=#{recordOut},
             </if>
             <if test="outPhone !=null and outPhone != ''">

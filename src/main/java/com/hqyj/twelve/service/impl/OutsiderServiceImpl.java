@@ -29,6 +29,12 @@ public class OutsiderServiceImpl implements OutsiderService {
     }
 
     @Override
+    public Outsider getOutsiderById(Integer outId) {
+        Outsider outsider = outSiderDao.queryOutsiderById(outId);
+        return outsider;
+    }
+
+    @Override
     public int addOutsider(Outsider outsider) {
         int result = outSiderDao.insertOutsider(outsider);
         return result;

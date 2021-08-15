@@ -25,10 +25,11 @@
         <result column="stu_tel" property="stuTel"/>
     </resultMap>
 
+    <!-- 查所有学生信息 -->
     <select id="findAll" resultMap="baseStudentResultMap">
         select s.stu_key,s.stu_name,s.stu_sex,d.dor_id,s.stu_class,s.stu_state,s.stu_tel
-        from student s,dorm d,stu_dor sd
-        where s.stu_id=sd.stu_id and sd.dor_id=d.dor_id
+        from student s,stu_dor sd,dorm d
+        where s.stu_id=sd.stu_id and d.dor_id=sd.dor_id
     </select>
 
     <!-- 根据学号和姓名查询学生 -->
@@ -37,12 +38,27 @@
         from student where stu_key=#{stuKey} and stu_name=#{stuName}
     </select>
 
-    <!-- 添加学生信息 -->
+    <!-- 添加学生信息 + 添加学生寝室信息（未入住） -->
     <insert id="addStu" parameterType="map">
+        <selectKey resultType="int" order="AFTER" keyProperty="stuId" keyColumn="stu_id">
+        select last_insert_id()
+        </selectKey>
         insert into student (stu_key,stu_name,stu_sex,stu_enr,stu_birth,stu_college,stu_major,stu_class,stu_address,stu_tel,stu_state) values (#{stuKey},#{stuName},#{stuSex},#{stuEnr},#{stuBirth},#{stuCollege},#{stuMajor},#{stuClass},#{stuAddress},#{stuTel},'未入住')
-        <!--测试用
-        insert into student (stu_key,stu_name) values (#{stuKey},#{stuName})
-        -->
+    </insert>
+    <!--
+        **********  若数据库数据中寝室id有变动，请注意修改  *************
+        添加学生信息的同时，向stu_dor表中添加学生id
+            dor_id=5表男生寝室,编号5
+            dor_id=6表女生寝室，编号6
+     -->
+    <insert id="addStuIdToAD">
+        insert into stu_dor (id,stu_id,dor_id)
+        <if test="stuSex != null and stuSex != '' and stuSex=='男'.toString()">
+            values (null,#{stuId},5)
+        </if>
+        <if test="stuSex != null and stuSex != '' and stuSex=='女'.toString()">
+            values (null,#{stuId},6)
+        </if>
     </insert>
 
 </mapper>

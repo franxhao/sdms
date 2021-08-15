@@ -32,7 +32,6 @@ public class StudentManagementServiceImpl implements StudentManagementService {
             Date birthday = simpleDateFormat.parse((String) data.get("stuBirth"));
             data.put("stuEnr",enr);
             data.put("stuBirth",birthday);
-            studentDao.addStu(data);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -44,9 +43,14 @@ public class StudentManagementServiceImpl implements StudentManagementService {
         Map<String, Object> map = studentDao.queryStuByKeyAndName(stuKey, stuName);
         if (map == null) {
             //无此学生，可以添加
-            boolean b = studentDao.addStu(data);
-            if (b) {
-                //添加成功,返回ok，表是添加成功
+            boolean result = studentDao.addStu(data);
+            if (result) {
+                //3.添加成功,向学生寝室表中添加记录
+                //3.1 获取学生性别后做记录添加
+                Integer stuId= (Integer) data.get("stuId");
+                String stuSex = (String) data.get("stuSex");
+                studentDao.addStuIdToAD(stuId,stuSex);
+                // 返回ok，表示添加成功
                 return "ok";
             } else {
                 //添加失败，返回fail,表示添加失败
