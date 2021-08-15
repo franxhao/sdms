@@ -22,4 +22,31 @@
         <property name="realm" ref="myShiroRealm"/>
     </bean>
 
+    <!--    shiro过滤器，用于授权-->
+    <!--    这里的id要和web.xml中配置的代理过滤器的名称一致-->
+    <!-- 当已认证的用户访问系统受限资源时，检查所具有的权限，如果有该资源的访问权限
+      授权通过，允许访问，授权失败，拒绝访问
+      web应用的受限资源，就是我们的系统中暴露出来的url资源
+    -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="defaultWebSecurityManager"/>
+        <!--        没有认证过的用户，访问受限资源时，shiro直接跳转到该处配置的地址-->
+        <property name="loginUrl" value="/login.jsp"/>
+        <!--        已认证过的但是没有对应访问权限的用户访问受限资源时，shiro直接跳转到该页面-->
+        <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
+        <property name="filterChainDefinitions">
+            <value>
+                <!--                配置过滤器链 查找规则：从上往下匹配，匹配中了就结束匹配
+                                    想要控制的url = 身份信息
+                                    身份信息：anon  匿名用户
+                                             authc  已认证过的用户
+                                             user  曾经认证过的用户
+                                             roles[角色信息] 具有某个角色的用户
+                                             perms[权限名] 具有某个权限的用户
+                -->
+
+            </value>
+        </property>
+    </bean>
+
 </beans>
