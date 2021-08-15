@@ -71,4 +71,14 @@ public class AdminServiceImpl implements AdminService {
     public int updateEmpById(Employee emp) {
         return adminDao.updateEmpById(emp);
     }
+
+    @Override
+    public Administrator queryAdminByUsername(String username) {
+        return adminDao.queryAdminByUsername(username);
+    }
+
+    @Override
+    public Employee queryEmpByUsername(String username) {
+        return adminDao.queryEmpByUsername(username);
+    }
 }

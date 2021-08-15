@@ -9,7 +9,11 @@
 </head>
 <body>
 	<%
+		//默认跳转到登录页面
+//		response.sendRedirect(request.getContextPath()+"/login.jsp");
+		//为了开发，先暂时关闭跳转到登录页面，直接跳转到main.jsp
 		response.sendRedirect(request.getContextPath()+"/pages/main.jsp");
+
 	%>
 </body>
 </html>
