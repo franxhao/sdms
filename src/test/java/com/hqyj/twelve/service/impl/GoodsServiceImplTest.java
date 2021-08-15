@@ -38,10 +38,16 @@ public class GoodsServiceImplTest {
     }
 
     @Test
+    public void getGoodsByIdTest(){
+        Goods goodsById = goodsService.getGoodsById(1);
+        System.out.println(goodsById);
+    }
+
+    @Test
     public void modifyInformationTest() {
         Goods goods = new Goods();
-        goods.setGoodsId(1);
-        goods.setGoodsPerson("张三");
+        goods.setGoodsId(2);
+        goods.setGoodsPerson("张麻子");
         goods.setPersonPhone("16698422685");
         goods.setGoodsName("书包");
         //goods.setGoodsOut("2021-7-15");

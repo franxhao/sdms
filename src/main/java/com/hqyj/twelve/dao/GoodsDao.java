@@ -12,6 +12,9 @@ public interface GoodsDao {
     //通过 登记人姓名和电话 查询存储物品信息
     List<Goods> queryGoodsByNameAndPhone(@Param("name") String goodsPerson, @Param("phone") String personPhone);
 
+    //根据 id 查询 个人存储信息
+    Goods queryGoodsById(Integer goodsId);
+
     //修改 登记 信息（注：未实现 修改 存入和取出时间的修改）
     int updateById(Goods goods);
 

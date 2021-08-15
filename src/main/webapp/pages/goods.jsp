@@ -78,13 +78,13 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                人员来访管理 <small>全部信息</small>
+                存储物品 <small>全部信息</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="${pageContext.request.contextPath}/index.jsp"><i
                         class="fa fa-dashboard"></i> 首页</a></li>
                 <li><a
-                        href="${pageContext.request.contextPath}/sysLog/findAll.do">人员来访管理</a></li>
+                        href="${pageContext.request.contextPath}/sysLog/findAll.do">存储物品管理</a></li>
 
                 <li class="active">全部信息</li>
             </ol>
@@ -136,33 +136,31 @@
                                                                                type="checkbox"
                                                                                class="icheckbox_square-blue"></th>
                                 <th class="sorting_asc">ID</th>
-                                <th class="sorting">姓名</th>
-                                <th class="sorting">性别</th>
-                                <th class="sorting">年龄</th>
-                                <th class="sorting">来访时间</th>
-                                <th class="sorting">离开时间</th>
-                                <th class="sorting">电话号码</th>
+                                <th class="sorting">物品名称</th>
+                                <th class="sorting">存储人</th>
+                                <th class="sorting">存储人电话</th>
+                                <th class="sorting">存储时间</th>
+                                <th class="sorting">取物时间</th>
                                 <th class="sorting">备注</th>
-                                <th class="sorting">操作</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:forEach items="${pageData.list}" var="one">
                                 <tr>
                                     <td><input name="ids" type="checkbox"></td>
-                                    <td>${one.outId}</td>
-                                    <td>${one.outName}</td>
-                                    <td>${one.outSex}</td>
-                                    <td>${one.outAge}</td>
-                                    <td>${one.recordIn}</td>
-                                    <td>${one.recordOut}</td>
-                                    <td>${one.outPhone}</td>
-                                    <td>${one.outDes}</td>
+                                    <td>${one.goodsId}</td>
+                                    <td>${one.goodsName}</td>
+                                    <td>${one.goodsPerson}</td>
+                                    <td>${one.personPhone}</td>
+                                    <td>${one.goodsIn}</td>
+                                    <td>${one.goodsOut}</td>
+                                    <td>${one.goodsDes}</td>
                                     <td>
-                                        <button type="button" class="btn btn-success" onclick="edit(${one.outId})">
+                                        <button type="button" class="btn btn-success" onclick="edit(${one.goodsId})">
                                             修改
                                         </button>
-                                        <button type="button" class="btn btn-danger" onclick="deleteOne(${one.outId})">
+                                        <button type="button" class="btn btn-danger"
+                                                onclick="deleteOne(${one.goodsId})">
                                             删除
                                         </button>
                                     </td>
@@ -217,7 +215,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title">添加用户</h3>
+                        <h3 class="modal-title">存储物品信息登记</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -225,39 +223,34 @@
                     <div class="modal-body">
                         <form method="post" onsubmit="return false;">
                             <div class="form-group">
-                                <label>姓名</label>
-                                <input id="outName" type="text" name="outName"
+                                <label>物品名称</label>
+                                <input id="goodsName" type="text" name="goodsName"
+                                       class="form-control" placeholder="存储物品名称"><br/>
+                            </div>
+                            <div class="form-group">
+                                <label>存储人</label>
+                                <input id="goodsPerson" type="text" name="goodsPerson"
                                        class="form-control" placeholder="请输入姓名"><br/>
                             </div>
                             <div class="form-group">
-                                <label>性别</label>
-                                <input id="outSex" type="text" name="outSex"
-                                       class="form-control" placeholder="请输入性别"><br/>
-                            </div>
-                            <div class="form-group">
-                                <label>年龄</label>
-                                <input id="outAge" type="text" name="outAge"
-                                       class="form-control" placeholder="请输入年龄"><br/>
-                            </div>
-                            <div class="form-group">
-                                <label>进入时间</label>
-                                <input id="recordIn" type="text" name="recordIn"
-                                       class="form-control" placeholder="登记进入时间（格式如：2021-05-06）"><br/>
-                            </div>
-                            <div class="form-group">
-                                <label>离开时间</label>
-                                <input id="recordOut" type="text" name="recordOut"
-                                       class="form-control" placeholder="请登记预计离开时间（格式如：2021-05-06）"><br/>
-                            </div>
-                            <div class="form-group">
-                                <label>电话</label>
-                                <input id="outPhone" type="text" name="outPhone"
+                                <label>存储人电话</label>
+                                <input id="personPhone" type="text" name="personPhone"
                                        class="form-control" placeholder="请输入电话号码"><br/>
                             </div>
                             <div class="form-group">
+                                <label>存储时间</label>
+                                <input id="goodsIn" type="text" name="goodsIn"
+                                       class="form-control" placeholder="登记存储时间（格式如：2021-05-06）"><br/>
+                            </div>
+                            <div class="form-group">
+                                <label>取物时间</label>
+                                <input id="goodsOut" type="text" name="goodsOut"
+                                       class="form-control" placeholder="登记取物时间（格式如：2021-05-06）"><br/>
+                            </div>
+                            <div class="form-group">
                                 <label>备注</label>
-                                <input id="outDes" type="text" name="outDes"
-                                       class="form-control" placeholder="备注信息"><br/>
+                                <input id="goodsDes" type="text" name="goodsDes"
+                                       class="form-control" placeholder="备注"><br/>
                             </div>
                             <%-- <input class="btn btn-success" type="submit" value="提交">--%>
                         </form>
@@ -284,44 +277,39 @@
                     <div class="modal-body">
                         <form method="post" onsubmit="return false;">
                             <div class="form-group">
-                                <label>编号</label>
-                                <input id="outIdc" type="text" name="outIdc"
+                                <label>ID</label>
+                                <input id="goodsIdc" type="text" name="goodsIdc"
                                        class="form-control" readonly><br/>
                             </div>
                             <div class="form-group">
-                                <label>姓名</label>
-                                <input id="outNamec" type="text" name="outNamec"
-                                       class="form-control" placeholder="请输入姓名"><br/>
+                                <label>物品名称</label>
+                                <input id="goodsNamec" type="text" name="goodsNamec"
+                                       class="form-control" placeholder="请输入物品名称"><br/>
                             </div>
                             <div class="form-group">
-                                <label>性别</label>
-                                <input id="outSexc" type="text" name="outSexc"
-                                       class="form-control" placeholder="请输入性别"><br/>
+                                <label>存储人</label>
+                                <input id="goodsPersonc" type="text" name="goodsPersonc"
+                                       class="form-control" placeholder="存储人姓名"><br/>
                             </div>
                             <div class="form-group">
-                                <label>年龄</label>
-                                <input id="outAgec" type="text" name="outAgec"
-                                       class="form-control" placeholder="请输入年龄"><br/>
+                                <label>存储人电话</label>
+                                <input id="personPhonec" type="text" name="personPhonec"
+                                       class="form-control" placeholder="请输入存储人电话号码"><br/>
                             </div>
                             <div class="form-group">
                                 <label>进入时间</label>
-                                <input id="recordInc" type="text" name="recordInc"
-                                       class="form-control" placeholder="登记进入时间（格式如：2021-05-06）"><br/>
+                                <input id="goodsInc" type="text" name="goodsInc"
+                                       class="form-control" placeholder="存储物品时间（格式如：2021-05-06）"><br/>
                             </div>
                             <div class="form-group">
                                 <label>离开时间</label>
-                                <input id="recordOutc" type="text" name="recordOutc"
-                                       class="form-control" placeholder="请登记预计离开时间（格式如：2021-05-06）"><br/>
+                                <input id="goodsOutc" type="text" name="goodsOutc"
+                                       class="form-control" placeholder="取走物品时间（格式如：2021-05-06）"><br/>
                             </div>
                             <div class=" form-group">
-                                <label>电话</label>
-                                <input id="outPhonec" type="text" name="outPhonecc"
-                                       class="form-control" placeholder="请输入电话号码"><br/>
-                            </div>
-                            <div class="form-group">
                                 <label>备注</label>
-                                <input id="outDesc" type="text" name="outDesc"
-                                       class="form-control" placeholder="备注信息"><br/>
+                                <input id="goodsDesc" type="text" name="goodsDesc"
+                                       class="form-control" placeholder="请输入电话号码"><br/>
                             </div>
                             <%--                      <input class="btn btn-success" type="submit" value="提交">--%>
                         </form>
@@ -397,7 +385,7 @@
 
     function goto() {
         window.location.href =
-            "${pageContext.request.contextPath}/outsider/getAll?pageNumber=" + pageNumber + "&pageSize=" + pageSize;
+            "${pageContext.request.contextPath}/goods/getAll?pageNumber=" + pageNumber + "&pageSize=" + pageSize;
     }
 
     //首页
@@ -440,23 +428,22 @@
         $(".add").click(function () {
             $("#addModal").modal("show");
             $("#addAjax").click(function () {
-                var outsider = {
-                    outName: $("#outName").val(),
-                    outSex: $("#outSex").val(),
-                    outAge: $("#outAge").val(),
-                    recordIn: $("#recordIn").val(),
-                    recordOut: $("#recordOut").val(),
-                    outPhone: $("#outPhone").val(),
-                    outDes: $("#outDes").val(),
+                var goods = {
+                    goodsName: $("#goodsName").val(),
+                    goodsPerson: $("#goodsPerson").val(),
+                    personPhone: $("#personPhone").val(),
+                    goodsIn: $("#goodsIn").val(),
+                    goodsOut: $("#goodsOut").val(),
+                    goodsDes: $("#goodsDes").val()
                 }
                 $.ajax({
-                    url: "${pageContext.request.contextPath}/outsider/addOutsider",
+                    url: "${pageContext.request.contextPath}/goods/addGoods",
                     type: "post",
                     contentType: "application/json",
-                    data: JSON.stringify(outsider),
+                    data: JSON.stringify(goods),
                     dataType: "json",
                     success: function (result) {
-                        alert("添加成功");
+                        alert(result["message"]);
                         location.reload();
                     },
                     error: function (result) {
@@ -471,43 +458,41 @@
     //修改模态框添加值
     function edit(id) {
         $("#updateModal").modal("show")
-        var outsider = {outId: id}
+        var goods = {goodsId: id}
         $.ajax({
-            url: "${pageContext.request.contextPath}/outsider/updateOutsider",
+            url: "${pageContext.request.contextPath}/goods/updateGoods",
             type: "POST",
             contentType: "application/json",
-            data: JSON.stringify(outsider),
+            data: JSON.stringify(goods),
             dataType: "json",
             success: function (result) {
-                $("#outIdc").val(result["outsider"].outId)
-                $("#outNamec").val(result["outsider"].outName)
-                $("#outSexc").val(result["outsider"].outSex)
-                $("#outAgec").val(result["outsider"].outAge)
-                $("#recordInc").val(result["outsider"].recordIn)
-                $("#recordOutc").val(result["outsider"].recordOut)
-                $("#outPhonec").val(result["outsider"].outPhone)
-                $("#outDesc").val(result["outsider"].outDes)
+                $("#goodsIdc").val(result["goods"].goodsId)
+                $("#goodsNamec").val(result["goods"].goodsName)
+                $("#goodsPersonc").val(result["goods"].goodsPerson)
+                $("#personPhonec").val(result["goods"].personPhone)
+                $("#goodsInc").val(result["goods"].goodsIn)
+                $("#goodsOutc").val(result["goods"].goodsOut)
+                $("#goodsDesc").val(result["goods"].goodsDes)
             }
         })
     }
 
     //提交修改信息
     function edit_do() {
-        var outsider = {
-            outId: $("#outIdc").val(),
-            outName: $("#outNamec").val(),
-            outSex: $("#outSexc").val(),
-            outAge: $("#outAgec").val(),
-            recordIn: $("#recordInc").val(),
-            recordOut: $("#recordOutc").val(),
-            outPhone: $("#outPhonec").val(),
-            outDes: $("#outDesc").val(),
+        var goods = {
+            goodsId: $("#goodsIdc").val(),
+            goodsName: $("#goodsNamec").val(),
+            goodsPerson: $("#goodsPersonc").val(),
+            personPhone: $("#personPhonec").val(),
+            goodsIn: $("#goodsInc").val(),
+            goodsOut: $("#goodsOutc").val(),
+            goodsDes: $("#goodsDesc").val()
         }
         $.ajax({
-            url: "${pageContext.request.contextPath}/outsider/updateOutsiderDo",
+            url: "${pageContext.request.contextPath}/goods/updateGoodsDo",
             type: "post",
             contentType: "application/json",
-            data: JSON.stringify(outsider),
+            data: JSON.stringify(goods),
             dataType: "json",
             success: function (result) {
                 alert(result["message"]);
@@ -523,12 +508,12 @@
     //删除信息
     function deleteOne(id) {
         if (confirm("确定删除这条数据吗？")) {
-            var outsider = {outId: id}
+            var goods = {goodsId: id}
             $.ajax({
-                url: "${pageContext.request.contextPath}/outsider/deleteOne",
+                url: "${pageContext.request.contextPath}/goods/deleteOne",
                 type: "POST",
                 contentType: "application/json",
-                data: JSON.stringify(outsider),
+                data: JSON.stringify(goods),
                 dataType: "json",
                 success: function (result) {
                     alert(result["message"])

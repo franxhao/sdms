@@ -13,6 +13,7 @@ public interface OutsiderService {
     //根据 姓名和手机号码 查询个人来访信息
     List<Outsider> getOutsiderByNameAndPhone(String outName, String outPhone);
 
+    //根据 id 查询 个人来访信息
     Outsider getOutsiderById(Integer outId);
 
     //添加来访人员信息

@@ -32,6 +32,12 @@
         FROM goods where goods_person = #{name} and person_phone = #{phone}
     </select>
 
+    <select id="queryGoodsById" resultMap="goodsBaseResultMap">
+        SELECT
+        <include refid="goodsColumnSql"/>
+        FROM goods where goods_id = #{goodsId}
+    </select>
+
     <update id="updateById" parameterType="com.hqyj.twelve.pojo.Goods">
         update goods
         <set>
@@ -45,10 +51,10 @@
             <if test="personPhone !=null and personPhone != ''">
                 person_phone=#{personPhone},
             </if>
-            <if test="goodsIn !=null and goodsIn != ''">
+            <if test="goodsIn !=null">
                 goods_in=#{goodsIn},
             </if>
-            <if test="goodsOut !=null and goodsOut != ''">
+            <if test="goodsOut !=null">
                 goods_out=#{goodsOut},
             </if>
             <if test="goodsDes !=null and goodsDes != ''">

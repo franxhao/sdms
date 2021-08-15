@@ -1,11 +1,10 @@
 package com.hqyj.twelve.controller;
 
-import com.hqyj.twelve.dao.OutSiderDao;
-import com.hqyj.twelve.pojo.Administrator;
+import com.hqyj.twelve.pojo.Goods;
 import com.hqyj.twelve.pojo.Outsider;
 import com.hqyj.twelve.pojo.PageData;
+import com.hqyj.twelve.service.GoodsService;
 import com.hqyj.twelve.service.OutsiderService;
-import com.hqyj.twelve.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,14 +14,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/outsider")
-public class OutsiderController {
+@RequestMapping("/goods")
+public class GoodsController {
     @Autowired
-    private OutsiderService outsiderService;
+    private GoodsService goodsService;
 
     @RequestMapping("/getAll")
     public String getAllOutsider(Integer pageNumber, Integer pageSize, ModelMap modelMap) {
@@ -38,33 +36,36 @@ public class OutsiderController {
         } else {
             size = pageSize;
         }
-        PageData<Outsider> pageData = outsiderService.getOutsiderByPage(number, size);
+        PageData<Goods> pageData = goodsService.getGoodsByPage(number, size);
         modelMap.put("pageData", pageData);
-        return "outsider";
+        return "goods";
     }
 
-    @RequestMapping("/addOutsider")
+    @RequestMapping("/addGoods")
     @ResponseBody
-    public Map<String, Object> addOutsider(@RequestBody Outsider outsider) {
-        outsiderService.addOutsider(outsider);
+    public Map<String, Object> addGoods(@RequestBody Goods goods) {
+        goodsService.addGoods(goods);
         Map<String, Object> map = new HashMap<>();
+        map.put("message", "添加成功");
         return map;
     }
 
-    @RequestMapping("/updateOutsider")
+    @RequestMapping("/updateGoods")
     @ResponseBody
-    public Map<String,Object> updateOutsider(@RequestBody Outsider outsider){
-        Integer outId = outsider.getOutId();
-        Outsider outsiderById = outsiderService.getOutsiderById(outId);
-        Map<String,Object> map = new HashMap<>();
-        map.put("outsider",outsiderById);
+    public Map<String, Object> updateOutsider(@RequestBody Goods goods) {
+        Integer goodsId = goods.getGoodsId();
+        Goods goodsById = goodsService.getGoodsById(goodsId);
+        Map<String, Object> map = new HashMap<>();
+        map.put("goods", goodsById);
         return map;
     }
 
-    @RequestMapping("/updateOutsiderDo")
+    @RequestMapping("/updateGoodsDo")
     @ResponseBody
-    public Map<String,Object> updateOutsiderDo(@RequestBody Outsider outsider){
-        outsiderService.modifyInformation(outsider);
+    public Map<String,Object> updateOutsiderDo(@RequestBody Goods goods){
+        System.out.println(goods);
+        int result = goodsService.modifyInformation(goods);
+        System.out.println(result);
         Map<String,Object> map = new HashMap<>();
         map.put("message","修改成功");
         return map;
@@ -72,10 +73,10 @@ public class OutsiderController {
 
     @RequestMapping("/deleteOne")
     @ResponseBody
-    public Map<String,Object> deleteOne(@RequestBody Outsider outsider){
-        outsiderService.removeById(outsider.getOutId());
-        Map<String,Object> map = new HashMap<>();
-        map.put("message","删除成功");
+    public Map<String, Object> deleteOne(@RequestBody Goods goods) {
+        goodsService.removeById(goods.getGoodsId());
+        Map<String, Object> map = new HashMap<>();
+        map.put("message", "删除成功");
         return map;
     }
 }

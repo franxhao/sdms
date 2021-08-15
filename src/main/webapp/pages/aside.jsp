@@ -60,9 +60,15 @@
 						<i class="fa fa-circle-o"></i> 访问日志 </a></li>
 
 					<li><a
-							href="${pageContext.request.contextPath}/outsider/getAll"> <i
-							class="fa fa-circle-o"></i> 来访人员信息登记
+							href="${pageContext.request.contextPath}/goods/getAll"> <i
+							class="fa fa-circle-o"></i> 存储物品
 					</a></li>
+
+					<li><a
+							href="${pageContext.request.contextPath}/outsider/getAll"> <i
+							class="fa fa-circle-o"></i> 来访人员登记
+					</a></li>
+
 				</ul></li>
 			<li class="treeview"><a href="#"> <i class="fa fa-cube"></i>
 					<span>基础数据</span> <span class="pull-right-container"> <i
