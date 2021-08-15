@@ -11,14 +11,7 @@ public class MyAuthenticationToken implements AuthenticationToken {
 
 
     private String flag;//新增的校验因子
-    /**
-     * The username
-     */
     private String username;
-
-    /**
-     * The password, in char[] format
-     */
     private char[] password;
 
     public void setFlag(String flag){

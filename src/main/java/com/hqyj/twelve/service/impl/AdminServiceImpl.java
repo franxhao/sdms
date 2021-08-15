@@ -1,8 +1,11 @@
 package com.hqyj.twelve.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hqyj.twelve.dao.AdminDao;
 import com.hqyj.twelve.pojo.Administrator;
 import com.hqyj.twelve.pojo.Employee;
+import com.hqyj.twelve.pojo.PageData;
 import com.hqyj.twelve.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,5 +83,30 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Employee queryEmpByUsername(String username) {
         return adminDao.queryEmpByUsername(username);
+    }
+
+    @Override
+    public PageData<Administrator> queryAllAdminByPage(Integer pageNumber, Integer pageSize) {
+        PageHelper.startPage(pageNumber, pageSize);
+        List<Administrator> Administrator = adminDao.queryAllAdmin();
+        PageInfo<Administrator> pageInfo = new PageInfo<>(Administrator);
+        PageData<Administrator> pageData = new PageData<>();
+
+        pageData.setCurrentPage(pageNumber);
+        pageData.setPageSize(pageSize);
+        pageData.setTotalPage(pageInfo.getPages());
+        pageData.setTotalSize((int) pageInfo.getTotal());
+        if (pageInfo.isHasNextPage()) {
+            pageData.setNextPage(pageInfo.getNextPage());
+        } else {
+            pageData.setNextPage(pageInfo.getPages());
+        }
+        if (pageInfo.isHasPreviousPage()) {
+            pageData.setPreviousPage(pageInfo.getPrePage());
+        } else {
+            pageData.setPreviousPage(1);
+        }
+        pageData.setList(pageInfo.getList());
+        return pageData;
     }
 }
