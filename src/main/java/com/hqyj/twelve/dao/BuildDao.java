@@ -4,7 +4,7 @@ import com.hqyj.twelve.pojo.Building;
 
 import java.util.List;
 
-public interface buildDao {
+public interface BuildDao {
     //查询楼房信息
     List<Building> queryAll();
     //修改楼房信息
