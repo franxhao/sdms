@@ -34,7 +34,7 @@ public class OutsiderController {
             number = pageNumber;
         }
         if (pageSize == null) {
-            size = 2;   //默认每页显示两条
+            size = 3;   //默认每页显示两条
         } else {
             size = pageSize;
         }
@@ -45,11 +45,31 @@ public class OutsiderController {
 
     @RequestMapping("/addOutsider")
     @ResponseBody
-    //添加管理员
-    public Map<String, Object> addPage(@RequestBody Outsider outsider) {
+    public Map<String, Object> addOutsider(@RequestBody Outsider outsider) {
         Date recordIn = outsider.getRecordIn();
         outsiderService.addOutsider(outsider);
         Map<String, Object> map = new HashMap<>();
+        return map;
+    }
+
+    @RequestMapping("/updateOutsider")
+    @ResponseBody
+    public Map<String,Object> updateOutsider(@RequestBody Outsider outsider){
+        Integer outId = outsider.getOutId();
+        Outsider outsiderById = outsiderService.getOutsiderById(outId);
+        Map<String,Object> map = new HashMap<>();
+        map.put("outsider",outsiderById);
+        return map;
+    }
+
+    @RequestMapping("/updateOutsiderDo")
+    @ResponseBody
+    public Map<String,Object> updateOutsiderDo(@RequestBody Outsider outsider){
+        System.out.println(outsider);
+        int i = outsiderService.modifyInformation(outsider);
+        System.out.println(i);
+        Map<String,Object> map = new HashMap<>();
+        map.put("message","修改成功");
         return map;
     }
 }

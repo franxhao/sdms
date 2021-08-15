@@ -30,11 +30,17 @@ public class OutsiderServiceImplTest {
     }
 
     @Test
-    public void getGoodsByNameAndPhoneTest() {
+    public void getOutsiderByNameAndPhoneTest() {
         List<Outsider> byNameAndPhone = outsiderService.getOutsiderByNameAndPhone("张三", "16698422965");
         for (Outsider outsider : byNameAndPhone) {
             System.out.println(outsider);
         }
+    }
+
+    @Test
+    public void getOutsiderByIdTest(){
+        Outsider outsiderById = outsiderService.getOutsiderById(1);
+        System.out.println(outsiderById);
     }
 
     @Test
@@ -68,8 +74,18 @@ public class OutsiderServiceImplTest {
     @Test
     public void modifyInformationTest() {
         Outsider outsider = new Outsider();
-        outsider.setOutId(1);
+        outsider.setOutId(26);
         outsider.setOutPhone("16698422957");
+        String strDate = "2021-8-9";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateTime;
+        try {
+            dateTime = simpleDateFormat.parse(strDate);
+            java.sql.Date sqlTime = new java.sql.Date(dateTime.getTime());
+            outsider.setRecordIn(sqlTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         outsiderService.modifyInformation(outsider);
     }
 

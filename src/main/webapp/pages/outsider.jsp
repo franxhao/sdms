@@ -161,7 +161,7 @@
                                     <td>
                                         <button type="button" class="btn btn-success" onclick="edit(${one.outId})">修改
                                         </button>
-                                        <button type="button" class="btn btn-danger">删除</button>
+                                        <button type="button" class="btn btn-danger" onclick="deleteOne()">删除</button>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -224,37 +224,37 @@
                             <div class="form-group">
                                 <label>姓名</label>
                                 <input id="outName" type="text" name="outName"
-                                       class="form-control"><br/>
+                                       class="form-control" placeholder="请输入姓名"><br/>
                             </div>
                             <div class="form-group">
                                 <label>性别</label>
                                 <input id="outSex" type="text" name="outSex"
-                                       class="form-control"><br/>
+                                       class="form-control" placeholder="请输入性别"><br/>
                             </div>
                             <div class="form-group">
                                 <label>年龄</label>
                                 <input id="outAge" type="text" name="outAge"
-                                       class="form-control"><br/>
+                                       class="form-control" placeholder="请输入年龄"><br/>
                             </div>
                             <div class="form-group">
                                 <label>进入时间</label>
                                 <input id="recordIn" type="text" name="recordIn"
-                                       class="form-control"><br/>
+                                       class="form-control" placeholder="登记进入时间（格式如：2021-05-06）"><br/>
                             </div>
                             <div class="form-group">
                                 <label>离开时间</label>
                                 <input id="recordOut" type="text" name="recordOut"
-                                       class="form-control"><br/>
+                                       class="form-control" placeholder="请登记预计离开时间（格式如：2021-05-06）"><br/>
                             </div>
                             <div class="form-group">
                                 <label>电话</label>
                                 <input id="outPhone" type="text" name="outPhone"
-                                       class="form-control"><br/>
+                                       class="form-control" placeholder="请输入电话号码"><br/>
                             </div>
                             <div class="form-group">
                                 <label>备注</label>
                                 <input id="outDes" type="text" name="outDes"
-                                       class="form-control"><br/>
+                                       class="form-control" placeholder="备注信息"><br/>
                             </div>
                             <%-- <input class="btn btn-success" type="submit" value="提交">--%>
                         </form>
@@ -281,53 +281,51 @@
                     <div class="modal-body">
                         <form method="post" onsubmit="return false;">
                             <div class="form-group">
-                                <label>用户名</label>
-                                <input id="adUserName1" type="text" name="adUserName"
-                                       class="form-control"><br/>
-                            </div>
-                            <div class="form-group">
-                                <label>用户密码</label>
-                                <input id="adPassword1" type="text" name="adPassword"
-                                       class="form-control"><br/>
+                                <label>编号</label>
+                                <input id="outIdc" type="text" name="outIdc"
+                                       class="form-control" readonly><br/>
                             </div>
                             <div class="form-group">
                                 <label>姓名</label>
-                                <input id="adName1" type="text" name="adName" class="form-control"><br/>
+                                <input id="outNamec" type="text" name="outNamec"
+                                       class="form-control" placeholder="请输入姓名"><br/>
                             </div>
                             <div class="form-group">
                                 <label>性别</label>
-                                <input id="adSex1" type="text" name="adSex" class="form-control"><br/>
+                                <input id="outSexc" type="text" name="outSexc"
+                                       class="form-control" placeholder="请输入性别"><br/>
                             </div>
                             <div class="form-group">
                                 <label>年龄</label>
-                                <input id="adAge1" type="text" name="adAge" class="form-control"><br/>
+                                <input id="outAgec" type="text" name="outAgec"
+                                       class="form-control" placeholder="请输入年龄"><br/>
                             </div>
                             <div class="form-group">
-                                <label>职位</label>
-                                <input id="adJob1" type="text" name="adJob" class="form-control"><br/>
+                                <label>进入时间</label>
+                                <input id="recordInc" type="text" name="recordInc"
+                                       class="form-control" placeholder="登记进入时间（格式如：2021-05-06）"><br/>
                             </div>
                             <div class="form-group">
-                                <label>联系电话</label>
-                                <input id="adPhone1" type="text" name="adPhone" class="form-control"><br/>
+                                <label>离开时间</label>
+                                <input id="recordOutc" type="text" name="recordOutc"
+                                       class="form-control" placeholder="请登记预计离开时间（格式如：2021-05-06）"><br/>
                             </div>
-                            <div class="form-group">
-                                <label>家庭住址</label>
-                                <input id="adAddress1" type="text" name="adAddress" class="form-control"><br/>
-                            </div>
-                            <div class="form-group">
-                                <label>角色</label> <br/>
-                                <input id="roleId1" type="radio" name="roleId" checked>管理员<br/>
+                            <div class=" form-group">
+                                <label>电话</label>
+                                <input id="outPhonec" type="text" name="outPhonecc"
+                                       class="form-control" placeholder="请输入电话号码"><br/>
                             </div>
                             <div class="form-group">
                                 <label>备注</label>
-                                <input id="adDes1" type="text" name="adDes" class="form-control"><br/>
+                                <input id="outDesc" type="text" name="outDesc"
+                                       class="form-control" placeholder="备注信息"><br/>
                             </div>
                             <%--                      <input class="btn btn-success" type="submit" value="提交">--%>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn1" data-dismiss="modal">取消</button>
-                        <button id="updateAjax" type="button" class="btn btn-primary">提交</button>
+                        <button id="updateAjax" type="button" class="btn btn-primary" onclick="edit_do()">提交</button>
                     </div>
                 </div>
             </div>
@@ -464,24 +462,64 @@
         });
     })
 
+
+    //修改模态框添加值
     function edit(id) {
         $("#updateModal").modal("show")
-/*
+        var outsider = {outId: id}
         $.ajax({
-            url: "back/bood/edit",
-            method: "GET",
-            data: {
-                "id": id
-            },
-            success: function (data) {
-                $("#id2").val(data.id)
-                $("#name2").val(data.name)
-                $("#author2").val(data.author)
-                $("#price2").val(data.price)
-            },
-            dataType: "json"
-        })*/
+            url: "${pageContext.request.contextPath}/outsider/updateOutsider",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(outsider),
+            dataType: "json",
+            success: function (result) {
+                $("#outIdc").val(result["outsider"].outId)
+                $("#outNamec").val(result["outsider"].outName)
+                $("#outSexc").val(result["outsider"].outSex)
+                $("#outAgec").val(result["outsider"].outAge)
+                $("#recordInc").val(result["outsider"].recordIn)
+                $("#recordOutc").val(result["outsider"].recordOut)
+                $("#outPhonec").val(result["outsider"].outPhone)
+                $("#outDesc").val(result["outsider"].outDes)
+            }
+        })
     }
+
+    //提交修改信息
+    function edit_do() {
+        var outsider = {
+            outId: $("#outIdc").val(),
+            outName: $("#outNamec").val(),
+            outSex: $("#outSexc").val(),
+            outAge: $("#outAgec").val(),
+            recordIn: $("#recordInc").val(),
+            recordOut: $("#recordOutc").val(),
+            outPhone: $("#outPhonec").val(),
+            outDes: $("#outDesc").val(),
+        }
+        $.ajax({
+            url: "${pageContext.request.contextPath}/outsider/updateOutsiderDo",
+            type: "post",
+            contentType: "application/json",
+            data: JSON.stringify(outsider),
+            dataType: "json",
+            success: function (result) {
+                alert(result["message"]);
+                location.reload();
+            },
+            error: function (result) {
+                alert("添加失败");
+            }
+        });
+    }
+
+
+    function deleteOne() {
+        
+
+    }
+
 </script>
 </body>
 
