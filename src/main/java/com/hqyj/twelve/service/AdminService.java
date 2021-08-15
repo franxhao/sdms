@@ -24,6 +24,14 @@ public interface AdminService {
     //通过id查询指定的员工用户
     Employee queryEmpById(int id);
 
+
+    //通过管理员用户名查询
+    Administrator queryAdminByUsername(String username);
+
+    //通过普通员工用户名查询
+    Employee queryEmpByUsername(String username);
+
+
     //添加一个管理员用户
     int  addAdmin(Administrator admin);
 

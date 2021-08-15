@@ -33,22 +33,26 @@
 		<div class="login-box-body">
 			<p class="login-box-msg">登录系统</p>
 
-			<form action="${pageContext.request.contextPath}/pages/main.jsp"
+			<form action="${pageContext.request.contextPath}/user/login"
 				method="post">
 				<div class="form-group has-feedback">
 					<input type="text" name="username" class="form-control"
-						placeholder="用户名"> <span
+						placeholder="用户名" value="${cookie.name.value}"> <span
 						class="glyphicon glyphicon-envelope form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
 					<input type="password" name="password" class="form-control"
-						placeholder="密码"> <span
+						placeholder="密码" value="${cookie.password.value}"> <span
 						class="glyphicon glyphicon-lock form-control-feedback"></span>
+				</div>
+				<div class="form-group has-feedback">
+					管理员<input type="radio" name="flag" value="1" class="form-control">&nbsp; &nbsp; &nbsp; &nbsp;
+					员工<input  type="radio" name="flag"   value="2" class="form-control">
 				</div>
 				<div class="row">
 					<div class="col-xs-8">
 						<div class="checkbox icheck">
-							<label><input type="checkbox"> 记住 下次自动登录</label>
+							<label><input type="checkbox"> 记住密码</label>
 						</div>
 					</div>
 					<!-- /.col -->
@@ -59,7 +63,7 @@
 				</div>
 			</form>
 
-			<a href="#">忘记密码</a><br>
+<%--			<a href="#">忘记密码</a><br>--%>
 
 
 		</div>
