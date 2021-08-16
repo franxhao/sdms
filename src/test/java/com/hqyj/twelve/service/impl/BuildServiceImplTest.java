@@ -35,4 +35,8 @@ public class BuildServiceImplTest {
     @Test
     public void deleteById() {
     }
+    @Test
+    public void queryById(){
+        System.out.println(buildService.queryBuildById(2));
+    }
 }

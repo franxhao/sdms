@@ -129,6 +129,7 @@
                                         id="selall" type="checkbox" class="icheckbox_square-blue">
                                 </th>
 <%--                                <th class="sorting_asc">楼房编号</th>--%>
+                                <th class="sorting_asc">寝室编号</th>
                                 <th class="sorting_asc">住宿性别</th>
                                 <th class="sorting_desc">应住人数</th>
                                 <th class="sorting">实住人数</th>
@@ -141,7 +142,7 @@
 
                                 <tr>
                                     <td><input name="ids" type="checkbox"></td>
-<%--                                    <td>${one.buildId}</td>--%>
+                                    <td>${one.dorId}</td>
                                     <td>${one.dorSex}</td>
                                     <td>${one.dorNum}</td>
                                     <td>${one.dorFact}</td>
@@ -267,6 +268,11 @@
 <%--                                    <input id="buildId1" type="text" name="buildId"--%>
 <%--                                           class="form-control" placeholder="请输入楼房编号"><br/>--%>
 <%--                                </div>--%>
+                                <div class="form-group">
+                                    <label>居住性别</label>
+                                    <input id="dorId1" type="text" name="dorId1"
+                                         class="form-control" readonly="readonly"><br/>
+                                </div>
                                 <div class="form-group">
                                     <label>居住性别</label>
                                     <input id="dorSex1" type="text" name="dorSex1"
@@ -453,6 +459,7 @@
             dataType: "json",
             success: function (result) {
                 // $("#buildId1").val(result["dorm"].buildId)
+                $("#dorId1").val(result["dorm"].dorId);
                 $("#dorSex1").val(result["dorm"].dorSex);
                 $("#dorNum1").val(result["dorm"].dorNum);
                 $("#dorFact1").val(result["dorm"].dorFact);
@@ -465,6 +472,7 @@
     function edit_do() {
         var dorm = {
             // buildId: $("#buildId1").val(),
+            dorId: $("#dorId1").val(),
             dorSex: $("#dorSex1").val(),
             dorNum: $("#dorNum1").val(),
             dorFact: $("#dorFact1").val(),
