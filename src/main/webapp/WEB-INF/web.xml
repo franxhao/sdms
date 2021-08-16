@@ -64,4 +64,14 @@
     <tracking-mode>COOKIE</tracking-mode>
   </session-config>
 
+  <!--用于谷歌验证码生成的web.xml配置内容 -->
+  <servlet>
+    <servlet-name>KaptchaServlet</servlet-name>
+    <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>KaptchaServlet</servlet-name>
+    <url-pattern>/kaptcha.jpg</url-pattern>
+  </servlet-mapping>
+
 </web-app>

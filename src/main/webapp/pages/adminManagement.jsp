@@ -160,7 +160,7 @@
                                     <td class="text-center">
                                         <span style="display: none">${one.adId}</span>
                                         <a href="javascript:;" class="btn bg-olive btn-xs aUpdate">修改</a>
-                                        <a href="javascript:;" class="btn bg-olive  btn-xs aDelete">删除</a>
+                                        <a href="javascript:;" class="btn bg-red  btn-xs aDelete">删除</a>
                                     </td>
                                 </tr>
                             </c:forEach>

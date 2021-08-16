@@ -21,7 +21,12 @@
         from dorm d
         left join stu_dor sd on sd.dor_id = d.dor_id
         left join student s on s.stu_id = sd.stu_id
+
     </select>
+<select id="queryDormById" resultType="com.hqyj.twelve.pojo.Dorm">
+    select d.dor_id,d.dor_sex,d.dor_num ,d.dor_fact ,
+        d.dor_price ,s.stu_name from dorm where dor_id=#{dorId}
+</select>
     <update id="updateOne" parameterType="com.hqyj.twelve.pojo.Dorm">
         update dorm <set>
         dor_id=#{dorId},
