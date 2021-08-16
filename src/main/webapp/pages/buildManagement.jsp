@@ -193,7 +193,6 @@
                     <!--分页-->
 
                 </div>
-            </div>
         </section>
         <!-- 正文区域 /-->
     </div>
@@ -260,22 +259,22 @@
                 <form method="post" onsubmit="return false;">
                     <div class="form-group">
                         <label>楼房名称</label>
-                        <input id="buildName1" type="text" name="buildName"
+                        <input id="buildName1" type="text" name="buildName1"
                                class="form-control" placeholder="请输入楼房名称"><br/>
                     </div>
                     <div class="form-group">
                         <label>房间数</label>
-                        <input id="romAmount1" type="text" name="romAmount"
+                        <input id="romAmount1" type="text" name="romAmount1"
                                class="form-control" placeholder="请输入房间数"><br/>
                     </div>
                     <div class="form-group">
                         <label>楼层数</label>
-                        <input id="floorAmount1" type="text" name="floorAmount"
+                        <input id="floorAmount1" type="text" name="floorAmount1"
                                class="form-control" placeholder="请输入楼层数"><br/>
                     </div>
                     <div class="form-group">
                         <label>应住人数</label>
-                        <input id="personAmount1" type="text" name="personAmount"
+                        <input id="personAmount1" type="text" name="personAmount1"
                                class="form-control" placeholder="应住人数"><br/>
                     </div>
                     <%--                      <input class="btn btn-success" type="submit" value="提交">--%>
@@ -456,7 +455,7 @@
     //提交修改信息
     function edit_do() {
         var build = {
-            buildId: $("#buildName1").val(),
+            buildName: $("#buildName1").val(),
             romAmount: $("#romAmount1").val(),
             floorAmount: $("#floorAmount1").val(),
             personAmount: $("#personAmount1").val(),
