@@ -2,16 +2,22 @@ package com.hqyj.twelve.realm;
 
 import com.hqyj.twelve.pojo.Administrator;
 import com.hqyj.twelve.pojo.Employee;
+import com.hqyj.twelve.pojo.Role;
 import com.hqyj.twelve.service.AdminService;
+import com.hqyj.twelve.service.RoleService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @description:
@@ -22,6 +28,9 @@ public class MyShiroRealm extends AuthorizingRealm {
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private RoleService roleService;
 
     //给shiro框架返回系统中待认证用户的认证信息
     @Override
@@ -57,7 +66,7 @@ public class MyShiroRealm extends AuthorizingRealm {
             //在我们的管理员数据库中查询用户的认证信息
             Employee emp = adminService.queryEmpByUsername(username);
             if(emp == null){
-                throw new UnknownAccountException(username+"不存在");
+                throw new UnknownAccountException(username+"不存在2");
             }
             session.setAttribute("user",emp);
 
@@ -70,11 +79,24 @@ public class MyShiroRealm extends AuthorizingRealm {
     }
 
 
-
+    //给shiro框架返回系统中用户的授权信息
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        System.out.println("获取授权信息");
+        //获取当前用户用户名
+        String username =(String)principalCollection.getPrimaryPrincipal();
 
-    return null;
+//        //查询系统中待授权用户的权限信息：角色信息，权限信息
+//        Administrator admin = adminService.queryAdminByUsername(username);
+//        Set<String> roles = new HashSet<>();
+//        roles.add(roleService.queryRoleById(admin.getRoleId()).getRoleName());
+//        //创建一个授权信息对象
+//        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+//        //赋予角色相关的授权信息
+//         info.setRoles(roles);
+//         return info;
+         return  null;
+
     }
 
     @Override
