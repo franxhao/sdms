@@ -30,7 +30,7 @@ public class StudentManagementController {
             number = pageNumber;
         }
         if (pageSize == null) {
-            size = 5;   //默认每页显示5条
+            size = 7;   //默认每页显示7条
         } else {
             size = pageSize;
         }

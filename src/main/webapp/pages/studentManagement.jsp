@@ -452,30 +452,6 @@
 	<script src="../js/stuManagement.js"></script>
 
 	<script>
-		function delete_do(stuKey,stuName){
-			if (confirm("是否确定删除？")){
-				$.ajax({
-					url:"deleteOne",
-					method:"post",
-					contentType:"application/json;charset=utf-8",
-					dataType:"json",
-					data:JSON.stringify({
-						key:stuKey,
-						name:stuName
-					}),
-					success:function (data) {
-							alert(data["message"]);
-							location.reload();
-					},
-					error:function (error) {
-						alert("出错，删除失败!")
-						console.log("delete_do err: " + error);
-					}
-				})
-			}
-		}
-
-
 		function search_do() {
 			if ($("#sel").val().length > 0){
 				$.ajax({
