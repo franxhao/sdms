@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,11 +31,11 @@ public class StudentDaoTest {
 
     @Test
     public void queryStuByKeyAndName() {
-        String stuKey = "20180109";
-        String stuName = "阳";
-        Map<String, Object> map = studentDao.queryStuByKeyAndName(stuKey, stuName);
-        System.out.println(map);
-        if (map == null) {
+        String stuKey = "20180101";
+        String stuName = "阳神";
+        List<Student> stu = studentDao.queryStuByKeyAndName(stuKey, stuName);
+        System.out.println(stu);
+        if (stu.size() == 0) {
             System.out.println("查无此人");
         } else {
             System.out.println("此人存在");
@@ -57,5 +60,24 @@ public class StudentDaoTest {
         Integer stuId = 17;
         String stuSex = "男";
         studentDao.addStuIdToAD(stuId,stuSex);
+    }
+
+
+    @Test
+    public void testQueryStuByKeyAndName() throws ParseException {
+        String stuKey = "20190102";
+        String stuName = "阳神1";
+        List<Student> stu = studentDao.queryStuByKeyAndName(stuKey, stuName);
+//        System.out.println(stu);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        for (Student student : stu) {
+            System.out.println(student.getStuBirth());
+//            System.out.println(simpleDateFormat.format(student.getStuBirth()));
+//            System.out.println(simpleDateFormat.parse(student.getStuBirth()));
+//            System.out.println(simpleDateFormat.parse(format));
+
+        }
+//        stu.forEach(s-> System.out.println(simpleDateFormat.format(s.getStuBirth())));
     }
 }

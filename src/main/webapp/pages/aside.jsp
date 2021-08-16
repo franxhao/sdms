@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <aside class="main-sidebar">
 	<!-- sidebar: style can be found in sidebar.less -->
 	<section class="sidebar">
@@ -11,7 +12,8 @@
 			</div>
 			<div class="pull-left info">
 				<p>
-					<security:authentication property="principal.username" />
+<%--					获取当前登录的用户名--%>
+                  	    <shiro:principal />
 				</p>
 				<a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
 			</div>
@@ -47,7 +49,7 @@
 					</a></li>
 
                     <li><a
-                            href="${pageContext.request.contextPath}/admin/list">
+                            href="${pageContext.request.contextPath}/admin/page">
                         <i class="fa fa-circle-o"></i> 管理员管理
                     </a></li>
 

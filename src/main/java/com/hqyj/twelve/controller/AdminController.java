@@ -2,6 +2,8 @@ package com.hqyj.twelve.controller;
 
 import com.hqyj.twelve.pojo.Administrator;
 import com.hqyj.twelve.pojo.Employee;
+import com.hqyj.twelve.pojo.Outsider;
+import com.hqyj.twelve.pojo.PageData;
 import com.hqyj.twelve.service.AdminService;
 import com.hqyj.twelve.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,26 @@ public class AdminController {
     public  String queryAllAdmin(ModelMap modelMap){
         List<Administrator> adminList = adminService.queryAllAdmin();
         modelMap.addAttribute("adminList",adminList);
+        return "adminManagement";
+    }
+
+    @RequestMapping("/page")
+    //通过分页返回管理员数据
+    public String queryAllAdminByPage(Integer pageNumber, Integer pageSize, ModelMap modelMap ){
+        int number;
+        int size;
+        if (pageNumber == null) {
+            number = 1; //默认显示第一页
+        } else {
+            number = pageNumber;
+        }
+        if (pageSize == null) {
+            size = 3;   //默认每页显示两条
+        } else {
+            size = pageSize;
+        }
+        PageData<Administrator> pageData = adminService.queryAllAdminByPage(number, size);
+        modelMap.put("pageData", pageData);
         return "adminManagement";
     }
 

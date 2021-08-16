@@ -4,10 +4,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hqyj.twelve.dao.DormDao">
     <cache/>
-    <select id="queryAll" resultType="com.hqyj.twelve.pojo.Dorm" useCache="true">
+    <resultMap id="dormBaseResultMap" type="com.hqyj.twelve.pojo.Dorm">
+        <id column="dor_id" property="dorId"/>
+        <result column="dor_sex" property="dorSex"/>
+        <result column="dor_num" property="dorNum"/>
+        <result column="dor_fact" property="dorFact"/>
+        <result column="dor_price" property="dorPrice"/>
+        <collection property="students" ofType="com.hqyj.twelve.pojo.Student">
+            <id column="stu_name" property="stuName"/>
+        </collection>
+    </resultMap>
+    <select id="queryAll" resultMap="dormBaseResultMap" useCache="true">
         <!--写sql语句-->
-        select dor_id dorId,dor_sex dorSex,dor_num dorNum,dor_fact dorFact,dor_price dorPrice
-        from dorm
+        select d.dor_id,d.dor_sex,d.dor_num ,d.dor_fact ,
+        d.dor_price ,s.stu_name
+        from dorm d
+        left join stu_dor sd on sd.dor_id = d.dor_id
+        left join student s on s.stu_id = sd.stu_id
     </select>
     <update id="updateOne" parameterType="com.hqyj.twelve.pojo.Dorm">
         update dorm <set>

@@ -141,7 +141,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${adminList}" var="one">
+                            <c:forEach items="${pageData.list}" var="one">
 
                                 <tr>
                                     <td><input name="ids" type="checkbox"></td>
@@ -152,12 +152,15 @@
                                     <td>${one.adJob}</td>
                                     <td>${one.adPhone}</td>
                                     <td>${one.adAddress}</td>
-                                    <td>${one.roleId}</td>
+                                    <td>
+                                        <c:if test="${one.roleId==1}">管理员</c:if>
+                                        <c:if test="${one.roleId==2}">宿管</c:if>
+                                    </td>
                                     <td>${one.adDes}</td>
                                     <td class="text-center">
                                         <span style="display: none">${one.adId}</span>
                                         <a href="javascript:;" class="btn bg-olive btn-xs aUpdate">修改</a>
-                                        <a href="javascript:;" class="btn bg-olive btn-xs aDelete">删除</a>
+                                        <a href="javascript:;" class="btn bg-red  btn-xs aDelete">删除</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -165,7 +168,33 @@
 
                         </table>
                         <!--数据列表/-->
+                        <!--分页-->
+                        <div class="box-footer">
+                            <div class="pull-left">
+                                <div class="form-group form-inline">
+                                    <span class="">当前第<strong>${pageData.currentPage}</strong>页，共<strong>${pageData.totalSize}</strong>条数据</span>
+                                </div>
+                            </div>
 
+                            <div class="box-tools pull-right">
+                                <ul class="pagination">
+                                    <li>
+                                        <button type="button" class="btn bg-primary" onclick="firstPage()">首页</button>
+                                    </li>
+                                    <li>
+                                        <button type="button" class="btn bg-primary" onclick="previousPage()">上一页</button>
+                                    </li>
+                                    <li>
+                                        <button type="button" class="btn bg-primary" onclick="nextPage()">下一页</button>
+                                    </li>
+                                    <li>
+                                        <button type="button" class="btn bg-primary" onclick="lastPage()">尾页</button>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <!--分页-->
                     </div>
                     <!-- 数据表格 /-->
 
@@ -504,6 +533,51 @@
 
         });
     })
+</script>
+
+<%--分页--%>
+<script>
+    var pageNumber = ${pageData.currentPage};
+    var pageSize = ${pageData.pageSize};
+    var totalPage = ${pageData.totalPage};
+
+    function goto() {
+        window.location.href =
+            "${pageContext.request.contextPath}/admin/page?pageNumber=" + pageNumber + "&pageSize=" + pageSize;
+    }
+
+    //首页
+    function firstPage() {
+        if (pageNumber > 1) {
+            pageNumber = 1;
+            //跳转页面
+            goto();
+        }
+    }
+
+    //上一页
+    function previousPage() {
+        if (pageNumber > 1) {
+            pageNumber--;
+            goto();
+        }
+    }
+
+    //下一页
+    function nextPage() {
+        if (pageNumber < totalPage) {
+            pageNumber++;
+            goto();
+        }
+    }
+
+    //尾页
+    function lastPage() {
+        if (pageNumber < totalPage) {
+            pageNumber = totalPage;
+            goto();
+        }
+    }
 </script>
 
 </body>
