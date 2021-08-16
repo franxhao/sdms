@@ -43,12 +43,12 @@ public class OutsiderController {
         return "outsider";
     }
 
-    @RequestMapping("/getPersonByName")
+    @RequestMapping("/getOutsiderByName")
     @ResponseBody
-    public List<Outsider> getPersonByName(String name, ModelMap modelMap) {
+    public List<Outsider> getOutsiderByName(String name) {
         List<Outsider> outsiderByName = outsiderService.getOutsiderByName(name);
         for (Outsider outsider : outsiderByName) {
-            System.out.println(outsider.getRecordIn());
+            System.out.println(outsider);
         }
         return outsiderByName;
     }

@@ -300,7 +300,7 @@
                                        class="form-control" placeholder="请输入年龄"><br/>
                             </div>
                             <div class="form-group">
-                                <label>进入时间</label>
+                                <label>来访时间</label>
                                 <input id="recordInc" type="text" name="recordInc"
                                        class="form-control" placeholder="登记进入时间（格式如：2021-05-06）"><br/>
                             </div>
@@ -364,7 +364,8 @@
                         </table>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btn1" data-dismiss="modal">关闭</button>
+                        <button id="tremove" type="button" class="btn btn-secondary btn1" data-dismiss="modal">关闭
+                        </button>
                     </div>
                 </div>
             </div>
@@ -510,19 +511,38 @@
         //回车事件
         $("#sousuo").keydown(function (e) {
             if (e.keyCode == 13) {
-                $("#queryModal").modal("show");
-                var outsider = $("#sousuo").val()
+                var name = $("#sousuo").val()
                 $.ajax({
-                    url: "${pageContext.request.contextPath}/outsider/getPersonByName",
+                    url: "${pageContext.request.contextPath}/outsider/getOutsiderByName",
                     type: "post",
                     data: {
-                        name: outsider
+                        name: name
                     },
                     dataType: "json",
                     success: function (result) {
-                        for (let i = 0; i < result.length; i++) {
-                            $(".ttbody").append(
-                                `<tr>
+                        if (result.length == 0) {
+                            alert("查无此人")
+                        } else {
+                            $("#queryModal").modal("show");
+                            $.each(result, function (i, item) {
+                                $(".ttbody").append(
+                                    `<tr>
+                                <td >` + item.outId + `</td>
+                                <td >` + item.outName + `</td>
+                                <td >` + item.outSex + `</td>
+                                <td >` + item.outAge + `</td>
+                                <td >` + item.recordIn + `</td>
+                                <td >` + item.recordOut + `</td>
+                                <td >` + item.outPhone + `</td>
+                                <td >` + item.outDes + `</td>
+                                </tr>`
+                                )
+                            })
+
+
+                            /*for (let i = 0; i < result.length; i++) {
+                                $(".ttbody").append(
+                                    `<tr>
                                 <td >` + result[i].outId + `</td>
                                 <td >` + result[i].outName + `</td>
                                 <td >` + result[i].outSex + `</td>
@@ -532,7 +552,8 @@
                                 <td >` + result[i].outPhone + `</td>
                                 <td >` + result[i].outDes + `</td>
                                 </tr>`
-                            )
+                                )
+                            }*/
                         }
                     },
                     error: function (result) {
@@ -541,7 +562,10 @@
                 })
             }
         })
-
+        //清空 <tbody class="ttbody">
+        $("#tremove").click(function () {
+            $(".ttbody").html("")
+        })
 
     })
 

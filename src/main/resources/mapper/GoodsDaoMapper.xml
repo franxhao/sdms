@@ -32,6 +32,12 @@
         FROM goods where goods_person = #{name} and person_phone = #{phone}
     </select>
 
+    <select id="queryGoodsByName" resultMap="goodsBaseResultMap">
+        SELECT
+        <include refid="goodsColumnSql"/>
+        FROM goods where goods_person = #{goodsPerson}
+    </select>
+
     <select id="queryGoodsById" resultMap="goodsBaseResultMap">
         SELECT
         <include refid="goodsColumnSql"/>
