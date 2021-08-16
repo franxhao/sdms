@@ -157,52 +157,52 @@
 
 										<div class="col-md-2 title">学号</div>
 										<div class="col-md-4 data">
-											<input id="stuKey2" type="text" class="form-control" name="stuKey"
+											<input id="stuKey2" type="text" class="form-control" name="stuKey2"
 												   placeholder="请填写学生学号" readonly>
 										</div>
 										<div class="col-md-2 title">姓名</div>
 										<div class="col-md-4 data">
-											<input id="stuName2" type="text" class="form-control" name="stuName"
+											<input id="stuName2" type="text" class="form-control" name="stuName2"
 												   placeholder="请填写学生姓名" readonly>
 										</div>
 										<div class="col-md-2 title">性别</div>
 										<div class="col-md-4 data">
-											<input id="stuSex2" type="text" class="form-control" name="stuSex"
+											<input id="stuSex2" type="text" class="form-control" name="stuSex2"
 												   placeholder="请填写学生性别">
 										</div>
 										<div class="col-md-2 title">入学日期</div>
 										<div class="col-md-4 data">
-											<input id="stuEnr2" type="text" class="form-control" name="stuEnr"
+											<input id="stuEnr2" type="text" class="form-control" name="stuEnr2"
 												   placeholder="如：2000-01-01">
 										</div>
 										<div class="col-md-2 title">出生日期</div>
 										<div class="col-md-4 data">
-											<input id="stuBirth2" type="text" class="form-control" name="stuBirth"
+											<input id="stuBirth2" type="text" class="form-control" name="stuBirth2"
 												   placeholder="如：2000-01-01">
 										</div>
 										<div class="col-md-2 title">学院</div>
 										<div class="col-md-4 data">
-											<input id="stuCollege2" type="text" class="form-control" name="stuCollege"
+											<input id="stuCollege2" type="text" class="form-control" name="stuCollege2"
 												   placeholder="请填写学生所在学院">
 										</div>
 										<div class="col-md-2 title">专业</div>
 										<div class="col-md-4 data">
-											<input id="stuMajor2" type="text" class="form-control" name="stuMajor"
+											<input id="stuMajor2" type="text" class="form-control" name="stuMajor2"
 												   placeholder="请填写学生专业">
 										</div>
 										<div class="col-md-2 title">班级</div>
 										<div class="col-md-4 data">
-											<input id="stuClass2" type="text" class="form-control" name="stuClass"
+											<input id="stuClass2" type="text" class="form-control" name="stuClass2"
 												   placeholder="请填写学生所在班级">
 										</div>
 										<div class="col-md-2 title">家庭住址</div>
 										<div class="col-md-4 data">
-											<input id="stuAddress2" type="text" class="form-control" name="stuAddress"
+											<input id="stuAddress2" type="text" class="form-control" name="stuAddress2"
 												   placeholder="请填写学生的家庭住址">
 										</div>
 										<div class="col-md-2 title">联系方式</div>
 										<div class="col-md-4 data">
-											<input id="stuTel2" type="text" class="form-control" name="stuTel"
+											<input id="stuTel2" type="text" class="form-control" name="stuTel2"
 												   placeholder="请填写学生的联系方式">
 										</div>
 									</div>
@@ -291,13 +291,13 @@
 										<td>${one.stuKey}</td>
 										<td>${one.stuName}</td>
 										<td>${one.stuSex}</td>
-										<td>${one.romId}</td>
+										<td>${one.room}</td>
 										<td>${one.stuClass}</td>
 										<td>${one.stuState}</td>
 										<td>${one.stuTel}</td>
 										<td class="text-center">
 											<a href="javascript:" onclick="edit1('${one.stuKey}','${one.stuName}')" class="btn bg-olive btn-xs ">修改</a>
-											<a href="#" class="btn bg-red btn-xs ">删除</a>
+											<a href="#" class="btn bg-red btn-xs" onclick="delete_do('${one.stuKey}','${one.stuName}')">删除</a>
 										</td>
 									</tr>
 									</c:forEach>
@@ -403,9 +403,6 @@
 		});
 	</script>
 
-	<!-- 引入编写的js文件 -->
-	<script src="../js/stuManagement.js"></script>
-
 	<%--分页--%>
 	<script>
 		var pageNumber = ${STUDENTS.currentPage};
@@ -451,11 +448,32 @@
 		}
 	</script>
 
-
+	<!-- 引入编写的js文件 -->
+	<script src="../js/stuManagement.js"></script>
 
 	<script>
-
-
+		function delete_do(stuKey,stuName){
+			if (confirm("是否确定删除？")){
+				$.ajax({
+					url:"deleteOne",
+					method:"post",
+					contentType:"application/json;charset=utf-8",
+					dataType:"json",
+					data:JSON.stringify({
+						key:stuKey,
+						name:stuName
+					}),
+					success:function (data) {
+							alert(data["message"]);
+							location.reload();
+					},
+					error:function (error) {
+						alert("出错，删除失败!")
+						console.log("delete_do err: " + error);
+					}
+				})
+			}
+		}
 
 
 		function search_do() {

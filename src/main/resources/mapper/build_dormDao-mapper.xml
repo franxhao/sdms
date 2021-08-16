@@ -54,4 +54,5 @@
     <delete id="deleteById">
         delete from building where build_id=#{buildId};
     </delete>
+
 </mapper>
