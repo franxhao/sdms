@@ -4,7 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-
     <!--SqlSessionFactory(mybatis整合到spring的核心配置)-->
     <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!--        配置数据源-->
@@ -16,10 +15,23 @@
         <!--        配置mybatis的分页插件-->
         <property name="plugins">
             <array>
-                <bean class="com.github.pagehelper.PageInterceptor"></bean>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <!--
+                        设置分页插件
+                        如果删除的数据是本页的最后一条，则跳回上一页
+                        如果添加数据时最后一页已经满了，则自动跳到新开的一页
+                    -->
+                    <property name="properties">
+                        <value>
+                            helperDialect=mysql
+                            reasonable=true
+                        </value>
+                    </property>
+                </bean>
             </array>
         </property>
     </bean>
+
 
     <!--    配置所有mybatis生成的代理Dao对象的类型所在包
             以便spring的ioc创建代理Dao对象-->

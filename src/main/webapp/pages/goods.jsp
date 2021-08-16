@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -58,6 +59,8 @@
             width: 100%;
             bottom: 0;
         }
+
+
     </style>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -119,9 +122,8 @@
                         </div>
                         <div class="box-tools pull-right">
                             <div class="has-feedback">
-                                <input type="text" class="form-control input-sm"
-                                       placeholder="搜索"> <span
-                                    class="glyphicon glyphicon-search form-control-feedback"></span>
+                                <input type="text" class="form-control input-sm" placeholder="搜索">
+                                <a class="glyphicon glyphicon-search form-control-feedback"></a>
                             </div>
                         </div>
 
@@ -132,9 +134,9 @@
                                class="table table-bordered table-striped table-hover dataTable">
                             <thead>
                             <tr>
-                                <th class="" style="padding-right: 0px"><input id="selall"
-                                                                               type="checkbox"
-                                                                               class="icheckbox_square-blue"></th>
+                                <%--<th class="" style="padding-right: 0px">
+                                    <input id="selall" type="checkbox" class="icheckbox_square-blue">
+                                </th>--%>
                                 <th class="sorting_asc">ID</th>
                                 <th class="sorting">物品名称</th>
                                 <th class="sorting">存储人</th>
@@ -147,13 +149,13 @@
                             <tbody>
                             <c:forEach items="${pageData.list}" var="one">
                                 <tr>
-                                    <td><input name="ids" type="checkbox"></td>
+                                        <%--<td><input name="ids" type="checkbox"></td>--%>
                                     <td>${one.goodsId}</td>
                                     <td>${one.goodsName}</td>
                                     <td>${one.goodsPerson}</td>
                                     <td>${one.personPhone}</td>
-                                    <td>${one.goodsIn}</td>
-                                    <td>${one.goodsOut}</td>
+                                    <td><fmt:formatDate value="${one.goodsIn}"/></td>
+                                    <td><fmt:formatDate value="${one.goodsOut}"/></td>
                                     <td>${one.goodsDes}</td>
                                     <td>
                                         <button type="button" class="btn btn-success" onclick="edit(${one.goodsId})">
@@ -180,7 +182,7 @@
                 <div class="box-footer">
                     <div class="pull-left">
                         <div class="form-group form-inline">
-                            <span class="">当前第<strong>${pageData.currentPage}</strong>页，共<strong>${pageData.totalSize}</strong>条数据</span>
+                            <span class="">当前第<strong>${pageData.currentPage <= pageData.totalPage ? pageData.currentPage:pageData.totalPage}</strong>页，共<strong>${pageData.totalSize}</strong>条数据</span>
                         </div>
                     </div>
 
