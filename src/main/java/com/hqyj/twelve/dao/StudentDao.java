@@ -73,5 +73,9 @@ public interface StudentDao {
      */
     int deleteOneById(Integer stuId);
 
-
+    /**
+     * 根据student添加学生类
+     * @param student
+     */
+    void addStuforStudent(Student student);
 }

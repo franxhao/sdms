@@ -55,4 +55,10 @@ public interface StudentManagementService {
      * @return
      */
     int removeByKeyAndName(Map<String, Object> keyName);
+
+    /**
+     * 通过studentPOJO类添加学生
+     * @param student
+     */
+    void addStuforStudent(Student student);
 }

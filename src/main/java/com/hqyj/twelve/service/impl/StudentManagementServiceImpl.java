@@ -206,4 +206,9 @@ public class StudentManagementServiceImpl implements StudentManagementService {
             return -1;
         }
     }
+
+    @Override
+    public void addStuforStudent(Student student) {
+        studentDao.addStuforStudent(student);
+    }
 }

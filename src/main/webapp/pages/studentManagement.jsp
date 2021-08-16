@@ -26,6 +26,11 @@
 			top: 47px;
 			right: 210px !important;
 		}
+		.fileDown{
+			position: absolute;
+			top: 53px;
+			left: 170px !important;
+		}
 
 		.box-tools button:hover {
 			background-color: #d4d0c8;
@@ -240,10 +245,14 @@
 										<button type="button" class="btn btn-default" onclick="location.reload()" title="刷新">
 											<i class="fa fa-refresh"></i> 刷新
 										</button>
+
+
 									</div>
 								</div>
 							</div>
-
+							<form id="uploadForm" class="fileDown" name="uploadForm" action="${pageContext.request.contextPath}/stuManagement/upload" method="post" enctype="multipart/form-data">
+								<input type="file" name="excelFile" onchange="doUpload()"><br/>
+							</form>
 							<select id="sel" class="selectpicker downlist" multiple title="-- 请选择查询方式 --">
 								<option value="sel1">按寝室查询</option>
 								<option value="sel2">按学号查询</option>
@@ -359,6 +368,10 @@
 	<jsp:include page="/commons/js.jsp"/>
 
 	<script>
+		function doUpload()
+		{
+			document.getElementById("uploadForm").submit()
+		}
 		$(document).ready(function() {
 			// 选择框
 			$(".select2").select2();
@@ -452,30 +465,6 @@
 	<script src="../js/stuManagement.js"></script>
 
 	<script>
-		function delete_do(stuKey,stuName){
-			if (confirm("是否确定删除？")){
-				$.ajax({
-					url:"deleteOne",
-					method:"post",
-					contentType:"application/json;charset=utf-8",
-					dataType:"json",
-					data:JSON.stringify({
-						key:stuKey,
-						name:stuName
-					}),
-					success:function (data) {
-							alert(data["message"]);
-							location.reload();
-					},
-					error:function (error) {
-						alert("出错，删除失败!")
-						console.log("delete_do err: " + error);
-					}
-				})
-			}
-		}
-
-
 		function search_do() {
 			if ($("#sel").val().length > 0){
 				$.ajax({

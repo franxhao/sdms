@@ -86,5 +86,12 @@
         delete from student where stu_key=#{stuKey} and stu_name=#{stuName}
     </delete>
 
+    <insert id="addStuforStudent"  parameterType="com.hqyj.twelve.pojo.Student">
+        <selectKey resultType="int" order="AFTER" keyProperty="stuId" keyColumn="stu_id">
+            select last_insert_id()
+        </selectKey>
+        insert into student (stu_key,stu_name,stu_sex,stu_enr,stu_birth,stu_college,stu_major,stu_class,stu_address,stu_tel,stu_state) values (#{stuKey},#{stuName},#{stuSex},#{stuEnr},#{stuBirth},#{stuCollege},#{stuMajor},#{stuClass},#{stuAddress},#{stuTel},'未入住')
+    </insert>
+
 
 </mapper>
