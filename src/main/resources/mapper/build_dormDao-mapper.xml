@@ -28,7 +28,7 @@
         left join dorm d on d.dor_id = bd.dor_id
     </select>
     <select id="queryBuildById" resultType="com.hqyj.twelve.pojo.Building">
-        select build_id,build_name,rom_amount,floor_amount,person_amount from building where build_id=#{buildId};
+        select build_id,build_name,rom_amount,floor_amount,person_amount from building where build_id=#{buildId}
     </select>
 
     <update id="updateOne" parameterType="com.hqyj.twelve.pojo.Building">
