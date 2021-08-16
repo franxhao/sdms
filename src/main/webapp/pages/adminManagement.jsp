@@ -112,10 +112,10 @@
                             </div>
                         </div>
                         <div class="box-tools pull-right">
-                            <div class="has-feedback">
-                                <input type="text" class="form-control input-sm"
-                                       placeholder="搜索"> <span
-                                    class="glyphicon glyphicon-search form-control-feedback"></span>
+                            <div class="has-feedback input-group">
+                                <input type="text" id="searchUser" class="form-control input-sm"
+                                       placeholder="搜索用户">
+                                <span class="glyphicon glyphicon-search form-control-feedback" ></span>
                             </div>
                         </div>
                         <!--工具栏/-->
@@ -338,6 +338,49 @@
                 </div>
             </div>
         </div>
+
+        <!-- 查询管理员信息模态框 -->
+        <div class="modal fade" id="queryModal" style="top:20px" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog" style="width: 1000px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">查询管理员信息</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><strong>&times;</strong></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table id="dataList1"
+                               class="table table-bordered table-striped table-hover dataTable">
+                            <thead>
+                            <tr>
+                                <th class="sorting_asc">用户名</th>
+                                <th class="sorting_desc">姓名</th>
+                                <th class="sorting">性别</th>
+                                <th class="sorting">年龄</th>
+                                <th class="sorting">职位</th>
+                                <th class="sorting">联系电话</th>
+                                <th class="sorting">家庭住址</th>
+                                <th class="sorting">角色信息</th>
+                                <th class="sorting">备注</th>
+                            </tr>
+                            </thead>
+                            <tbody class="ttbody">
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="tremove" type="button" class="btn btn-secondary btn1" data-dismiss="modal">关闭
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
     </div>
     <!-- @@close -->
@@ -580,6 +623,60 @@
     }
 </script>
 
-</body>
+<%--模糊查询--%>
+<script type="text/javascript">
+    //搜索(通过按下回车键响应事件)
+    $("#searchUser").keydown(function (e) {
+        if (e.keyCode == 13) {
+            var name = $("#searchUser").val()
+            $.ajax({
+                url: "${pageContext.request.contextPath}/admin/queryAdminByUsernameLike",
+                type: "post",
+                data: {
+                    username: name
+                },
+                dataType: "json",
+                success: function (result) {
+                    if (result.length == 0) {
+                        alert("查无此人")
+                    } else {
+                        $("#queryModal").modal("show");
+                        $.each(result, function (i, item) {
+                            var a;
+                            if(item.roleId ==1){
+                                a= "管理员";
+                            }else if(item.roleId ==2){
+                                a="宿管"
+                            };
+                            $(".ttbody").append(
+                                `<tr>
+                                <td >` + item.adUsername + `</td>
+                                <td >` + item.adName + `</td>
+                                <td >` + item.adSex + `</td>
+                                <td >` + item.adAge + `</td>
+                                <td >` + item.adJob + `</td>
+                                <td >` + item.adPhone + `</td>
+                                <td >` + item.adAddress + `</td>
+                                <td >` + a + `</td>
+                                <td >` + item.adDes + `</td>
+                                </tr>`
+                            )
+                        })
 
+                    }
+                },
+                error: function (result) {
+                    alert("查询失败");
+                }
+            })
+        }
+    })
+
+    //清空 <tbody class="ttbody">
+    $("#tremove").click(function () {
+        $(".ttbody").html("")
+    })
+</script>
+
+</body>
 </html>

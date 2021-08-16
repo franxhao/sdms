@@ -128,10 +128,11 @@
                                 <th class="" style="padding-right: 0px"><input
                                         id="selall" type="checkbox" class="icheckbox_square-blue">
                                 </th>
-                                <th class="sorting_asc">楼栋名称</th>
-                                <th class="sorting_asc">楼栋房间数</th>
-                                <th class="sorting_desc">楼栋层数</th>
-                                <th class="sorting">楼栋应住人数</th>
+                                <th class="sorting_asc">楼房编号</th>
+                                <th class="sorting_asc">楼房名称</th>
+                                <th class="sorting_asc">楼房房间数</th>
+                                <th class="sorting_desc">楼房层数</th>
+                                <th class="sorting">楼房应住人数</th>
                                 <th class="sorting">操作</th>
                             </tr>
                             </thead>
@@ -140,11 +141,15 @@
 
                                 <tr>
                                     <td><input name="ids" type="checkbox"></td>
+                                    <td>${one.buildId}</td>
                                     <td>${one.buildName}</td>
                                     <td>${one.romAmount}</td>
                                     <td>${one.floorAmount}</td>
                                     <td>${one.personAmount}</td>
                                     <td class="text-center">
+                                        <span style="display: none">${one.buildId}</span>
+<%--                                        <a href="javascript:;" class="btn bg-olive btn-xs eUpdate"--%>
+<%--                                           onclick="layer_show('修改楼房信息','${pageContext.request.contextPath}/pages/updateBuild.jsp?buildId='+${one.buildId},600,600)">修改</a>--%>
                                         <button type="button" class="btn btn-success" onclick="edit(${one.buildId})">
                                             修改
                                         </button>
@@ -258,6 +263,11 @@
             <div class="modal-body">
                 <form method="post" onsubmit="return false;">
                     <div class="form-group">
+                        <div class="form-group">
+                            <label>ID</label>
+                            <input id="buildId1" type="text" name="buildId1"
+                                   class="form-control" readonly><br/>
+                        </div>
                         <label>楼房名称</label>
                         <input id="buildName1" type="text" name="buildName1"
                                class="form-control" placeholder="请输入楼房名称"><br/>
@@ -282,7 +292,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn1" data-dismiss="modal">取消</button>
-                <button id="updateAjax" type="button" class="btn btn-primary" onclick="edit_do()">提交</button>
+                <button id="updateAjax" type="button" class="btn btn-primary" onclick="edit_do(id)">提交</button>
             </div>
         </div>
     </div>
@@ -431,8 +441,6 @@
             });
         });
     })
-
-
     //修改模态框添加值
     function edit(id) {
         $("#updateModal").modal("show")
@@ -444,6 +452,7 @@
             data: JSON.stringify(build),
             dataType: "json",
             success: function (result) {
+                $("#buildId1").val(result["build"].buildId)
                 $("#buildName1").val(result["build"].buildName)
                 $("#romAmount1").val(result["build"].romAmount)
                 $("#floorAmount1").val(result["build"].floorAmount)
@@ -455,6 +464,7 @@
     //提交修改信息
     function edit_do() {
         var build = {
+            buildId: $("#buildId1").val(),
             buildName: $("#buildName1").val(),
             romAmount: $("#romAmount1").val(),
             floorAmount: $("#floorAmount1").val(),

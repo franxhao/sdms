@@ -28,6 +28,10 @@
     </select>
 
     <select id="queryAdminByUsername" resultType="com.hqyj.twelve.pojo.Administrator">
+        <include refid="admin"/> where ad_username=#{adUsername}
+    </select>
+
+    <select id="queryAdminByUsernameLike" resultType="com.hqyj.twelve.pojo.Administrator">
         <include refid="admin"/> where ad_username like #{adUsername}
     </select>
 
