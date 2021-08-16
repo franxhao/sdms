@@ -285,7 +285,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${STUDENTS}" var="one">
+									<c:forEach items="${STUDENTS.list}" var="one">
 									<tr>
 										<td><input name="ids" type="checkbox"></td>
 										<td>${one.stuKey}</td>
@@ -313,7 +313,7 @@
 						<div class="box-footer">
 							<div class="pull-left">
 								<div class="form-group form-inline">
-									<span class="">当前第<strong>${pageData.currentPage}</strong>页，共<strong>${pageData.totalSize}</strong>条数据</span>
+									<span class="">当前第<strong>${STUDENTS.currentPage}</strong>页，共<strong>${STUDENTS.totalSize}</strong>条数据</span>
 								</div>
 							</div>
 
@@ -408,9 +408,9 @@
 
 	<%--分页--%>
 	<script>
-		var pageNumber = ${pageData.currentPage};
-		var pageSize = ${pageData.pageSize};
-		var totalPage = ${pageData.totalPage};
+		var pageNumber = ${STUDENTS.currentPage};
+		var pageSize = ${STUDENTS.pageSize};
+		var totalPage = ${STUDENTS.totalPage};
 
 		function goto() {
 			window.location.href =
