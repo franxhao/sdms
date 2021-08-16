@@ -43,6 +43,16 @@ public class OutsiderController {
         return "outsider";
     }
 
+    @RequestMapping("/getPersonByName")
+    @ResponseBody
+    public List<Outsider> getPersonByName(String name, ModelMap modelMap) {
+        List<Outsider> outsiderByName = outsiderService.getOutsiderByName(name);
+        for (Outsider outsider : outsiderByName) {
+            System.out.println(outsider.getRecordIn());
+        }
+        return outsiderByName;
+    }
+
     @RequestMapping("/addOutsider")
     @ResponseBody
     public Map<String, Object> addOutsider(@RequestBody Outsider outsider) {
@@ -53,29 +63,29 @@ public class OutsiderController {
 
     @RequestMapping("/updateOutsider")
     @ResponseBody
-    public Map<String,Object> updateOutsider(@RequestBody Outsider outsider){
+    public Map<String, Object> updateOutsider(@RequestBody Outsider outsider) {
         Integer outId = outsider.getOutId();
         Outsider outsiderById = outsiderService.getOutsiderById(outId);
-        Map<String,Object> map = new HashMap<>();
-        map.put("outsider",outsiderById);
+        Map<String, Object> map = new HashMap<>();
+        map.put("outsider", outsiderById);
         return map;
     }
 
     @RequestMapping("/updateOutsiderDo")
     @ResponseBody
-    public Map<String,Object> updateOutsiderDo(@RequestBody Outsider outsider){
+    public Map<String, Object> updateOutsiderDo(@RequestBody Outsider outsider) {
         outsiderService.modifyInformation(outsider);
-        Map<String,Object> map = new HashMap<>();
-        map.put("message","修改成功");
+        Map<String, Object> map = new HashMap<>();
+        map.put("message", "修改成功");
         return map;
     }
 
     @RequestMapping("/deleteOne")
     @ResponseBody
-    public Map<String,Object> deleteOne(@RequestBody Outsider outsider){
+    public Map<String, Object> deleteOne(@RequestBody Outsider outsider) {
         outsiderService.removeById(outsider.getOutId());
-        Map<String,Object> map = new HashMap<>();
-        map.put("message","删除成功");
+        Map<String, Object> map = new HashMap<>();
+        map.put("message", "删除成功");
         return map;
     }
 }

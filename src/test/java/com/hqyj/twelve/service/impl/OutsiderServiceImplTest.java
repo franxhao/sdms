@@ -38,6 +38,14 @@ public class OutsiderServiceImplTest {
     }
 
     @Test
+    public void getOutsiderByNameTest() {
+        List<Outsider> byNameAndPhone = outsiderService.getOutsiderByName("张三");
+        for (Outsider outsider : byNameAndPhone) {
+            System.out.println(outsider);
+        }
+    }
+
+    @Test
     public void getOutsiderByIdTest(){
         Outsider outsiderById = outsiderService.getOutsiderById(1);
         System.out.println(outsiderById);
