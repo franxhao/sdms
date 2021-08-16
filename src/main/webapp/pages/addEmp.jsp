@@ -21,24 +21,24 @@
     <form  method="post" onsubmit="return false;">
         <div class="form-group">
             <label>用户名</label>
-            <input id="empUserName" type="text" name="empUserName" value="阳桑"  class="form-control"><br/>
+            <input id="empUserName" type="text" name="empUserName" value=""  class="form-control"><br/>
         </div>
         <div class="form-group">
             <label>用户密码</label>
-            <input id="empPassword" type="text" name="empPassword" value="123456"
+            <input id="empPassword" type="text" name="empPassword" value=""
                    class="form-control"><br/>
         </div>
         <div class="form-group">
             <label>姓名</label>
-            <input id="empName" type="text" name="empName" value="谢金赤" class="form-control"><br/>
+            <input id="empName" type="text" name="empName" value="" class="form-control"><br/>
         </div>
         <div class="form-group">
             <label>性别</label>
-            <input id="empSex" type="text" name="empSex" value="男" class="form-control"><br/>
+            <input id="empSex" type="text" name="empSex" value="" class="form-control"><br/>
         </div>
         <div class="form-group">
             <label>年龄</label>
-            <input id="empAge" type="text" name="empAge" value="22" class="form-control"><br/>
+            <input id="empAge" type="text" name="empAge" value="" class="form-control"><br/>
         </div>
         <div class="form-group">
             <label>职位</label>
@@ -46,11 +46,11 @@
         </div>
         <div class="form-group">
             <label>联系电话</label>
-            <input id="empPhone" type="text" name="empPhone" value="13456897531"  class="form-control"><br/>
+            <input id="empPhone" type="text" name="empPhone" value=""  class="form-control"><br/>
         </div>
         <div class="form-group">
             <label>家庭住址</label>
-            <input id="empAddress" type="text" name="empAddress" value="金牛区九里提"  class="form-control"><br/>
+            <input id="empAddress" type="text" name="empAddress" value=""  class="form-control"><br/>
         </div>
         <div class="form-group">
             <label>角色</label> <br/>
@@ -58,7 +58,15 @@
         </div>
         <div class="form-group">
             <label>寝室楼栋</label>
-            <input id="buildId" type="text" name="buildId" value="1"  class="form-control"><br/>
+            <select id="buildId" class="selectpicker form-control" title="-- 请选择楼栋 --" >
+                <option class="buildId" value="2">海棠苑男</option>
+                <option class="buildId" value="3">桂花苑男</option>
+                <option class="buildId" value="4">桂花苑女</option>
+                <option class="buildId" value="5">蓝雾苑男</option>
+                <option class="buildId" value="6">蓝雾苑女</option>
+                <option class="buildId" value="8">海棠苑女</option>
+            </select>
+<%--            <input id="buildId" type="text" name="buildId" value=""  class="form-control"><br/>--%>
         </div>
         <div class="form-group">
             <label>备注</label>

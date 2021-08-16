@@ -156,7 +156,14 @@
 												<c:if test="${one.roleId==1}">管理员</c:if>
 												<c:if test="${one.roleId==2}">宿管</c:if>
 											</td>
-											<td>${one.buildId}</td>
+											<td>
+												<c:if test="${one.buildId==2}">海棠苑男</c:if>
+												<c:if test="${one.buildId==3}">桂花苑男</c:if>
+												<c:if test="${one.buildId==4}">桂花苑女</c:if>
+												<c:if test="${one.buildId==5}">蓝雾苑男</c:if>
+												<c:if test="${one.buildId==6}">蓝雾苑女</c:if>
+												<c:if test="${one.buildId==8}">海棠苑女</c:if>
+											</td>
 											<td>${one.empDes}</td>
 											<td class="text-center">
 												<span style="display: none">${one.empId}</span>

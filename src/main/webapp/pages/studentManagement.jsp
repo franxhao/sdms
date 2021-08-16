@@ -250,9 +250,11 @@
 									</div>
 								</div>
 							</div>
+							<!-- 文件上传 -->
 							<form id="uploadForm" class="fileDown" name="uploadForm" action="${pageContext.request.contextPath}/stuManagement/upload" method="post" enctype="multipart/form-data">
-								<input type="file" name="excelFile" onchange="doUpload()"><br/>
+									<input type="file" name="excelFile" onchange="doUpload()"><br/>
 							</form>
+
 							<select id="sel" class="selectpicker downlist" multiple title="-- 请选择查询方式 --">
 								<option value="sel1">按寝室查询</option>
 								<option value="sel2">按学号查询</option>
