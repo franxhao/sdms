@@ -193,7 +193,6 @@
                     <!--分页-->
 
                 </div>
-            </div>
         </section>
         <!-- 正文区域 /-->
     </div>
@@ -456,7 +455,7 @@
     //提交修改信息
     function edit_do() {
         var build = {
-            buildId: $("#buildName1").val(),
+            buildName: $("#buildName1").val(),
             romAmount: $("#romAmount1").val(),
             floorAmount: $("#floorAmount1").val(),
             personAmount: $("#personAmount1").val(),
