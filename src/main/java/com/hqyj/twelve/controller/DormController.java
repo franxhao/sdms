@@ -23,21 +23,9 @@ public class DormController {
     @Autowired
     private DormService dormService;
     @RequestMapping("/queryAllDorm")
-    public String queryAllBuilding(Integer pageNumber, Integer pageSize,ModelMap modelMap){
-        int number;
-        int size;
-        if (pageNumber == null) {
-            number = 1; //默认显示第一页
-        } else {
-            number = pageNumber;
-        }
-        if (pageSize == null) {
-            size = 3;   //默认每页显示两条
-        } else {
-            size = pageSize;
-        }
-        PageData<Dorm> pageData = dormService.getDormByPage(number, size);
-        modelMap.put("pageData", pageData);
+    public String queryAllBuilding(ModelMap modelMap){
+        List<Dorm> dormList = dormService.queryAll();
+        modelMap.addAttribute("dormList",dormList);
         return "dormManagement";
     }
     @RequestMapping("/addDorm")

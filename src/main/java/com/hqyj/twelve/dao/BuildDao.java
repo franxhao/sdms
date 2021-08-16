@@ -1,6 +1,7 @@
 package com.hqyj.twelve.dao;
 
 import com.hqyj.twelve.pojo.Building;
+import com.hqyj.twelve.pojo.Outsider;
 
 import java.util.List;
 
@@ -13,4 +14,7 @@ public interface BuildDao {
     int insertOne(Building building);
     //删除
     int deleteById(int buildId);
+    //按id查询一个
+    //根据 id 查询 楼房信息
+    Building queryBuildById(int buildId);
 }

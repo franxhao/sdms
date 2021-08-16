@@ -59,4 +59,9 @@ public class BuildServiceImpl implements BuildService {
         pageData.setList(pageInfo.getList());
         return pageData;
     }
+
+    @Override
+    public Building queryBuildById(int buildId) {
+        return buildDao.queryBuildById(buildId);
+    }
 }

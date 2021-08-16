@@ -18,4 +18,7 @@ public interface BuildService {
     //分页查询楼房信息
     //pageNumber 页码     pageSize 每页记录数
     PageData<Building> getBuildByPage(int pageNumber, int pageSize);
+    //按id查询一个
+    //根据 id 查询 楼房信息
+    Building queryBuildById(int buildId);
 }

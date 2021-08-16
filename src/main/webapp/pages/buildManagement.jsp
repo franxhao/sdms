@@ -78,7 +78,7 @@
                 <li><a href="${pageContext.request.contextPath}/index.jsp"><i
                         class="fa fa-dashboard"></i> 首页</a></li>
                 <li><a
-                        href="#">楼栋管理</a></li>
+                        href="${pageContext.request.contextPath}/build/findAll.do">楼栋管理</a></li>
 
                 <li class="active">全部楼栋</li>
             </ol>
@@ -101,12 +101,13 @@
                         <div class="pull-left">
                             <div class="form-group form-inline">
                                 <div class="btn-group">
-                                    <a  class="btn btn-success add"  href="javascript:;" onclick="layer_show('添加员工','${pageContext.request.contextPath}/pages/addDorm.jsp',600,600)">
-                                        <i class="fa fa-file-o"></i> 新建
+                                    <a class="btn btn-primary add" href="javascript:;">
+                                        <i class="fa fa-address-book-o"></i><u>添加</u>
                                     </a>
-                                    <a  class="btn btn-success " href="javascript:location.reload()">
-                                        <i class="fa fa-refresh"></i> 刷新
-                                    </a>
+                                    <button type="button" class="btn btn-primary" title="刷新"
+                                            onclick="window.location.reload();">
+                                        <i class="fa fa-refresh"></i><u>刷新</u>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -135,7 +136,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${buildingList}" var="one">
+                            <c:forEach items="${pageData.list}" var="one">
 
                                 <tr>
                                     <td><input name="ids" type="checkbox"></td>
@@ -156,49 +157,46 @@
                             </tbody>
 
                         </table>
-                        <!--数据列表/-->
+                            <!--数据列表/-->
+
+                        </div>
+                        <!-- 数据表格 /-->
 
                     </div>
-                    <!-- 数据表格 /-->
+
+                    <!--分页-->
+                    <div class="box-footer">
+                        <div class="pull-left">
+                            <div class="form-group form-inline">
+                                <span class="">当前第<strong>${pageData.currentPage}</strong>页，共<strong>${pageData.totalSize}</strong>条数据</span>
+                            </div>
+                        </div>
+
+                        <div class="box-tools pull-right">
+                            <ul class="pagination">
+                                <li>
+                                    <button type="button" class="btn bg-primary" onclick="firstPage()">首页</button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn bg-primary" onclick="previousPage()">上一页</button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn bg-primary" onclick="nextPage()">下一页</button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn bg-primary" onclick="lastPage()">尾页</button>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <!--分页-->
 
                 </div>
-                <!-- /.box-body -->
-
             </div>
-
         </section>
         <!-- 正文区域 /-->
     </div>
-
-    <!--分页-->
-    <div class="box-footer">
-        <div class="pull-left">
-            <div class="form-group form-inline">
-                <span class="">当前第<strong>${pageData.currentPage}</strong>页，共<strong>${pageData.totalSize}</strong>条数据</span>
-            </div>
-        </div>
-
-        <div class="box-tools pull-right">
-            <ul class="pagination">
-                <li>
-                    <button type="button" class="btn bg-primary" onclick="firstPage()">首页</button>
-                </li>
-                <li>
-                    <button type="button" class="btn bg-primary" onclick="previousPage()">上一页</button>
-                </li>
-                <li>
-                    <button type="button" class="btn bg-primary" onclick="nextPage()">下一页</button>
-                </li>
-                <li>
-                    <button type="button" class="btn bg-primary" onclick="lastPage()">尾页</button>
-                </li>
-            </ul>
-        </div>
-
-    </div>
-    <!--分页-->
-
-</div>
 
 </section>
 <!-- 正文区域 /-->
@@ -411,7 +409,7 @@
         $(".add").click(function () {
             $("#addModal").modal("show");
             $("#addAjax").click(function () {
-                var biulding = {
+                var build = {
                     buildName: $("#buildName").val(),
                     romAmount: $("#romAmount").val(),
                     floorAmount: $("#floorAmount").val(),
@@ -421,7 +419,7 @@
                     url: "${pageContext.request.contextPath}/building/addBuild",
                     type: "post",
                     contentType: "application/json",
-                    data: JSON.stringify(building),
+                    data: JSON.stringify(build),
                     dataType: "json",
                     success: function (result) {
                         alert("添加成功");
@@ -447,27 +445,27 @@
             data: JSON.stringify(build),
             dataType: "json",
             success: function (result) {
-                $("#buildName1").val(result["outsider"].outId)
-                $("#romAmount1").val(result["outsider"].outName)
-                $("#floorAmount1").val(result["outsider"].outSex)
-                $("#personAmount1").val(result["outsider"].outAge)
+                $("#buildName1").val(result["build"].buildName)
+                $("#romAmount1").val(result["build"].romAmount)
+                $("#floorAmount1").val(result["build"].floorAmount)
+                $("#personAmount1").val(result["build"].personAmount)
             }
         })
     }
 
     //提交修改信息
     function edit_do() {
-        var outsider = {
+        var build = {
             buildId: $("#buildName1").val(),
             romAmount: $("#romAmount1").val(),
             floorAmount: $("#floorAmount1").val(),
             personAmount: $("#personAmount1").val(),
         }
         $.ajax({
-            url: "${pageContext.request.contextPath}/building/updateBuild",
+            url: "${pageContext.request.contextPath}/building/updateBuildDo",
             type: "post",
             contentType: "application/json",
-            data: JSON.stringify(outsider),
+            data: JSON.stringify(build),
             dataType: "json",
             success: function (result) {
                 alert(result["message"]);
@@ -483,12 +481,12 @@
     //删除信息
     function deleteOne(id) {
         if (confirm("确定删除这条数据吗？")) {
-            var outsider = {outId: id}
+            var build = {buildId: id}
             $.ajax({
-                url: "${pageContext.request.contextPath}/outsider/deleteOne",
+                url: "${pageContext.request.contextPath}/building/deleteBuild",
                 type: "POST",
                 contentType: "application/json",
-                data: JSON.stringify(outsider),
+                data: JSON.stringify(build),
                 dataType: "json",
                 success: function (result) {
                     alert(result["message"])
