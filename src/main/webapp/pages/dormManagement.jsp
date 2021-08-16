@@ -78,7 +78,7 @@
                 <li><a href="${pageContext.request.contextPath}/index.jsp"><i
                         class="fa fa-dashboard"></i> 首页</a></li>
                 <li><a
-                        href="#">宿舍管理</a></li>
+                        href="${pageContext.request.contextPath}/build/findAll.do">人员来访管理</a></li>
 
                 <li class="active">全部宿舍</li>
             </ol>

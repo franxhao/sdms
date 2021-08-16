@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>修改员工信息</title>
+    <title>修改寝室信息</title>
     <%--	导入外部的js代码--%>
     <jsp:include page="/commons/css.jsp"/>
     <jsp:include page="/commons/js.jsp"/>
@@ -73,7 +73,7 @@
     $(function () {
         //页面加载就通过ajax获取数据回显到页面
         $.ajax({
-            url:"${pageContext.request.contextPath}/admin/queryEmpById",
+            url:"${pageContext.request.contextPath}/building/queryBuildById",
             type:"post",
             dataType:"json",
             data:{

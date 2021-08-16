@@ -57,7 +57,7 @@ public class UserController {
             //将cookie发送到浏览器
             resp.addCookie(cookie);
             resp.addCookie(cookie2);
-           return "main";
+           return "redirect:/pages/main.jsp";
        }
        return "redirect:/login.jsp";
     }

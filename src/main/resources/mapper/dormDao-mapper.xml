@@ -22,6 +22,7 @@
         left join stu_dor sd on sd.dor_id = d.dor_id
         left join student s on s.stu_id = sd.stu_id
     </select>
+
     <update id="updateOne" parameterType="com.hqyj.twelve.pojo.Dorm">
         update dorm <set>
         dor_id=#{dorId},

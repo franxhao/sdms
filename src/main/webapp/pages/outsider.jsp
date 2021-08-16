@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -154,8 +155,8 @@
                                     <td>${one.outName}</td>
                                     <td>${one.outSex}</td>
                                     <td>${one.outAge}</td>
-                                    <td>${one.recordIn}</td>
-                                    <td>${one.recordOut}</td>
+                                    <td><fmt:formatDate value="${one.recordIn}" type="both"/></td>
+                                    <td><fmt:formatDate value="${one.recordOut}" type="both"/></td>
                                     <td>${one.outPhone}</td>
                                     <td>${one.outDes}</td>
                                     <td>
@@ -213,13 +214,13 @@
 
         <!--添加用的模态框 -->
         <div class="modal fade" id="addModal" style="top:20px" tabindex="-1" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
+             aria-hidden="true" data-backdrop="static">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title">添加用户</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true"><strong>&times;</strong></span>
                         </button>
                     </div>
                     <div class="modal-body">
@@ -272,13 +273,13 @@
 
         <!--修改用的模态框 -->
         <div class="modal fade" id="updateModal" style="top:20px" tabindex="-1" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
+             aria-hidden="true" data-backdrop="static">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title">修改登记信息</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true"><strong>&times;</strong></span>
                         </button>
                     </div>
                     <div class="modal-body">

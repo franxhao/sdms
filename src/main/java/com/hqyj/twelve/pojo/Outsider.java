@@ -1,5 +1,7 @@
 package com.hqyj.twelve.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +15,9 @@ public class Outsider implements Serializable {
     private String outName;
     private String outSex;
     private Integer outAge;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date recordIn;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date recordOut;
     private String outPhone;
     private String outDes;

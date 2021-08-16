@@ -107,10 +107,10 @@
                         <div class="pull-left">
                             <div class="form-group form-inline">
                                 <div class="btn-group">
-                                    <a class="btn btn-primary add" href="javascript:;">
+                                    <a class="btn btn-warning add" href="javascript:;">
                                         <i class="fa fa-address-book-o"></i><u>添加</u>
                                     </a>
-                                    <button type="button" class="btn btn-primary" title="刷新"
+                                    <button type="button" class="btn btn-warning" title="刷新"
                                             onclick="window.location.reload();">
                                         <i class="fa fa-refresh"></i><u>刷新</u>
                                     </button>
@@ -187,16 +187,16 @@
                     <div class="box-tools pull-right">
                         <ul class="pagination">
                             <li>
-                                <button type="button" class="btn bg-primary" onclick="firstPage()">首页</button>
+                                <button type="button" class="btn btn-warning" onclick="firstPage()">首页</button>
                             </li>
                             <li>
-                                <button type="button" class="btn bg-primary" onclick="previousPage()">上一页</button>
+                                <button type="button" class="btn btn-warning" onclick="previousPage()">上一页</button>
                             </li>
                             <li>
-                                <button type="button" class="btn bg-primary" onclick="nextPage()">下一页</button>
+                                <button type="button" class="btn btn-warning" onclick="nextPage()">下一页</button>
                             </li>
                             <li>
-                                <button type="button" class="btn bg-primary" onclick="lastPage()">尾页</button>
+                                <button type="button" class="btn btn-warning" onclick="lastPage()">尾页</button>
                             </li>
                         </ul>
                     </div>
