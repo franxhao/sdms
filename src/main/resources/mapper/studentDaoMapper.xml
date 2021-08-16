@@ -16,13 +16,20 @@
     </sql>
 
     <resultMap id="baseStudentResultMap" type="com.hqyj.twelve.pojo.Student">
+        <id column="stu_id" property="stuId"/>
         <result column="stu_key" property="stuKey"/>
         <result column="stu_name" property="stuName"/>
         <result column="stu_sex" property="stuSex"/>
-        <result column="dor_id" property="romId"/>
+        <result column="stu_enr" property="stuEnr"/>
+        <result column="stu_birth" property="stuBirth"/>
+        <result column="stu_college" property="stuCollege"/>
+        <result column="stu_major" property="stuMajor"/>
         <result column="stu_class" property="stuClass"/>
-        <result column="stu_state" property="stuState"/>
+        <result column="stu_address" property="stuAddress"/>
         <result column="stu_tel" property="stuTel"/>
+        <result column="stu_state" property="stuState"/>
+        <result column="stu_des" property="stuDes"/>
+        <result column="dor_id" property="romId"/>
     </resultMap>
 
     <!-- 查所有学生信息 -->
@@ -33,7 +40,7 @@
     </select>
 
     <!-- 根据学号和姓名查询学生 -->
-    <select id="queryStuByKeyAndName" resultType="map" parameterType="string">
+    <select id="queryStuByKeyAndName" resultType="com.hqyj.twelve.pojo.Student" parameterType="string" resultMap="baseStudentResultMap">
         <include refid="studentField"/>
         from student where stu_key=#{stuKey} and stu_name=#{stuName}
     </select>
@@ -60,5 +67,13 @@
             values (null,#{stuId},6)
         </if>
     </insert>
+    
+    
+    <!-- 更新学生信息 -->
+    <update id="UpdateStuMassage" parameterType="map">
+        update student set stu_sex=#{stuSex},stu_enr=#{stuEnr},stu_birth=#{stuBirth},
+        stu_college=#{stuCollege},stu_major=#{stuMajor},stu_class=#{stuClass},stu_address=#{stuAddress},stu_tel=#{stuTel}
+        where stu_key=#{stuKey} and stu_name=#{stuName}
+    </update>
 
 </mapper>

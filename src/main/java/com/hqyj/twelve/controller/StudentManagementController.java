@@ -18,6 +18,11 @@ public class StudentManagementController {
     @Autowired
     private StudentManagementService studentManagementService;
 
+    /**
+     * 查询所有学生的信息
+     * @param modelMap
+     * @return
+     */
     @RequestMapping("/findAll")
     public String getAllStu(ModelMap modelMap){
         List<Student> students = studentManagementService.findAll();
@@ -25,10 +30,44 @@ public class StudentManagementController {
         return "studentManagement";
     }
 
+    /**
+     * 添加学生信息
+     * @param data
+     * @return
+     */
     @RequestMapping("/addStu")
     @ResponseBody
     public String addStu(@RequestBody Map<String, Object> data){
         String message = studentManagementService.addStu(data);
         return message;
+    }
+
+    /**
+     * 搜索功能
+     * @param map
+     * @return
+     */
+    @RequestMapping("/search")
+    public String searchVal(Map<String, Object> map){
+        studentManagementService.searchVal(map);
+        return null;
+    }
+
+    /**
+     * 修改学生信息之回传数据
+     * @param keyAndName
+     * @return
+     */
+    @RequestMapping("/reEdit")
+    @ResponseBody
+    public List<Student> reEditMessage(@RequestBody Map<String, Object> keyAndName){
+        return studentManagementService.reEditMessage(keyAndName);
+    }
+
+    @RequestMapping("/stuEdit")
+    @ResponseBody
+    public String stuEdit(@RequestBody Map<String, Object> editMassage){
+        String flag = studentManagementService.stuEdit(editMassage);
+        return flag;
     }
 }

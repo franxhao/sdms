@@ -1,5 +1,7 @@
 package com.hqyj.twelve.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,7 +14,9 @@ public class Student implements Serializable {
     private String stuKey;
     private String stuName;
     private String stuSex;
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date stuEnr;
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date stuBirth;
     private String stuCollege;
     private String stuMajor;
