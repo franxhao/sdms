@@ -54,4 +54,7 @@ public interface AdminService {
     //通过分页返回管理员数据
     PageData<Administrator> queryAllAdminByPage(Integer pageNumber, Integer pageSize);
 
+    //通过用户名模糊查询管理员
+    List<Administrator> queryAdminByUsernameLike(String username);
+
 }

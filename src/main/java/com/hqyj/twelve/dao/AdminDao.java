@@ -31,6 +31,9 @@ public interface AdminDao {
     //根据用户名查询管理员
     Administrator queryAdminById(int id);
 
+    //根据用户名模糊查询管理员
+    List<Administrator> queryAdminByUsernameLike(String username);
+
     //根据用户名查询普通员工
     Employee queryEmpById(int id);
 
@@ -51,6 +54,8 @@ public interface AdminDao {
 
     //根据id删除管理员用户
     int deleteAdminById(Integer id);
+
+
 
 
 }
