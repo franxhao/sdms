@@ -18,4 +18,24 @@ public interface StudentManagementService {
      * @return
      */
     String addStu(Map<String, Object> data);
+
+    /**
+     * 搜索功能
+     * @param map
+     */
+    void searchVal(Map<String, Object> map);
+
+    /**
+     * 修改学生信息之回传数据
+     * @param keyAndName
+     * @return
+     */
+    List<Student> reEditMessage(Map<String, Object> keyAndName);
+
+    /**
+     * 修改学生信息
+     * @param editMassage
+     * @return
+     */
+    String stuEdit(Map<String, Object> editMassage);
 }
