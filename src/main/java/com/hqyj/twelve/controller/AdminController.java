@@ -156,6 +156,4 @@ public class AdminController {
         emp.setEmpPassword(hashPassword);
         int num = adminService.updateEmpById(emp);
     }
-
-
 }
