@@ -1,5 +1,6 @@
 package com.hqyj.twelve.dao;
 
+import com.hqyj.twelve.pojo.Building;
 import com.hqyj.twelve.pojo.Dorm;
 
 import javax.swing.*;
@@ -12,7 +13,9 @@ public interface DormDao {
     //修改寝室信息
     int updateOne(Dorm dorm);
     //增加寝室信息
-    int insertOne(Dorm drom);
+    int insertOne(Dorm dorm);
     //删除寝室
-    int deleteById(int dorId);
+    int deleteById(Integer dorId);
+    //按id查阅一个寝室
+    Dorm queryDormById(Integer dormId);
 }

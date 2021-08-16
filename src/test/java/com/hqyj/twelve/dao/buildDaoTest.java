@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -37,5 +38,10 @@ public class buildDaoTest {
     public void deleteById(){
         int rs = buildDao.deleteById(10);
         System.out.println("返回结果："+rs);
+    }
+    @Test
+    public void queryById(){
+        Building buildingList = buildDao.queryBuildById(3);
+        System.out.println(buildingList);
     }
 }

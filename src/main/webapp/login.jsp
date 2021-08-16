@@ -49,6 +49,11 @@
 					管理员<input type="radio" name="flag" value="1" class="form-control">&nbsp; &nbsp; &nbsp; &nbsp;
 					员工<input  type="radio" name="flag"   value="2" class="form-control">
 				</div>
+				<div class="form-group has-feedback">
+					<label>验证码：</label>
+					<input class="itxt" type="text" name="verification" style="width: 130px;" id="code"/>
+					<img id="code_img" alt="" src="kaptcha.jpg" style="float: right; margin-right: 30px ; width:90px; height: 28px">
+				</div>
 				<div class="row">
 					<div class="col-xs-8">
 						<div class="checkbox icheck">
@@ -88,6 +93,13 @@
 				increaseArea : '20%' // optional
 			});
 		});
+
+		//给验证码图片绑定单击事件
+		$("#code_img").click(function () {
+			//在事件响应的function函数中有一个this函数，这个this对象，是当前正在响应事假的dom对象。
+			this.src="${pageContext.request.contextPath}/kaptcha.jpg?d="+new Date();
+		});
+
 	</script>
 </body>
 

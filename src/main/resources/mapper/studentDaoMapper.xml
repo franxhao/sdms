@@ -34,6 +34,11 @@
 
     <!-- 查所有学生信息 -->
     <select id="findAll" resultMap="baseStudentResultMap">
+        <include refid="studentField"/> from student
+    </select>
+
+    <!-- 查所有已入住学生信息 -->
+    <select id="" resultMap="baseStudentResultMap">
         select s.stu_key,s.stu_name,s.stu_sex,d.dor_id,s.stu_class,s.stu_state,s.stu_tel
         from student s,stu_dor sd,dorm d
         where s.stu_id=sd.stu_id and d.dor_id=sd.dor_id
@@ -52,22 +57,6 @@
         </selectKey>
         insert into student (stu_key,stu_name,stu_sex,stu_enr,stu_birth,stu_college,stu_major,stu_class,stu_address,stu_tel,stu_state) values (#{stuKey},#{stuName},#{stuSex},#{stuEnr},#{stuBirth},#{stuCollege},#{stuMajor},#{stuClass},#{stuAddress},#{stuTel},'未入住')
     </insert>
-    <!--
-        **********  若数据库数据中寝室id有变动，请注意修改  *************
-        添加学生信息的同时，向stu_dor表中添加学生id
-            dor_id=5表男生寝室,编号5
-            dor_id=6表女生寝室，编号6
-     -->
-    <insert id="addStuIdToAD">
-        insert into stu_dor (id,stu_id,dor_id)
-        <if test="stuSex != null and stuSex != '' and stuSex=='男'.toString()">
-            values (null,#{stuId},5)
-        </if>
-        <if test="stuSex != null and stuSex != '' and stuSex=='女'.toString()">
-            values (null,#{stuId},6)
-        </if>
-    </insert>
-    
     
     <!-- 更新学生信息 -->
     <update id="UpdateStuMassage" parameterType="map">
@@ -75,5 +64,27 @@
         stu_college=#{stuCollege},stu_major=#{stuMajor},stu_class=#{stuClass},stu_address=#{stuAddress},stu_tel=#{stuTel}
         where stu_key=#{stuKey} and stu_name=#{stuName}
     </update>
+
+
+    <!-- 通过学生id查询学生寝室表 -->
+    <select id="queryStuDorByStuId" resultType="int" parameterType="int">
+        select count(1) from stu_dor where stu_id=#{stuId}
+    </select>
+
+    <!-- 通学生寝室表通过id删除记录 -->
+    <delete id="deleteStuDorById" parameterType="int">
+        delete from stu_dor where id=#{id}
+    </delete>
+
+    <!-- 通过寝室id查询寝室信息 -->
+    <select id="queryDormById" parameterType="int">
+        select dor_id,dor_sex,dor_num,dor_fact,dor_price from dorm where dor_id=#{dorId}
+    </select>
+
+    <!-- 通过学生学号和姓名删除学生信息 -->
+    <delete id="deleteOneByKeyAndName" parameterType="string">
+        delete from student where stu_key=#{stuKey} and stu_name=#{stuName}
+    </delete>
+
 
 </mapper>

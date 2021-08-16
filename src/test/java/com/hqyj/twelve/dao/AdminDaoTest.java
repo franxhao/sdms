@@ -50,9 +50,9 @@ public class AdminDaoTest {
     @Test
     public void insertEmployee() {
         Employee emp = new Employee();
-        emp.setEmpUsername("瑶桑");
+        emp.setEmpUsername("giao桑");
         emp.setEmpPassword("123456");
-        emp.setEmpName("阳东霖");
+        emp.setEmpName("不知名");
         emp.setEmpSex("男");
         emp.setEmpAge(22);
         emp.setEmpJob("宿管");

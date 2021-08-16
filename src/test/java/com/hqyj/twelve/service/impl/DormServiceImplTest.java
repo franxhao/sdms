@@ -23,4 +23,5 @@ public class DormServiceImplTest {
             System.out.println(dorms);
         }
     }
+
 }

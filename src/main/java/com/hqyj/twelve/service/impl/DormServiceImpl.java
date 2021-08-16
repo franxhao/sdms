@@ -27,12 +27,12 @@ public class DormServiceImpl implements DormService {
     }
 
     @Override
-    public int insertOne(Dorm drom) {
-        return dormDao.insertOne(drom);
+    public int insertOne(Dorm dorm) {
+        return dormDao.insertOne(dorm);
     }
 
     @Override
-    public int deleteById(int dorId) {
+    public int deleteById(Integer dorId) {
         return dormDao.deleteById(dorId);
     }
 
@@ -59,5 +59,10 @@ public class DormServiceImpl implements DormService {
         }
         pageData.setList(pageInfo.getList());
         return pageData;
+    }
+
+    @Override
+    public Dorm queryDormById(Integer dormId) {
+        return dormDao.queryDormById(dormId);
     }
 }

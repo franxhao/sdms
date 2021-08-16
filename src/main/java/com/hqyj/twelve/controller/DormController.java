@@ -23,7 +23,7 @@ public class DormController {
     @Autowired
     private DormService dormService;
     @RequestMapping("/queryAllDorm")
-    public String queryAllBuilding(Integer pageNumber, Integer pageSize,ModelMap modelMap){
+    public String queryAllDorm(Integer pageNumber, Integer pageSize,ModelMap modelMap){
         int number;
         int size;
         if (pageNumber == null) {
@@ -32,7 +32,7 @@ public class DormController {
             number = pageNumber;
         }
         if (pageSize == null) {
-            size = 3;   //默认每页显示两条
+            size = 3;   //默认每页显示三条
         } else {
             size = pageSize;
         }
@@ -42,14 +42,23 @@ public class DormController {
     }
     @RequestMapping("/addDorm")
     @ResponseBody
-    public Map<String,Object> addBuild(@RequestBody Dorm dorm){
+    public Map<String,Object> addDorm(@RequestBody Dorm dorm){
         dormService.insertOne(dorm);
         Map<String ,Object> map = new HashMap<>();
         return map;
     }
     @RequestMapping("/updateDorm")
     @ResponseBody
-    public Map<String,Object> updateBuild(@RequestBody Dorm dorm){
+    public Map<String,Object> updateDorm(@RequestBody Dorm dor){
+        int dorId=dor.getDorId();
+        Dorm dorm = dormService.queryDormById(dorId);
+        Map<String,Object> map = new HashMap<>();
+        map.put("dorm",dorm);
+        return map;
+    }
+    @RequestMapping("/updateDormDo")
+    @ResponseBody
+    public Map<String,Object> updateDormById(@RequestBody Dorm dorm){
         System.out.println(dorm);
         int i = dormService.updateOne(dorm);
         System.out.println(i);

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,11 +20,6 @@ public class StudentManagementController {
     @Autowired
     private StudentManagementService studentManagementService;
 
-    /**
-     * 查询所有学生的信息
-     * @param modelMap
-     * @return
-     */
     @RequestMapping("/findAll")
     public String getAllStu(Integer pageNumber, Integer pageSize, ModelMap modelMap){
         int number;
@@ -38,17 +34,12 @@ public class StudentManagementController {
         } else {
             size = pageSize;
         }
-        PageData<Student> students = studentManagementService.getOutsiderByPage(number, size);
+        PageData<Student> students = studentManagementService.getStuManagementByPage(number, size);
 //        List<Student> students = studentManagementService.findAll();
-        modelMap.addAttribute("STUDENTS", students);
+        modelMap.put("STUDENTS", students);
         return "studentManagement";
     }
 
-    /**
-     * 添加学生信息
-     * @param data
-     * @return
-     */
     @RequestMapping("/addStu")
     @ResponseBody
     public String addStu(@RequestBody Map<String, Object> data){
@@ -56,25 +47,15 @@ public class StudentManagementController {
         return message;
     }
 
-    /**
-     * 搜索功能
-     * @param map
-     * @return
-     */
     @RequestMapping("/search")
     public String searchVal(Map<String, Object> map){
         studentManagementService.searchVal(map);
         return null;
     }
 
-    /**
-     * 修改学生信息之回传数据
-     * @param keyAndName
-     * @return
-     */
     @RequestMapping("/reEdit")
     @ResponseBody
-    public List<Student> reEditMessage(@RequestBody Map<String, Object> keyAndName){
+    public Student reEditMessage(@RequestBody Map<String, Object> keyAndName){
         return studentManagementService.reEditMessage(keyAndName);
     }
 
@@ -83,5 +64,20 @@ public class StudentManagementController {
     public String stuEdit(@RequestBody Map<String, Object> editMassage){
         String flag = studentManagementService.stuEdit(editMassage);
         return flag;
+    }
+
+    @RequestMapping("/deleteOne")
+    @ResponseBody
+    public Map<String,Object> deleteOne(@RequestBody Map<String,Object> data){
+        int flag = studentManagementService.removeByKeyAndName(data);
+        Map<String, Object> map = new HashMap<>();
+        if (flag == 3) {
+            map.put("message","已入住状态暂时无法删除");
+        } else if (flag > 0) {
+            map.put("message","删除成功");
+        } else {
+            map.put("message", "删除失败");
+        }
+        return map;
     }
 }

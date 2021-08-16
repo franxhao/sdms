@@ -1,5 +1,7 @@
 package com.hqyj.twelve.dao;
 
+import com.hqyj.twelve.pojo.Building;
+import com.hqyj.twelve.pojo.Dorm;
 import com.hqyj.twelve.pojo.Student;
 import org.apache.ibatis.annotations.Param;
 
@@ -22,26 +24,12 @@ public interface StudentDao {
     boolean addStu(Map<String, Object> data);
 
     /**
-     * 查询对应性别寝室状态
-     * @param stuSex 分配入住性别楼
-     * @return 返回应住人数和实住人数
-     */
-    List<Integer> queryRoomState(String stuSex);
-
-    /**
      * 通过学号和姓名查询学生
      * @param stuKey
      * @param stuName
      * @return
      */
-    List<Student> queryStuByKeyAndName(@Param("stuKey") String stuKey, @Param("stuName") String stuName);
-
-    /**
-     * 在学生寝室表中添加数据
-     * @param stuId
-     * @param stuSex
-     */
-    void addStuIdToAD(@Param("stuId") Integer stuId, @Param("stuSex") String stuSex);
+    Student queryStuByKeyAndName(@Param("stuKey") String stuKey, @Param("stuName") String stuName);
 
     /**
      * 更新学生信息
@@ -49,4 +37,41 @@ public interface StudentDao {
      * @return
      */
     boolean UpdateStuMassage(Map<String, Object> editMassage);
+
+    /**
+     * 通过学生学号和姓名删除学生信息(未入住学生适用)
+     * @param stuKey
+     * @param stuName
+     * @return
+     */
+    int deleteOneByKeyAndName(@Param("stuKey") String stuKey, @Param("stuName") String stuName);
+
+    /**
+     * 通过学生id查询学生寝室表
+     * @param stuId
+     * @return
+     */
+    int queryStuDorByStuId(Integer stuId);
+
+    /**
+     * 通学生寝室表通过id删除记录
+     * @param id
+     */
+    void deleteStuDorById(Integer id);
+
+    /**
+     * 通过寝室id查询寝室信息
+     * @param dorId
+     * @return
+     */
+    Dorm queryDormById(Integer dorId);
+
+    /**
+     * 通过id删除学生
+     * @param stuId
+     * @return
+     */
+    int deleteOneById(Integer stuId);
+
+
 }

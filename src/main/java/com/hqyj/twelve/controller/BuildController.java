@@ -1,6 +1,8 @@
 package com.hqyj.twelve.controller;
 
 import com.hqyj.twelve.pojo.Building;
+import com.hqyj.twelve.pojo.Outsider;
+import com.hqyj.twelve.pojo.PageData;
 import com.hqyj.twelve.service.BuildService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,9 +21,21 @@ public class BuildController {
     @Autowired
     private BuildService buildService;
     @RequestMapping("/queryAllBuild")
-    public String queryAllBuilding(ModelMap modelMap){
-        List<Building> buildingList = buildService.queryAll();
-        modelMap.addAttribute("buildingList",buildingList);
+    public String queryAllBuilding(Integer pageNumber, Integer pageSize,ModelMap modelMap){
+        int number;
+        int size;
+        if (pageNumber == null) {
+            number = 1; //默认显示第一页
+        } else {
+            number = pageNumber;
+        }
+        if (pageSize == null) {
+            size = 3;   //默认每页显示两条
+        } else {
+            size = pageSize;
+        }
+        PageData<Building> pageData = buildService.getBuildByPage(number, size);
+        modelMap.put("pageData", pageData);
         return "buildManagement";
     }
     @RequestMapping("/addBuild")
@@ -33,8 +47,17 @@ public class BuildController {
     }
     @RequestMapping("/updateBuild")
     @ResponseBody
+    public Map<String,Object> queryBuildById(@RequestBody Building building){
+        int buildId=building.getBuildId();
+        Building build = buildService.queryBuildById(buildId);
+        Map<String,Object> map = new HashMap<>();
+        map.put("build",build);
+        return map;
+    }
+    @RequestMapping("/updateBuildDo")
+    @ResponseBody
     public Map<String,Object> updateBuild(@RequestBody Building building){
-        System.out.println(building);
+
         int i = buildService.updateOne(building);
         System.out.println(i);
         Map<String ,Object> map = new HashMap<>();
