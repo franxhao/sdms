@@ -152,14 +152,17 @@
 											<td>${one.empJob}</td>
 											<td>${one.empPhone}</td>
 											<td>${one.empAddress}</td>
-											<td>${one.roleId}</td>
+											<td>
+												<c:if test="${one.roleId==1}">管理员</c:if>
+												<c:if test="${one.roleId==2}">宿管</c:if>
+											</td>
 											<td>${one.buildId}</td>
 											<td>${one.empDes}</td>
 											<td class="text-center">
 												<span style="display: none">${one.empId}</span>
 												<a href="javascript:;" class="btn bg-olive btn-xs eUpdate"
 												   onclick="layer_show('修改员工信息','${pageContext.request.contextPath}/pages/updateEmp.jsp?empId='+${one.empId},600,600)">修改</a>
-												<a href="javascript:;" class="btn bg-olive btn-xs eDelete" >删除</a>
+												<a href="javascript:;" class="btn bg-red btn-xs eDelete" >删除</a>
 											</td>
 										</tr>
 								  </c:forEach>
