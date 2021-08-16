@@ -156,10 +156,10 @@
                                     <td>${one.outDes}</td>
                                     <td>
                                         <button type="button" class="btn btn-success" onclick="edit(${one.outId})">
-                                            修改
+                                            <i class="glyphicon glyphicon-pencil"></i>修改
                                         </button>
                                         <button type="button" class="btn btn-danger" onclick="deleteOne(${one.outId})">
-                                            删除
+                                            <i class="glyphicon glyphicon-remove"></i> 删除
                                         </button>
                                     </td>
                                 </tr>
@@ -185,16 +185,24 @@
                     <div class="box-tools pull-right">
                         <ul class="pagination">
                             <li>
-                                <button type="button" class="btn bg-primary" onclick="firstPage()">首页</button>
+                                <button type="button" class="btn bg-primary" onclick="firstPage()">
+                                    <i class="glyphicon glyphicon-triangle-left"></i>首页
+                                </button>
                             </li>
                             <li>
-                                <button type="button" class="btn bg-primary" onclick="previousPage()">上一页</button>
+                                <button type="button" class="btn bg-primary" onclick="previousPage()">
+                                    <i class="glyphicon glyphicon-menu-left"></i>上一页
+                                </button>
                             </li>
                             <li>
-                                <button type="button" class="btn bg-primary" onclick="nextPage()">下一页</button>
+                                <button type="button" class="btn bg-primary" onclick="nextPage()">
+                                    <i class="glyphicon glyphicon-menu-right"></i>下一页
+                                </button>
                             </li>
                             <li>
-                                <button type="button" class="btn bg-primary" onclick="lastPage()">尾页</button>
+                                <button type="button" class="btn bg-primary" onclick="lastPage()">
+                                    <i class="glyphicon glyphicon-triangle-right"></i>尾页
+                                </button>
                             </li>
                         </ul>
                     </div>
@@ -342,7 +350,7 @@
                             <span aria-hidden="true"><strong>&times;</strong></span>
                         </button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body" style="position: absolute;top: 65px">
                         <table id="dataList1"
                                class="table table-bordered table-striped table-hover dataTable">
                             <thead>
