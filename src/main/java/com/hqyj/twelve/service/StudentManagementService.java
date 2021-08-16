@@ -1,5 +1,7 @@
 package com.hqyj.twelve.service;
 
+import com.github.pagehelper.Page;
+import com.hqyj.twelve.pojo.PageData;
 import com.hqyj.twelve.pojo.Student;
 
 import java.util.List;
@@ -38,4 +40,12 @@ public interface StudentManagementService {
      * @return
      */
     String stuEdit(Map<String, Object> editMassage);
+
+    /**
+     * 分页功能
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    PageData<Student> getOutsiderByPage(int pageNumber, int pageSize);
 }

@@ -1,6 +1,9 @@
 package com.hqyj.twelve.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hqyj.twelve.dao.StudentDao;
+import com.hqyj.twelve.pojo.PageData;
 import com.hqyj.twelve.pojo.Student;
 import com.hqyj.twelve.service.StudentManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,5 +120,30 @@ public class StudentManagementServiceImpl implements StudentManagementService {
             //修改失败，返回fail
             return "fail";
         }
+    }
+
+    @Override
+    public PageData<Student> getOutsiderByPage(int pageNumber, int pageSize) {
+        PageHelper.startPage(pageNumber, pageSize);
+        List<Student> students = studentDao.findAll();
+        PageInfo<Student> pageInfo = new PageInfo<>(students);
+        PageData<Student> pageData = new PageData<>();
+
+        pageData.setCurrentPage(pageNumber);
+        pageData.setPageSize(pageSize);
+        pageData.setTotalPage(pageInfo.getPages());
+        pageData.setTotalSize((int) pageInfo.getTotal());
+        if (pageInfo.isHasNextPage()) {
+            pageData.setNextPage(pageInfo.getNextPage());
+        } else {
+            pageData.setNextPage(pageInfo.getPages());
+        }
+        if (pageInfo.isHasPreviousPage()) {
+            pageData.setPreviousPage(pageInfo.getPrePage());
+        } else {
+            pageData.setPreviousPage(1);
+        }
+        pageData.setList(pageInfo.getList());
+        return pageData;
     }
 }

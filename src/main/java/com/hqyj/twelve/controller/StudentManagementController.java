@@ -1,5 +1,6 @@
 package com.hqyj.twelve.controller;
 
+import com.hqyj.twelve.pojo.PageData;
 import com.hqyj.twelve.pojo.Student;
 import com.hqyj.twelve.service.StudentManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,21 @@ public class StudentManagementController {
      * @return
      */
     @RequestMapping("/findAll")
-    public String getAllStu(ModelMap modelMap){
-        List<Student> students = studentManagementService.findAll();
+    public String getAllStu(Integer pageNumber, Integer pageSize, ModelMap modelMap){
+        int number;
+        int size;
+        if (pageNumber == null) {
+            number = 1; //默认显示第一页
+        } else {
+            number = pageNumber;
+        }
+        if (pageSize == null) {
+            size = 5;   //默认每页显示5条
+        } else {
+            size = pageSize;
+        }
+        PageData<Student> students = studentManagementService.getOutsiderByPage(number, size);
+//        List<Student> students = studentManagementService.findAll();
         modelMap.addAttribute("STUDENTS", students);
         return "studentManagement";
     }
