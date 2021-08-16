@@ -120,9 +120,8 @@
                         </div>
                         <div class="box-tools pull-right">
                             <div class="has-feedback">
-                                <input type="text" class="form-control input-sm"
-                                       placeholder="搜索"> <span
-                                    class="glyphicon glyphicon-search form-control-feedback"></span>
+                                <input type="text" id="sousuo" class="form-control input-sm" placeholder="通过姓名查找(回车)">
+                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
                             </div>
                         </div>
 
@@ -133,9 +132,6 @@
                                class="table table-bordered table-striped table-hover dataTable">
                             <thead>
                             <tr>
-                                <th class="" style="padding-right: 0px"><input id="selall"
-                                                                               type="checkbox"
-                                                                               class="icheckbox_square-blue"></th>
                                 <th class="sorting_asc">ID</th>
                                 <th class="sorting">姓名</th>
                                 <th class="sorting">性别</th>
@@ -150,13 +146,12 @@
                             <tbody>
                             <c:forEach items="${pageData.list}" var="one">
                                 <tr>
-                                    <td><input name="ids" type="checkbox"></td>
                                     <td>${one.outId}</td>
                                     <td>${one.outName}</td>
                                     <td>${one.outSex}</td>
                                     <td>${one.outAge}</td>
-                                    <td><fmt:formatDate value="${one.recordIn}" type="both"/></td>
-                                    <td><fmt:formatDate value="${one.recordOut}" type="both"/></td>
+                                    <td><fmt:formatDate value="${one.recordIn}"/></td>
+                                    <td><fmt:formatDate value="${one.recordOut}"/></td>
                                     <td>${one.outPhone}</td>
                                     <td>${one.outDes}</td>
                                     <td>
@@ -183,7 +178,7 @@
                 <div class="box-footer">
                     <div class="pull-left">
                         <div class="form-group form-inline">
-                            <span class="">当前第<strong>${pageData.currentPage}</strong>页，共<strong>${pageData.totalSize}</strong>条数据</span>
+                            <span class="">当前第<strong>${pageData.currentPage <= pageData.totalPage ? pageData.currentPage:pageData.totalPage}</strong>页，共<strong>${pageData.totalSize}</strong>条数据</span>
                         </div>
                     </div>
 
@@ -305,7 +300,7 @@
                                        class="form-control" placeholder="请输入年龄"><br/>
                             </div>
                             <div class="form-group">
-                                <label>进入时间</label>
+                                <label>来访时间</label>
                                 <input id="recordInc" type="text" name="recordInc"
                                        class="form-control" placeholder="登记进入时间（格式如：2021-05-06）"><br/>
                             </div>
@@ -330,6 +325,47 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn1" data-dismiss="modal">取消</button>
                         <button id="updateAjax" type="button" class="btn btn-primary" onclick="edit_do()">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 查询个人登记信息 -->
+        <div class="modal fade" id="queryModal" style="top:20px" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog" style="width: 1000px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">查询个人登记信息</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><strong>&times;</strong></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table id="dataList1"
+                               class="table table-bordered table-striped table-hover dataTable">
+                            <thead>
+                            <tr>
+                                <th class="sorting_asc">ID</th>
+                                <th class="sorting">姓名</th>
+                                <th class="sorting">性别</th>
+                                <th class="sorting">年龄</th>
+                                <th class="sorting">来访时间</th>
+                                <th class="sorting">离开时间</th>
+                                <th class="sorting">电话号码</th>
+                                <th class="sorting">备注</th>
+                            </tr>
+                            </thead>
+                            <tbody class="ttbody">
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="tremove" type="button" class="btn btn-secondary btn1" data-dismiss="modal">关闭
+                        </button>
                     </div>
                 </div>
             </div>
@@ -459,6 +495,10 @@
                     success: function (result) {
                         alert("添加成功");
                         location.reload();
+                        if (pageNumber < totalPage) {
+                            pageNumber = totalPage;
+                            goto();
+                        }
                     },
                     error: function (result) {
                         alert("添加失败");
@@ -466,6 +506,67 @@
                 });
             });
         });
+
+
+        //回车事件
+        $("#sousuo").keydown(function (e) {
+            if (e.keyCode == 13) {
+                var name = $("#sousuo").val()
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/outsider/getOutsiderByName",
+                    type: "post",
+                    data: {
+                        name: name
+                    },
+                    dataType: "json",
+                    success: function (result) {
+                        if (result.length == 0) {
+                            alert("查无此人")
+                        } else {
+                            $("#queryModal").modal("show");
+                            $.each(result, function (i, item) {
+                                $(".ttbody").append(
+                                    `<tr>
+                                <td >` + item.outId + `</td>
+                                <td >` + item.outName + `</td>
+                                <td >` + item.outSex + `</td>
+                                <td >` + item.outAge + `</td>
+                                <td >` + item.recordIn + `</td>
+                                <td >` + item.recordOut + `</td>
+                                <td >` + item.outPhone + `</td>
+                                <td >` + item.outDes + `</td>
+                                </tr>`
+                                )
+                            })
+
+
+                            /*for (let i = 0; i < result.length; i++) {
+                                $(".ttbody").append(
+                                    `<tr>
+                                <td >` + result[i].outId + `</td>
+                                <td >` + result[i].outName + `</td>
+                                <td >` + result[i].outSex + `</td>
+                                <td >` + result[i].outAge + `</td>
+                                <td >` + result[i].recordIn + `</td>
+                                <td >` + result[i].recordOut + `</td>
+                                <td >` + result[i].outPhone + `</td>
+                                <td >` + result[i].outDes + `</td>
+                                </tr>`
+                                )
+                            }*/
+                        }
+                    },
+                    error: function (result) {
+                        alert("添加失败");
+                    }
+                })
+            }
+        })
+        //清空 <tbody class="ttbody">
+        $("#tremove").click(function () {
+            $(".ttbody").html("")
+        })
+
     })
 
 

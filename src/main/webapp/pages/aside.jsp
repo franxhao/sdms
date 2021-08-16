@@ -35,14 +35,14 @@
 			</a>
 				<ul class="treeview-menu">
 
-					<li><a
+					<%--<li><a
 						href="${pageContext.request.contextPath}/pages/user-list.jsp">
 						<i class="fa fa-circle-o"></i> 用户管理
 					</a></li>
 					<li><a
 						href="${pageContext.request.contextPath}/pages/role-list.jsp">
 						<i	class="fa fa-circle-o"></i> 角色管理
-					</a></li>
+					</a></li>--%>
 					<li><a
 						href="${pageContext.request.contextPath}/stuManagement/findAll"> <i
 							class="fa fa-circle-o"></i> 学生信息管理
@@ -66,7 +66,26 @@
 						<i class="fa fa-circle-o"></i> 寝室管理
 					</a></li>
 
-					<li><a href="${pageContext.request.contextPath}/pages/syslog-list.jsp"> 
+
+
+				</ul></li>
+			<li class="treeview"><a href="#"> <i class="fa fa-cube"></i>
+					<span>宿舍管理</span> <span class="pull-right-container"> <i
+						class="fa fa-angle-left pull-right"></i>
+				</span>
+			</a>
+				<ul class="treeview-menu">
+
+					<%--<li><a
+						href="#">
+							<i class="fa fa-circle-o"></i> 产品管理
+					</a></li>
+					<li><a
+						href="#">
+							<i class="fa fa-circle-o"></i> 订单管理
+					</a></li>--%>
+
+					<li><a href="${pageContext.request.contextPath}/pages/syslog-list.jsp">
 						<i class="fa fa-circle-o"></i> 访问日志
 					</a></li>
 
@@ -78,23 +97,6 @@
 					<li><a
 							href="${pageContext.request.contextPath}/outsider/getAll"> <i
 							class="fa fa-circle-o"></i> 来访人员登记
-					</a></li>
-
-				</ul></li>
-			<li class="treeview"><a href="#"> <i class="fa fa-cube"></i>
-					<span>基础数据</span> <span class="pull-right-container"> <i
-						class="fa fa-angle-left pull-right"></i>
-				</span>
-			</a>
-				<ul class="treeview-menu">
-
-					<li><a
-						href="#">
-							<i class="fa fa-circle-o"></i> 产品管理
-					</a></li>
-					<li><a
-						href="#">
-							<i class="fa fa-circle-o"></i> 订单管理
 					</a></li>
 
 				</ul></li>

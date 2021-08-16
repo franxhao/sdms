@@ -2,7 +2,11 @@ package com.hqyj.twelve.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.hqyj.twelve.dao.BuildDao;
+import com.hqyj.twelve.dao.DormDao;
 import com.hqyj.twelve.dao.StudentDao;
+import com.hqyj.twelve.pojo.Building;
+import com.hqyj.twelve.pojo.Dorm;
 import com.hqyj.twelve.pojo.PageData;
 import com.hqyj.twelve.pojo.Student;
 import com.hqyj.twelve.service.StudentManagementService;
@@ -19,9 +23,37 @@ public class StudentManagementServiceImpl implements StudentManagementService {
     @Autowired
     public StudentDao studentDao;
 
+    @Autowired
+    public DormDao dormDao;
+
+    @Autowired
+    public BuildDao buildDao;
+
     @Override
     public List<Student> findAll() {
-        return studentDao.findAll();
+        //查所有学生信息
+        List<Student> all = studentDao.findAll();
+        //通过学生id查询学生寝室表
+       /* for (Student student : all) {
+            Integer stuId = student.getStuId();
+            Map<String, Object> map = studentDao.queryStuDorByStuId(stuId);
+            //获得学生寝室id,并通过寝室号查询楼房表
+            for (String s : map.keySet()) {
+                if ("dor_id".equals(map.get(s))) {
+                    Integer dorId = (Integer) map.get(s);
+                    Map<String, Object> buildDorm = buildDao.queryBDByDorId(dorId);
+                    //通过楼房表查所在楼,得到楼名
+                    Integer buildId = (Integer) buildDorm.get("build_id");
+                    Building building = buildDao.queryBuildingById(buildId);
+                    String buildName = building.getBuildName();
+                    //拼接出寝室名称，并填回list集合中
+                    // 楼房名buildName + "房间" + dorId
+                    String room = buildName + "房间" + dorId;
+                    student.setRoom(room);
+                }
+            }
+        }*/
+        return all;
     }
 
     @Override
@@ -43,16 +75,11 @@ public class StudentManagementServiceImpl implements StudentManagementService {
             //2.1通过查询学生学号和姓名，判断该学生是否已经在库中，不在则添加，在则不添加
         String stuKey = (String) data.get("stuKey");
         String stuName = (String) data.get("stuName");
-        List<Student> student = studentDao.queryStuByKeyAndName(stuKey, stuName);
-        if (student.size() == 0) {
+        Student student = studentDao.queryStuByKeyAndName(stuKey, stuName);
+        if (student == null) {
             //无此学生，可以添加
             boolean result = studentDao.addStu(data);
             if (result) {
-                //3.添加成功,向学生寝室表中添加记录
-                //3.1 获取学生性别后做记录添加
-                Integer stuId= (Integer) data.get("stuId");
-                String stuSex = (String) data.get("stuSex");
-                studentDao.addStuIdToAD(stuId,stuSex);
                 // 返回ok，表示添加成功
                 return "ok";
             } else {
@@ -90,21 +117,13 @@ public class StudentManagementServiceImpl implements StudentManagementService {
     }
 
     @Override
-    public List<Student> reEditMessage(Map<String, Object> keyAndName) {
+    public Student reEditMessage(Map<String, Object> keyAndName) {
         //获取学号和姓名
         String stuKey = (String) keyAndName.get("key");
         String stuName = (String) keyAndName.get("name");
 
         //通过学号和姓名查询学生信息
-        List<Student> student = studentDao.queryStuByKeyAndName(stuKey, stuName);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        for (Student stu : student) {
-            String enr = simpleDateFormat.format(stu.getStuEnr());
-            String birth = simpleDateFormat.format(stu.getStuBirth());
-
-            //Date parse = simpleDateFormat.parse(enr);
-            //stu.setStuEnr(stuEnr);
-        }
+        Student student = studentDao.queryStuByKeyAndName(stuKey, stuName);
 
         //将学生信息返回给控制器
         return student;
@@ -123,7 +142,7 @@ public class StudentManagementServiceImpl implements StudentManagementService {
     }
 
     @Override
-    public PageData<Student> getOutsiderByPage(int pageNumber, int pageSize) {
+    public PageData<Student> getStuManagementByPage(int pageNumber, int pageSize) {
         PageHelper.startPage(pageNumber, pageSize);
         List<Student> students = studentDao.findAll();
         PageInfo<Student> pageInfo = new PageInfo<>(students);
@@ -145,5 +164,51 @@ public class StudentManagementServiceImpl implements StudentManagementService {
         }
         pageData.setList(pageInfo.getList());
         return pageData;
+    }
+
+    @Override
+    public int removeByKeyAndName(Map<String, Object> data) {
+        String stuKey = (String) data.get("key");
+        String stuName = (String) data.get("name");
+        //1、查询学生信息，获取学生记录的id，住宿状态
+        Student student = studentDao.queryStuByKeyAndName(stuKey, stuName);
+        Integer stuId = student.getStuId();
+        String stuState = student.getStuState();
+
+        //2、如果住宿状态为已入住，则查学生寝室表，获取表id和学生的寝室id；如果为未入住，直接删除学生信息
+        if ("已入住".equals(stuState)) {
+            /*int i = studentDao.queryStuDorByStuId(stuId);
+            Integer id = (Integer) map.get("id");
+            Integer dorId = (Integer) map.get("dor_id");
+
+            //1.已入住学生，先删除学生寝室表的记录，再删除学生信息
+            studentDao.deleteStuDorById(id);
+            studentDao.deleteOneById(stuId);
+            //2.查该学生所住寝室的信息，并获取实住人数
+            Dorm dorm = studentDao.queryDormById(dorId);
+            Integer dorFact = dorm.getDorFact();
+            //3.实住人数-1
+            if (dorFact > 0) {
+                dorFact -= 1;
+                dorm.setDorFact(dorFact);
+                //3.更新寝室实住人数
+                dormDao.updateOne(dorm);
+            }*/
+            //返回1，删除完成
+            //返回3，已入住暂时无法删除
+            return 3;
+        } else if ("未入住".equals(stuState)) {
+            studentDao.deleteOneByKeyAndName(stuKey, stuName);
+            //返回1，表删除成功
+            return 1;
+        } else {
+            //出错
+            return -1;
+        }
+    }
+
+    @Override
+    public void addStuforStudent(Student student) {
+        studentDao.addStuforStudent(student);
     }
 }

@@ -31,7 +31,7 @@
 
 		<!-- 内容区域 -->
 		<div class="content-wrapper">
-
+			<img src="../img/qinshiimg.jpg">
 		</div>
 		<!-- 内容区域 /-->
 

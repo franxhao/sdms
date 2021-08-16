@@ -38,6 +38,14 @@ public class GoodsServiceImplTest {
     }
 
     @Test
+    public void getGoodsByName() {
+        List<Goods> goodsByName = goodsService.getGoodsByName("张小三");
+        for (Goods goods : goodsByName) {
+            System.out.println(goods);
+        }
+    }
+
+    @Test
     public void getGoodsByIdTest(){
         Goods goodsById = goodsService.getGoodsById(1);
         System.out.println(goodsById);

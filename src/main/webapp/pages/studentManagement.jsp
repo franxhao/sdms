@@ -26,6 +26,11 @@
 			top: 47px;
 			right: 210px !important;
 		}
+		.fileDown{
+			position: absolute;
+			top: 53px;
+			left: 170px !important;
+		}
 
 		.box-tools button:hover {
 			background-color: #d4d0c8;
@@ -157,52 +162,52 @@
 
 										<div class="col-md-2 title">学号</div>
 										<div class="col-md-4 data">
-											<input id="stuKey2" type="text" class="form-control" name="stuKey"
+											<input id="stuKey2" type="text" class="form-control" name="stuKey2"
 												   placeholder="请填写学生学号" readonly>
 										</div>
 										<div class="col-md-2 title">姓名</div>
 										<div class="col-md-4 data">
-											<input id="stuName2" type="text" class="form-control" name="stuName"
+											<input id="stuName2" type="text" class="form-control" name="stuName2"
 												   placeholder="请填写学生姓名" readonly>
 										</div>
 										<div class="col-md-2 title">性别</div>
 										<div class="col-md-4 data">
-											<input id="stuSex2" type="text" class="form-control" name="stuSex"
+											<input id="stuSex2" type="text" class="form-control" name="stuSex2"
 												   placeholder="请填写学生性别">
 										</div>
 										<div class="col-md-2 title">入学日期</div>
 										<div class="col-md-4 data">
-											<input id="stuEnr2" type="text" class="form-control" name="stuEnr"
+											<input id="stuEnr2" type="text" class="form-control" name="stuEnr2"
 												   placeholder="如：2000-01-01">
 										</div>
 										<div class="col-md-2 title">出生日期</div>
 										<div class="col-md-4 data">
-											<input id="stuBirth2" type="text" class="form-control" name="stuBirth"
+											<input id="stuBirth2" type="text" class="form-control" name="stuBirth2"
 												   placeholder="如：2000-01-01">
 										</div>
 										<div class="col-md-2 title">学院</div>
 										<div class="col-md-4 data">
-											<input id="stuCollege2" type="text" class="form-control" name="stuCollege"
+											<input id="stuCollege2" type="text" class="form-control" name="stuCollege2"
 												   placeholder="请填写学生所在学院">
 										</div>
 										<div class="col-md-2 title">专业</div>
 										<div class="col-md-4 data">
-											<input id="stuMajor2" type="text" class="form-control" name="stuMajor"
+											<input id="stuMajor2" type="text" class="form-control" name="stuMajor2"
 												   placeholder="请填写学生专业">
 										</div>
 										<div class="col-md-2 title">班级</div>
 										<div class="col-md-4 data">
-											<input id="stuClass2" type="text" class="form-control" name="stuClass"
+											<input id="stuClass2" type="text" class="form-control" name="stuClass2"
 												   placeholder="请填写学生所在班级">
 										</div>
 										<div class="col-md-2 title">家庭住址</div>
 										<div class="col-md-4 data">
-											<input id="stuAddress2" type="text" class="form-control" name="stuAddress"
+											<input id="stuAddress2" type="text" class="form-control" name="stuAddress2"
 												   placeholder="请填写学生的家庭住址">
 										</div>
 										<div class="col-md-2 title">联系方式</div>
 										<div class="col-md-4 data">
-											<input id="stuTel2" type="text" class="form-control" name="stuTel"
+											<input id="stuTel2" type="text" class="form-control" name="stuTel2"
 												   placeholder="请填写学生的联系方式">
 										</div>
 									</div>
@@ -240,9 +245,15 @@
 										<button type="button" class="btn btn-default" onclick="location.reload()" title="刷新">
 											<i class="fa fa-refresh"></i> 刷新
 										</button>
+
+
 									</div>
 								</div>
 							</div>
+							<!-- 文件上传 -->
+							<form id="uploadForm" class="fileDown" name="uploadForm" action="${pageContext.request.contextPath}/stuManagement/upload" method="post" enctype="multipart/form-data">
+									<input type="file" name="excelFile" onchange="doUpload()"><br/>
+							</form>
 
 							<select id="sel" class="selectpicker downlist" multiple title="-- 请选择查询方式 --">
 								<option value="sel1">按寝室查询</option>
@@ -291,13 +302,13 @@
 										<td>${one.stuKey}</td>
 										<td>${one.stuName}</td>
 										<td>${one.stuSex}</td>
-										<td>${one.romId}</td>
+										<td>${one.room}</td>
 										<td>${one.stuClass}</td>
 										<td>${one.stuState}</td>
 										<td>${one.stuTel}</td>
 										<td class="text-center">
 											<a href="javascript:" onclick="edit1('${one.stuKey}','${one.stuName}')" class="btn bg-olive btn-xs ">修改</a>
-											<a href="#" class="btn bg-red btn-xs ">删除</a>
+											<a href="#" class="btn bg-red btn-xs" onclick="delete_do('${one.stuKey}','${one.stuName}')">删除</a>
 										</td>
 									</tr>
 									</c:forEach>
@@ -359,6 +370,10 @@
 	<jsp:include page="/commons/js.jsp"/>
 
 	<script>
+		function doUpload()
+		{
+			document.getElementById("uploadForm").submit()
+		}
 		$(document).ready(function() {
 			// 选择框
 			$(".select2").select2();
@@ -402,9 +417,6 @@
 				});
 		});
 	</script>
-
-	<!-- 引入编写的js文件 -->
-	<script src="../js/stuManagement.js"></script>
 
 	<%--分页--%>
 	<script>
@@ -451,13 +463,10 @@
 		}
 	</script>
 
-
+	<!-- 引入编写的js文件 -->
+	<script src="../js/stuManagement.js"></script>
 
 	<script>
-
-
-
-
 		function search_do() {
 			if ($("#sel").val().length > 0){
 				$.ajax({

@@ -1,5 +1,7 @@
 package com.hqyj.twelve.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,7 +14,9 @@ public class Goods implements Serializable {
     private String goodsName;
     private String goodsPerson;
     private String personPhone;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date goodsIn;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date goodsOut;
     private String goodsDes;
 

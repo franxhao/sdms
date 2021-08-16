@@ -120,7 +120,7 @@
 							<!--工具栏/-->
 
 							<!--数据列表-->
-							<table id="myTable"
+							<table id="dataList"
 								class="table table-bordered table-striped table-hover dataTable">
 								<thead>
 									<tr>
@@ -155,8 +155,15 @@
 											<td>
 												<c:if test="${one.roleId==1}">管理员</c:if>
 												<c:if test="${one.roleId==2}">宿管</c:if>
-											</td><td>${one.buildId}</td>
-
+											</td>
+											<td>
+												<c:if test="${one.buildId==2}">海棠苑男</c:if>
+												<c:if test="${one.buildId==3}">桂花苑男</c:if>
+												<c:if test="${one.buildId==4}">桂花苑女</c:if>
+												<c:if test="${one.buildId==5}">蓝雾苑男</c:if>
+												<c:if test="${one.buildId==6}">蓝雾苑女</c:if>
+												<c:if test="${one.buildId==8}">海棠苑女</c:if>
+											</td>
 											<td>${one.empDes}</td>
 											<td class="text-center">
 												<span style="display: none">${one.empId}</span>
@@ -281,20 +288,52 @@
 					layer.msg('好的咱不删', {icon: 2});
 				});
 			});
-		});
 
-		// //使用DataTables来实现表格的一些功能(比如按价格升降序)
-		// var table=  $('#myTable').dataTable( {
-		// 	"ordering": true,
-		// 	"columnDefs": [
-		// 		{ "orderable": false, "targets": 0 },
-		// 		{ "orderable": true, "targets": 1 },
-		// 		{ "orderable": false, "targets": 2 },
-		// 		{ "orderable": false, "targets": 3 },
-		// 		{ "orderable": true, "targets": 4 },
-		// 	]
-		// } );
-		// table.order().draw();
+
+
+
+
+
+
+			//修改管理员操作
+			$(".eUpdate").click(function () {
+
+
+				$("#updateModal").modal("show");
+
+				//提交修改的操作
+				$("#updateAjax").click(function () {
+					$.ajax({
+						url:"${pageContext.request.contextPath}/admin/updateAdmin",
+						type: "post",
+						data:{
+							adId:adId,
+							adUsername: $("#adUserName1").val(),
+							adPassword: $("#adPassword1").val(),
+							adName: $("#adName1").val(),
+							adSex: $("#adSex1").val(),
+							adAge: $("#adAge1").val(),
+							adJob: $("#adJob1").val(),
+							adPhone: $("#adPhone1").val(),
+							roleId: $("#roleId1").val(),
+							adAddress: $("#adAddress1").val(),
+							adDes: $("#adDes1").val(),
+						},
+						success:function(data) {
+							alert("修改成功");
+							location.reload();
+						},
+						error:function (data) {
+							console.log("通信错误");
+							alert("通信失败");
+						}
+					});
+
+				});
+
+
+			});
+		})
 	</script>
 
 </body>

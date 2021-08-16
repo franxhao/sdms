@@ -12,6 +12,9 @@ public interface GoodsDao {
     //通过 登记人姓名和电话 查询存储物品信息
     List<Goods> queryGoodsByNameAndPhone(@Param("name") String goodsPerson, @Param("phone") String personPhone);
 
+    //通过 登记人姓名和电话 查询存储物品信息
+    List<Goods> queryGoodsByName(String goodsPerson);
+
     //根据 id 查询 个人存储信息
     Goods queryGoodsById(Integer goodsId);
 

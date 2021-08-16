@@ -14,6 +14,9 @@ public interface GoodsService {
     //通过 登记人姓名和电话 查询存储物品信息
     List<Goods> getGoodsByNameAndPhone(String goodsPerson, String personPhone);
 
+
+    List<Goods> getGoodsByName(String goodsPerson);
+
     //根据 id 查询 个人存储信息
     Goods getGoodsById(Integer goodsId);
 

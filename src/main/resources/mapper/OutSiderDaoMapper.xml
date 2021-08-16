@@ -33,6 +33,12 @@
         FROM outsider where out_name = #{name} and out_phone = #{phone}
     </select>
 
+    <select id="queryOutsiderByName" resultMap="outsiderBaseResultMap">
+        SELECT
+        <include refid="outsiderColumnSql"/>
+        FROM outsider where out_name = #{outName}
+    </select>
+
     <select id="queryOutsiderById" resultMap="outsiderBaseResultMap">
         SELECT
         <include refid="outsiderColumnSql"/>

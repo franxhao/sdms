@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -41,6 +42,16 @@ public class GoodsController {
         return "goods";
     }
 
+    @RequestMapping("/getPersonByName")
+    @ResponseBody
+    public List<Goods> getPersonByName(String name) {
+        List<Goods> goodsByNames = goodsService.getGoodsByName(name);
+        for (Goods goods : goodsByNames) {
+            System.out.println(goods);
+        }
+        return goodsByNames;
+    }
+
     @RequestMapping("/addGoods")
     @ResponseBody
     public Map<String, Object> addGoods(@RequestBody Goods goods) {
@@ -62,12 +73,12 @@ public class GoodsController {
 
     @RequestMapping("/updateGoodsDo")
     @ResponseBody
-    public Map<String,Object> updateOutsiderDo(@RequestBody Goods goods){
+    public Map<String, Object> updateOutsiderDo(@RequestBody Goods goods) {
         System.out.println(goods);
         int result = goodsService.modifyInformation(goods);
         System.out.println(result);
-        Map<String,Object> map = new HashMap<>();
-        map.put("message","修改成功");
+        Map<String, Object> map = new HashMap<>();
+        map.put("message", "修改成功");
         return map;
     }
 

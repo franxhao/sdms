@@ -32,7 +32,7 @@ public interface StudentManagementService {
      * @param keyAndName
      * @return
      */
-    List<Student> reEditMessage(Map<String, Object> keyAndName);
+    Student reEditMessage(Map<String, Object> keyAndName);
 
     /**
      * 修改学生信息
@@ -47,5 +47,18 @@ public interface StudentManagementService {
      * @param pageSize
      * @return
      */
-    PageData<Student> getOutsiderByPage(int pageNumber, int pageSize);
+    PageData<Student> getStuManagementByPage(int pageNumber, int pageSize);
+
+    /**
+     * 通过学号和姓名删除学生
+     * @param keyName
+     * @return
+     */
+    int removeByKeyAndName(Map<String, Object> keyName);
+
+    /**
+     * 通过studentPOJO类添加学生
+     * @param student
+     */
+    void addStuforStudent(Student student);
 }

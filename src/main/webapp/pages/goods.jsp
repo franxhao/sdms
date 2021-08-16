@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -58,6 +59,8 @@
             width: 100%;
             bottom: 0;
         }
+
+
     </style>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -119,9 +122,8 @@
                         </div>
                         <div class="box-tools pull-right">
                             <div class="has-feedback">
-                                <input type="text" class="form-control input-sm"
-                                       placeholder="搜索"> <span
-                                    class="glyphicon glyphicon-search form-control-feedback"></span>
+                                <input type="text" id="sousuo" class="form-control input-sm" placeholder="通过姓名查找(回车)">
+                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
                             </div>
                         </div>
 
@@ -132,9 +134,9 @@
                                class="table table-bordered table-striped table-hover dataTable">
                             <thead>
                             <tr>
-                                <th class="" style="padding-right: 0px"><input id="selall"
-                                                                               type="checkbox"
-                                                                               class="icheckbox_square-blue"></th>
+                                <%--<th class="" style="padding-right: 0px">
+                                    <input id="selall" type="checkbox" class="icheckbox_square-blue">
+                                </th>--%>
                                 <th class="sorting_asc">ID</th>
                                 <th class="sorting">物品名称</th>
                                 <th class="sorting">存储人</th>
@@ -147,13 +149,13 @@
                             <tbody>
                             <c:forEach items="${pageData.list}" var="one">
                                 <tr>
-                                    <td><input name="ids" type="checkbox"></td>
+                                        <%--<td><input name="ids" type="checkbox"></td>--%>
                                     <td>${one.goodsId}</td>
                                     <td>${one.goodsName}</td>
                                     <td>${one.goodsPerson}</td>
                                     <td>${one.personPhone}</td>
-                                    <td>${one.goodsIn}</td>
-                                    <td>${one.goodsOut}</td>
+                                    <td><fmt:formatDate value="${one.goodsIn}"/></td>
+                                    <td><fmt:formatDate value="${one.goodsOut}"/></td>
                                     <td>${one.goodsDes}</td>
                                     <td>
                                         <button type="button" class="btn btn-success" onclick="edit(${one.goodsId})">
@@ -180,7 +182,7 @@
                 <div class="box-footer">
                     <div class="pull-left">
                         <div class="form-group form-inline">
-                            <span class="">当前第<strong>${pageData.currentPage}</strong>页，共<strong>${pageData.totalSize}</strong>条数据</span>
+                            <span class="">当前第<strong>${pageData.currentPage <= pageData.totalPage ? pageData.currentPage:pageData.totalPage}</strong>页，共<strong>${pageData.totalSize}</strong>条数据</span>
                         </div>
                     </div>
 
@@ -297,12 +299,12 @@
                                        class="form-control" placeholder="请输入存储人电话号码"><br/>
                             </div>
                             <div class="form-group">
-                                <label>进入时间</label>
+                                <label>存储时间</label>
                                 <input id="goodsInc" type="text" name="goodsInc"
                                        class="form-control" placeholder="存储物品时间（格式如：2021-05-06）"><br/>
                             </div>
                             <div class="form-group">
-                                <label>离开时间</label>
+                                <label>取物时间</label>
                                 <input id="goodsOutc" type="text" name="goodsOutc"
                                        class="form-control" placeholder="取走物品时间（格式如：2021-05-06）"><br/>
                             </div>
@@ -317,6 +319,45 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn1" data-dismiss="modal">取消</button>
                         <button id="updateAjax" type="button" class="btn btn-primary" onclick="edit_do()">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 查询个人物品存储信息 -->
+        <div class="modal fade" id="queryModal" style="top:20px" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog" style="width: 1000px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">查询个人物品存储信息</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><strong>&times;</strong></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table id="dataList1"
+                               class="table table-bordered table-striped table-hover dataTable">
+                            <thead>
+                            <tr>
+                                <th class="sorting_asc">ID</th>
+                                <th class="sorting">物品名称</th>
+                                <th class="sorting">存储人</th>
+                                <th class="sorting">存储人电话</th>
+                                <th class="sorting">存储时间</th>
+                                <th class="sorting">取物时间</th>
+                                <th class="sorting">备注</th>
+                            </tr>
+                            </thead>
+                            <tbody class="ttbody">
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="tremove" type="button" class="btn btn-secondary btn1" data-dismiss="modal">关闭
+                        </button>
                     </div>
                 </div>
             </div>
@@ -452,6 +493,65 @@
                 });
             });
         });
+
+        //回车事件
+        $("#sousuo").keydown(function (e) {
+            if (e.keyCode == 13) {
+                var name = $("#sousuo").val()
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/goods/getPersonByName",
+                    type: "post",
+                    data: {
+                        name: name
+                    },
+                    dataType: "json",
+                    success: function (result) {
+                        if (result.length == 0) {
+                            alert("查无此人")
+                        } else {
+                            $("#queryModal").modal("show");
+                            //返回值是集合 进行遍历
+                            $.each(result, function (i, item) {
+                                $(".ttbody").append(
+                                    `<tr>
+                                <td >` + item.goodsId + `</td>
+                                <td >` + item.goodsName + `</td>
+                                <td >` + item.goodsPerson + `</td>
+                                <td >` + item.personPhone + `</td>
+                                <td >` + item.goodsIn + `</td>
+                                <td >` + item.goodsOut + `</td>
+                                <td >` + item.goodsDes + `</td>
+                                </tr>`
+                                )
+                            })
+
+
+                            /*for (let i = 0; i < result.length; i++) {
+                                $(".ttbody").append(
+                                    `<tr>
+                                <td >` + result[i].goodsId + `</td>
+                                <td >` + result[i].goodsName + `</td>
+                                <td >` + result[i].goodsPerson + `</td>
+                                <td >` + result[i].personPhone + `</td>
+                                <td >` + result[i].goodsIn + `</td>
+                                <td >` + result[i].goodsOut + `</td>
+                                <td >` + result[i].goodsDes + `</td>
+                                </tr>`
+                                )
+                            }*/
+                        }
+                    },
+                    error: function (result) {
+                        alert("添加失败");
+                    }
+                })
+            }
+        })
+        //清空 <tbody class="ttbody">
+        $("#tremove").click(function () {
+            $(".ttbody").html("")
+        })
+
     })
 
 
