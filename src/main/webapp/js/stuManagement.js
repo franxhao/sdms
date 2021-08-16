@@ -62,16 +62,16 @@ function edit1(stuKey,stuName) {
             console.log(data)
 
             // console.log(data[0].stu_key)
-            $("#stuKey2").val(data[0].stuKey);
-            $("#stuName2").val(data[0].stuName);
-            $("#stuSex2").val(data[0].stuSex);
-            $("#stuEnr2").val(data[0].stuEnr);
-            $("#stuBirth2").val(data[0].stuBirth);
-            $("#stuCollege2").val(data[0].stuCollege);
-            $("#stuMajor2").val(data[0].stuMajor);
-            $("#stuClass2").val(data[0].stuClass);
-            $("#stuAddress2").val(data[0].stuAddress);
-            $("#stuTel2").val(data[0].stuTel);
+            $("#stuKey2").val(data.stuKey);
+            $("#stuName2").val(data.stuName);
+            $("#stuSex2").val(data.stuSex);
+            $("#stuEnr2").val(data.stuEnr);
+            $("#stuBirth2").val(data.stuBirth);
+            $("#stuCollege2").val(data.stuCollege);
+            $("#stuMajor2").val(data.stuMajor);
+            $("#stuClass2").val(data.stuClass);
+            $("#stuAddress2").val(data.stuAddress);
+            $("#stuTel2").val(data.stuTel);
         },
         error:function (err) {
             console.log("edit1 err:" + err)
