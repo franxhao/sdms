@@ -269,22 +269,22 @@
 <%--                                </div>--%>
                                 <div class="form-group">
                                     <label>居住性别</label>
-                                    <input id="dorSex1" type="text" name="dorSex"
+                                    <input id="dorSex1" type="text" name="dorSex1"
                                            class="form-control" placeholder="请输入居住性别"><br/>
                                 </div>
                                 <div class="form-group">
                                     <label>应住人数</label>
-                                    <input id="dorNum1" type="text" name="dorNum"
+                                    <input id="dorNum1" type="text" name="dorNum1"
                                            class="form-control" placeholder="请输入应住人数"><br/>
                                 </div>
                                 <div class="form-group">
                                     <label>实住人数</label>
-                                    <input id="dorFact1" type="text" name="dorFact"
+                                    <input id="dorFact1" type="text" name="dorFact1"
                                            class="form-control" placeholder="请输入实住人数"><br/>
                                 </div>
                                 <div class="form-group">
                                     <label>住宿费用</label>
-                                    <input id="dorPrice1" type="text" name="dorPrice"
+                                    <input id="dorPrice1" type="text" name="dorPrice1"
                                            class="form-control" placeholder="请输入住宿费用"><br/>
                                 </div>
                             <%--                      <input class="btn btn-success" type="submit" value="提交">--%>
