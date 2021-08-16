@@ -23,9 +23,12 @@
       <param-name>contextConfigLocation</param-name>
       <param-value>classpath:spring-mvc.xml</param-value>
     </init-param>
+
     <load-on-startup>1</load-on-startup>
   </servlet>
+
   <servlet-mapping>
+
     <servlet-name>DispatcherServlet</servlet-name>
     <!--/拦截所有的url,出来.jsp结尾的
         /*  拦截所有的url，包括.jsp
