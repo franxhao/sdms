@@ -32,6 +32,8 @@ public class MyShiroRealm extends AuthorizingRealm {
     @Autowired
     private RoleService roleService;
 
+    public String flag = null;
+
     //给shiro框架返回系统中待认证用户的认证信息
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
@@ -46,8 +48,9 @@ public class MyShiroRealm extends AuthorizingRealm {
 
         SimpleAuthenticationInfo info = null;
 
+        flag = token.getFlag();
         //如果flag==admin,说明是管理员在登录
-        if(token.getFlag().equals("admin")){
+        if(flag.equals("admin")){
             //在我们的管理员数据库中查询用户的认证信息
             Administrator admin = adminService.queryAdminByUsername(username);
             if(admin == null){
@@ -62,7 +65,7 @@ public class MyShiroRealm extends AuthorizingRealm {
         }
 
         //如果flag==emp,说明是普通用户在登录
-        if(token.getFlag().equals("emp")){
+        if(flag.equals("emp")){
             //在我们的管理员数据库中查询用户的认证信息
             Employee emp = adminService.queryEmpByUsername(username);
             if(emp == null){
@@ -85,18 +88,27 @@ public class MyShiroRealm extends AuthorizingRealm {
         System.out.println("获取授权信息");
         //获取当前用户用户名
         String username =(String)principalCollection.getPrimaryPrincipal();
+        //创建一个授权信息对象
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 
-//        //查询系统中待授权用户的权限信息：角色信息，权限信息
-//        Administrator admin = adminService.queryAdminByUsername(username);
+       //查询系统中待授权用户的权限信息：角色信息，权限信息
+        if(flag.equals("admin")){
+           // Administrator admin = adminService.queryAdminByUsername(username);
 //        Set<String> roles = new HashSet<>();
 //        roles.add(roleService.queryRoleById(admin.getRoleId()).getRoleName());
-//        //创建一个授权信息对象
-//        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-//        //赋予角色相关的授权信息
+            //赋予角色相关的授权信息
 //         info.setRoles(roles);
-//         return info;
-         return  null;
+        }
+        if(flag.equals("emp")) {
+//          Employee emp = adminService.queryEmpByUsername(username);
+//        Set<String> roles = new HashSet<>();
+//        roles.add(roleService.queryRoleById(emp.getRoleId()).getRoleName());
+            //赋予角色相关的授权信息
+//         info.setRoles(roles);
+        }
 
+//         return info;
+          return  null;
     }
 
     @Override

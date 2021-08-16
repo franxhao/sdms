@@ -54,7 +54,7 @@
         </div>
         <div class="form-group">
             <label>角色</label> <br/>
-            <input id="roleId" type="radio" name="roleId" value="1" checked >管理员<br/>
+            <input id="roleId" type="radio" name="roleId" value="2" checked >管理员<br/>
         </div>
         <div class="form-group">
             <label>寝室楼栋</label>
