@@ -34,7 +34,7 @@ public interface StudentDao {
      * @param stuName
      * @return
      */
-    Map<String, Object> queryStuByKeyAndName(@Param("stuKey") String stuKey, @Param("stuName") String stuName);
+    List<Student> queryStuByKeyAndName(@Param("stuKey") String stuKey, @Param("stuName") String stuName);
 
     /**
      * 在学生寝室表中添加数据
@@ -42,4 +42,11 @@ public interface StudentDao {
      * @param stuSex
      */
     void addStuIdToAD(@Param("stuId") Integer stuId, @Param("stuSex") String stuSex);
+
+    /**
+     * 更新学生信息
+     * @param editMassage
+     * @return
+     */
+    boolean UpdateStuMassage(Map<String, Object> editMassage);
 }

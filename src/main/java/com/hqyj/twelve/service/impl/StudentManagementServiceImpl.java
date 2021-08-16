@@ -1,6 +1,9 @@
 package com.hqyj.twelve.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hqyj.twelve.dao.StudentDao;
+import com.hqyj.twelve.pojo.PageData;
 import com.hqyj.twelve.pojo.Student;
 import com.hqyj.twelve.service.StudentManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +43,8 @@ public class StudentManagementServiceImpl implements StudentManagementService {
             //2.1通过查询学生学号和姓名，判断该学生是否已经在库中，不在则添加，在则不添加
         String stuKey = (String) data.get("stuKey");
         String stuName = (String) data.get("stuName");
-        Map<String, Object> map = studentDao.queryStuByKeyAndName(stuKey, stuName);
-        if (map == null) {
+        List<Student> student = studentDao.queryStuByKeyAndName(stuKey, stuName);
+        if (student.size() == 0) {
             //无此学生，可以添加
             boolean result = studentDao.addStu(data);
             if (result) {
@@ -60,5 +63,87 @@ public class StudentManagementServiceImpl implements StudentManagementService {
             //有此学生，返回exist，表示已存在
             return "exist";
         }
+    }
+
+    @Override
+    public void searchVal(Map<String, Object> map) {
+        //1.获取用户所选的搜索条件
+        String[] sel = (String[]) map.get("sel");
+        for (int i = 0; i < sel.length; i++) {
+            if (sel[i].equals("sel1")) {
+                String op1 = "sel1";
+            } else if (sel[i].equals("sel2")) {
+                String op2 = "sel2";
+            } else if (sel[i].equals("sel3")) {
+                String op3 = "sel3";
+            } else if (sel[i].equals("sel4")) {
+                String op4 = "sel4";
+            } else if (sel[i].equals("sel5")) {
+                String op5 = "sel5";
+            }
+        }
+        //2.获取用户搜索框输入的值
+        String search = (String) map.get("search_val");
+        //3.调用DAO层方法，做模糊查询
+        //studentDao.searchSth();
+        //4.返回学生类型
+    }
+
+    @Override
+    public List<Student> reEditMessage(Map<String, Object> keyAndName) {
+        //获取学号和姓名
+        String stuKey = (String) keyAndName.get("key");
+        String stuName = (String) keyAndName.get("name");
+
+        //通过学号和姓名查询学生信息
+        List<Student> student = studentDao.queryStuByKeyAndName(stuKey, stuName);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        for (Student stu : student) {
+            String enr = simpleDateFormat.format(stu.getStuEnr());
+            String birth = simpleDateFormat.format(stu.getStuBirth());
+
+            //Date parse = simpleDateFormat.parse(enr);
+            //stu.setStuEnr(stuEnr);
+        }
+
+        //将学生信息返回给控制器
+        return student;
+    }
+
+    @Override
+    public String stuEdit(Map<String, Object> editMassage) {
+        boolean flag = studentDao.UpdateStuMassage(editMassage);
+        if (flag) {
+            //修改成功，返回ok
+            return "ok";
+        }else {
+            //修改失败，返回fail
+            return "fail";
+        }
+    }
+
+    @Override
+    public PageData<Student> getOutsiderByPage(int pageNumber, int pageSize) {
+        PageHelper.startPage(pageNumber, pageSize);
+        List<Student> students = studentDao.findAll();
+        PageInfo<Student> pageInfo = new PageInfo<>(students);
+        PageData<Student> pageData = new PageData<>();
+
+        pageData.setCurrentPage(pageNumber);
+        pageData.setPageSize(pageSize);
+        pageData.setTotalPage(pageInfo.getPages());
+        pageData.setTotalSize((int) pageInfo.getTotal());
+        if (pageInfo.isHasNextPage()) {
+            pageData.setNextPage(pageInfo.getNextPage());
+        } else {
+            pageData.setNextPage(pageInfo.getPages());
+        }
+        if (pageInfo.isHasPreviousPage()) {
+            pageData.setPreviousPage(pageInfo.getPrePage());
+        } else {
+            pageData.setPreviousPage(1);
+        }
+        pageData.setList(pageInfo.getList());
+        return pageData;
     }
 }
