@@ -30,7 +30,7 @@
 		.fileDown{
 			position: absolute;
 			top: 53px;
-			left: 170px !important;
+			left: 262px !important;
 		}
 
 		.box-tools button:hover {
@@ -247,6 +247,11 @@
 										<button type="button" class="btn btn-default" onclick="location.reload()" title="刷新">
 											<i class="fa fa-refresh"></i> 刷新
 										</button>
+										 <button type="button" class="btn btn-default" title="体检预约">
+											 <a href="http://192.168.2.19:8085/pages/index.html">体检预约</a>
+										 </button>
+
+
 
 
 									</div>
@@ -294,11 +299,9 @@
 										<th class="sorting">班级</th>
 										<th class="sorting">住宿状态</th>
 										<th class="sorting">联系方式</th>
-
 										<shiro:hasRole name="管理员">
 										<th class="sorting">操作</th>
 										</shiro:hasRole>
-
 									</tr>
 								</thead>
 								<tbody>
@@ -315,10 +318,12 @@
 
 										<shiro:hasRole name="管理员">
 										<td class="text-center">
+
 											<a href="javascript:" onclick="edit1('${one.stuKey}','${one.stuName}')" class="btn bg-olive btn-xs ">修改</a>
 											<a href="#" class="btn bg-red btn-xs" onclick="delete_do('${one.stuKey}','${one.stuName}')">删除</a>
 										</td>
 										</shiro:hasRole>
+
 
 									</tr>
 									</c:forEach>
