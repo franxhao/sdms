@@ -8,71 +8,23 @@ import java.util.List;
  * 对应表building
  */
 public class Building implements Serializable {
-    private int buildId;
+    private Integer buildId;
     private String buildName;
-    private int romAmount;
-    private int floorAmount;
-    private int personAmount;
+    private Integer romAmount;
+    private Integer floorAmount;
+    private Integer personAmount;
 
     private List<Dorm> dorms;
 
     public Building() {
     }
 
-    public Building(int buildId, String buildName, int romAmount, int floorAmount, int personAmount, List<Dorm> dorms) {
+    public Building(Integer buildId, String buildName, Integer romAmount, Integer floorAmount, Integer personAmount, List<Dorm> dorms) {
         this.buildId = buildId;
         this.buildName = buildName;
         this.romAmount = romAmount;
         this.floorAmount = floorAmount;
         this.personAmount = personAmount;
-        this.dorms = dorms;
-    }
-
-    public int getBuildId() {
-        return buildId;
-    }
-
-    public void setBuildId(int buildId) {
-        this.buildId = buildId;
-    }
-
-    public String getBuildName() {
-        return buildName;
-    }
-
-    public void setBuildName(String buildName) {
-        this.buildName = buildName;
-    }
-
-    public int getRomAmount() {
-        return romAmount;
-    }
-
-    public void setRomAmount(int romAmount) {
-        this.romAmount = romAmount;
-    }
-
-    public int getFloorAmount() {
-        return floorAmount;
-    }
-
-    public void setFloorAmount(int floorAmount) {
-        this.floorAmount = floorAmount;
-    }
-
-    public int getPersonAmount() {
-        return personAmount;
-    }
-
-    public void setPersonAmount(int personAmount) {
-        this.personAmount = personAmount;
-    }
-
-    public List<Dorm> getDorms() {
-        return dorms;
-    }
-
-    public void setDorms(List<Dorm> dorms) {
         this.dorms = dorms;
     }
 
@@ -86,5 +38,53 @@ public class Building implements Serializable {
                 ", personAmount=" + personAmount +
                 ", dorms=" + dorms +
                 '}';
+    }
+
+    public Integer getBuildId() {
+        return buildId;
+    }
+
+    public void setBuildId(Integer buildId) {
+        this.buildId = buildId;
+    }
+
+    public String getBuildName() {
+        return buildName;
+    }
+
+    public void setBuildName(String buildName) {
+        this.buildName = buildName;
+    }
+
+    public Integer getRomAmount() {
+        return romAmount;
+    }
+
+    public void setRomAmount(Integer romAmount) {
+        this.romAmount = romAmount;
+    }
+
+    public Integer getFloorAmount() {
+        return floorAmount;
+    }
+
+    public void setFloorAmount(Integer floorAmount) {
+        this.floorAmount = floorAmount;
+    }
+
+    public Integer getPersonAmount() {
+        return personAmount;
+    }
+
+    public void setPersonAmount(Integer personAmount) {
+        this.personAmount = personAmount;
+    }
+
+    public List<Dorm> getDorms() {
+        return dorms;
+    }
+
+    public void setDorms(List<Dorm> dorms) {
+        this.dorms = dorms;
     }
 }

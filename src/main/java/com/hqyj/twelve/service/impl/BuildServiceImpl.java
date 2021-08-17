@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+
 @Service
 public class BuildServiceImpl implements BuildService {
     @Autowired
@@ -31,7 +33,7 @@ public class BuildServiceImpl implements BuildService {
     }
 
     @Override
-    public int deleteById(int buildId) {
+    public int deleteById(Integer buildId) {
         return buildDao.deleteById(buildId);
     }
 
@@ -61,7 +63,8 @@ public class BuildServiceImpl implements BuildService {
     }
 
     @Override
-    public Building queryBuildById(int buildId) {
-        return buildDao.queryBuildById(buildId);
+    public Map<String ,Object> queryBuildById(Integer buildId) {
+       return buildDao.queryBuildById(buildId);
+
     }
 }

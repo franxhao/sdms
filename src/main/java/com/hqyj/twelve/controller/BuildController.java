@@ -48,11 +48,9 @@ public class BuildController {
     @RequestMapping("/updateBuild")
     @ResponseBody
     public Map<String,Object> queryBuildById(@RequestBody Building building){
-        int buildId=building.getBuildId();
-        Building build = buildService.queryBuildById(buildId);
-        Map<String,Object> map = new HashMap<>();
-        map.put("build",build);
-        return map;
+        Integer buildId = building.getBuildId();
+        Map<String, Object> map1 = buildService.queryBuildById(buildId);
+        return map1;
     }
     @RequestMapping("/updateBuildDo")
     @ResponseBody

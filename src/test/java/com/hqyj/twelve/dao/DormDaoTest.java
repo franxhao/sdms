@@ -40,4 +40,10 @@ private DormDao dormDao;
         int rs = dormDao.deleteById(5);
         System.out.println("返回结果："+rs);
     }
+    @Test
+        //按id查阅一个寝室
+    public void queryDormById(){
+        Dorm dorm = dormDao.queryDormById(2);
+        System.out.println(dorm);
+    }
 }

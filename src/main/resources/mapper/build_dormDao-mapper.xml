@@ -27,7 +27,7 @@
         left join build_dorm bd on bd.build_id = b.build_id
         left join dorm d on d.dor_id = bd.dor_id
     </select>
-    <select id="queryBuildById" resultType="com.hqyj.twelve.pojo.Building">
+    <select id="queryBuildById" resultType="map" parameterType="int">
         select build_id,build_name,rom_amount,floor_amount,person_amount from building where build_id=#{buildId}
     </select>
 
