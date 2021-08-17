@@ -248,9 +248,8 @@
 											<i class="fa fa-refresh"></i> 刷新
 										</button>
 										 <button type="button" class="btn btn-default" title="体检预约">
-											 <a href="http://192.168.2.19:8085/pages/index.html">体检预约</a>
+											 <a href="javascript:" onclick="layer_show('体检预约','http://192.168.2.19:8085/pages/index.html',600,600)">体检预约</a>
 										 </button>
-
 
 
 
@@ -383,6 +382,7 @@
 
 	<%--	导入外部的js代码--%>
 	<jsp:include page="/commons/js.jsp"/>
+	<script type="text/javascript" src="../commons/layer_gp.js"/>
 
 	<script>
 		function doUpload()
@@ -481,29 +481,54 @@
 	<!-- 引入编写的js文件 -->
 	<script src="../js/stuManagement.js"></script>
 
-	<script>
-		function search_do() {
-			if ($("#sel").val().length > 0){
-				$.ajax({
-					url:"",
-					method:"post",
-					contentType:"application/json;charset=utf-8",
-					dataType:"text",
-					data:JSON.stringify({
-						sel:$("#sel").val(),
-						search_val:$("#search").val()
-					}),
-					success:function (data) {
+	<%--模糊查询--%>
+	<script type="text/javascript">
+			//搜索(通过按下回车键响应事件)
+			$("#search").keydown(function (e) {
+				if (e.keyCode == 13) {
+					var name = $("#search").val()
+					$.ajax({
+						url: "${pageContext.request.contextPath}/admin/queryAdminByUsernameLike",
+						type: "post",
+						data: {
+							username: name
+						},
+						dataType: "json",
+						success: function (result) {
+							if (result.length == 0) {
+								alert("查无此人")
+							} else {
+								$("#queryModal").modal("show");
+								$.each(result, function (i, item) {
+									var a;
+									if(item.roleId ==1){
+										a= "管理员";
+									}else if(item.roleId ==2){
+										a="宿管"
+									};
+									$(".ttbody").append(
+											`<tr>
+							<td >` + item.adUsername + `</td>
+							<td >` + item.adName + `</td>
+							<td >` + item.adSex + `</td>
+							<td >` + item.adAge + `</td>
+							<td >` + item.adJob + `</td>
+							<td >` + item.adPhone + `</td>
+							<td >` + item.adAddress + `</td>
+							<td >` + a + `</td>
+							<td >` + item.adDes + `</td>
+							</tr>`
+									)
+								})
 
-					},
-					error:function (err) {
-						console.log("search_do err: " + err);
-					}
-				})
-			} else {
-				layer.msg("请选择查询条件");
-			}
-		}
+							}
+						},
+						error: function (result) {
+							alert("查询失败");
+						}
+					})
+				}
+			})
 	</script>
 </body>
 
