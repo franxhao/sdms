@@ -106,5 +106,8 @@
          </where>
     </select>
 
+    <select id="findSexCount" resultType="Integer">
+        select count(1) from student GROUP BY stu_sex
+    </select>
 
 </mapper>

@@ -68,4 +68,6 @@ public interface StudentManagementService {
      * @return
      */
     List<Student> queryLike(String value);
+
+    List<Integer> findSexCount();
 }

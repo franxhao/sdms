@@ -64,8 +64,8 @@
 		}
 		.fileDown{
 			position: absolute;
-			top: 53px;
-			left: 262px !important;
+			top: 57px;
+			left: 344px !important;
 		}
 
 		.box-tools button:hover {
@@ -327,8 +327,9 @@
 										 <button type="button" class="btn btn-default" title="体检预约">
 											 <a href="javascript:" onclick="layer_show('体检预约','http://192.168.2.19:8085/pages/index.html',600,600)">体检预约</a>
 										 </button>
-
-
+										 <button type="button" class="btn btn-default" title="男女比例">
+											 <a href="javascript:" onclick="layer_show('男女比例','${pageContext.request.contextPath}/pages/sexInfo.jsp',600,600)">男女比例</a>
+										 </button>
 
 									</div>
 								</div>

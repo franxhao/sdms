@@ -85,4 +85,6 @@ public interface StudentDao {
      * @return
      */
     List<Student> queryLike(String inputVal);
+
+    List<Integer> findSexCount();
 }

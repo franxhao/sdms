@@ -15,7 +15,7 @@
 <%--					获取当前登录的用户名--%>
                   	    <shiro:principal />
 				</p>
-				<a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
+				<a><i class="fa fa-circle text-success"></i> 在线</a>
 			</div>
 		</div>
 

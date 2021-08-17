@@ -216,4 +216,9 @@ public class StudentManagementServiceImpl implements StudentManagementService {
     public List<Student> queryLike(String inputVal) {
         return studentDao.queryLike(inputVal);
     }
+
+    @Override
+    public List<Integer> findSexCount() {
+        return studentDao.findSexCount();
+    }
 }

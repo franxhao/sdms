@@ -124,4 +124,21 @@ public class StudentManagementController {
         return studentManagementService.queryLike(value);
     }
 
+    @RequestMapping("/sexCount")
+    @ResponseBody
+    public List<Map<String,Object>> sexCount(){
+        List<Integer> sexs =  studentManagementService.findSexCount();
+        Map<String,Object> map1 = new HashMap<>();
+        Map<String,Object> map2 = new HashMap<>();
+        map1.put("name","女");
+        map1.put("value",sexs.get(0));
+        map2.put("name","男");
+        map2.put("value",sexs.get(1));
+        List<Map<String,Object>> data = new ArrayList<>();
+        data.add(map1);
+        data.add(map2);
+        return data;
+    }
+
+
 }
