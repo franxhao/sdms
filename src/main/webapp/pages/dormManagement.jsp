@@ -459,11 +459,11 @@
             dataType: "json",
             success: function (result) {
                 // $("#buildId1").val(result["dorm"].buildId)
-                $("#dorId1").val(result["dorm"].dorId);
-                $("#dorSex1").val(result["dorm"].dorSex);
-                $("#dorNum1").val(result["dorm"].dorNum);
-                $("#dorFact1").val(result["dorm"].dorFact);
-                $("#dorPrice1").val(result["dorm"].dorPrice);
+                $("#dorId1").val(result.dor_id);
+                $("#dorSex1").val(result.dor_sex);
+                $("#dorNum1").val(result.dor_num);
+                $("#dorFact1").val(result.dor_fact);
+                $("#dorPrice1").val(result.dor_price);
             }
         })
     }

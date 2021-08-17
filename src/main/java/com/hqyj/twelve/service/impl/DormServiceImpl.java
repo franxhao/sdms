@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+
 @Service
 
 public class DormServiceImpl implements DormService {
@@ -62,7 +64,7 @@ public class DormServiceImpl implements DormService {
     }
 
     @Override
-    public Dorm queryDormById(Integer dormId) {
+    public Map<String, Object> queryDormById(Integer dormId) {
         return dormDao.queryDormById(dormId);
     }
 }
