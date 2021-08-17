@@ -113,7 +113,7 @@
 					console.log(data);
 					if(data.existsUsername){
 						//true用户名已经存在
-						$("#errorMsg").text("用户名存在");
+						//$("#errorMsg").text("用户名存在");
 					}else{
 						//false用户名不存在
 						if(username == ""){
