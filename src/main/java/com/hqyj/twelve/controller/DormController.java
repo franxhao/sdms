@@ -50,11 +50,9 @@ public class DormController {
     @RequestMapping("/updateDorm")
     @ResponseBody
     public Map<String,Object> updateDorm(@RequestBody Dorm dor){
-        int dorId=dor.getDorId();
-        Dorm dorm = dormService.queryDormById(dorId);
-        Map<String,Object> map = new HashMap<>();
-        map.put("dorm",dorm);
-        return map;
+        Integer dorId=dor.getDorId();
+        Map<String, Object> map1=dormService.queryDormById(dorId);
+        return map1;
     }
     @RequestMapping("/updateDormDo")
     @ResponseBody

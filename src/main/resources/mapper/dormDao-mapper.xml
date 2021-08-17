@@ -23,7 +23,7 @@
         left join student s on s.stu_id = sd.stu_id
 
     </select>
-<select id="queryDormById" resultType="com.hqyj.twelve.pojo.Dorm">
+<select id="queryDormById" resultType="map" parameterType="int">
     select dor_id,dor_sex,dor_num ,dor_fact ,
         dor_price from dorm where dor_id=#{dorId}
 </select>

@@ -43,7 +43,6 @@ private DormDao dormDao;
     @Test
         //按id查阅一个寝室
     public void queryDormById(){
-        Dorm dorm = dormDao.queryDormById(2);
-        System.out.println(dorm);
+        System.out.println(dormDao.queryDormById(3));
     }
 }

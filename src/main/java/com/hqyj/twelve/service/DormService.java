@@ -5,6 +5,7 @@ import com.hqyj.twelve.pojo.Dorm;
 import com.hqyj.twelve.pojo.PageData;
 
 import java.util.List;
+import java.util.Map;
 
 public interface DormService {
     //查询寝室信息
@@ -19,5 +20,5 @@ public interface DormService {
     //pageNumber 页码     pageSize 每页记录数
     PageData<Dorm> getDormByPage(int pageNumber, int pageSize);
     //根据 id 查询 寝室信息
-    Dorm queryDormById(Integer dormId);
+    Map<String, Object> queryDormById(Integer dormId);
 }

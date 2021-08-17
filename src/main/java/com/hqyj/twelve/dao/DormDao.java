@@ -6,6 +6,7 @@ import com.hqyj.twelve.pojo.Dorm;
 import javax.swing.*;
 import java.sql.Driver;
 import java.util.List;
+import java.util.Map;
 
 public interface DormDao {
     //查询寝室信息
@@ -17,5 +18,5 @@ public interface DormDao {
     //删除寝室
     int deleteById(Integer dorId);
     //按id查阅一个寝室
-    Dorm queryDormById(Integer dormId);
+    Map<String, Object> queryDormById(Integer dormId);
 }
