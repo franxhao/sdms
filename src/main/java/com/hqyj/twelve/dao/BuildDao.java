@@ -18,6 +18,6 @@ public interface BuildDao {
 
     //按id查询一个
     //根据 id 查询 楼房信息
-    Building queryBuildById(int buildId);
+    Map<String, Object> queryBuildById(Integer buildId);
 
 }

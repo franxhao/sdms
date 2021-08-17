@@ -266,7 +266,7 @@
                         <div class="form-group">
                             <label>ID</label>
                             <input id="buildId1" type="text" name="buildId1"
-                                   class="form-control" readonly><br/>
+                                   class="form-control" disabled="disabled"><br/>
                         </div>
                         <label>楼房名称</label>
                         <input id="buildName1" type="text" name="buildName1"
@@ -292,7 +292,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn1" data-dismiss="modal">取消</button>
-                <button id="updateAjax" type="button" class="btn btn-primary" onclick="edit_do(id)">提交</button>
+                <button id="updateAjax" type="button" class="btn btn-primary" onclick="edit_do()">提交</button>
             </div>
         </div>
     </div>
@@ -452,11 +452,12 @@
             data: JSON.stringify(build),
             dataType: "json",
             success: function (result) {
-                $("#buildId1").val(result["build"].buildId)
-                $("#buildName1").val(result["build"].buildName)
-                $("#romAmount1").val(result["build"].romAmount)
-                $("#floorAmount1").val(result["build"].floorAmount)
-                $("#personAmount1").val(result["build"].personAmount)
+                console.log(result)
+                $("#buildId1").val(result.build_id)
+                $("#buildName1").val(result.build_name)
+                $("#romAmount1").val(result.rom_amount)
+                $("#floorAmount1").val(result.floor_amount)
+                $("#personAmount1").val(result.person_amount)
             }
         })
     }

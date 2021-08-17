@@ -41,7 +41,6 @@ public class buildDaoTest {
     }
     @Test
     public void queryById(){
-        Building buildingList = buildDao.queryBuildById(3);
-        System.out.println(buildingList);
+        System.out.println(buildDao.queryBuildById(3));
     }
 }
