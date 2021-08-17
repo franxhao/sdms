@@ -110,10 +110,10 @@ public class StudentManagementController {
                 student.setStuTel(arr[9]);
                 studentManagementService.addStuforStudent(student);
             }
-            return "redirect:/";
+            return "redirect:/stuManagement/findAll";
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:/";
+            return "redirect:/stuManagement/findAll";
         }
     }
 

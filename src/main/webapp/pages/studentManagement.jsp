@@ -64,8 +64,8 @@
 		}
 		.fileDown{
 			position: absolute;
-			top: 57px;
-			left: 344px !important;
+			top: 43px;
+			left: 415px !important;
 		}
 
 		.box-tools button:hover {
@@ -330,6 +330,11 @@
 										 <button type="button" class="btn btn-default" title="男女比例">
 											 <a href="javascript:" onclick="layer_show('男女比例','${pageContext.request.contextPath}/pages/sexInfo.jsp',600,600)">男女比例</a>
 										 </button>
+										 <shiro:hasRole name="管理员">
+										 <button type="button" class="btn btn-default" title="模板下载">
+											 <a href="javascript:" onclick="downExcel()">模板下载</a>
+										 </button>
+										 </shiro:hasRole>
 
 									</div>
 								</div>
@@ -337,7 +342,8 @@
 							<!-- 文件上传 -->
 							<shiro:hasRole name="管理员">
 							<form id="uploadForm" class="fileDown" name="uploadForm" action="${pageContext.request.contextPath}/stuManagement/upload" method="post" enctype="multipart/form-data">
-									<input type="file" name="excelFile" onchange="doUpload()"><br/>
+									<input type="file" name="excelFile"/>
+									<input type="submit" value="提交">
 							</form>
 							</shiro:hasRole>
 							<select id="sel" class="selectpicker downlist" multiple title="-- 请选择查询方式 --">
@@ -608,6 +614,12 @@
 				$(".ttbody").html("")
 			})
 
+	</script>
+
+	<script>
+		function downExcel() {
+			window.location.href="../template/studentsAdd.xlsx";
+		}
 	</script>
 </body>
 

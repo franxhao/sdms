@@ -50,7 +50,7 @@
     axios.get("${pageContext.request.contextPath}/stuManagement/sexCount").then((res)=>{
         var option = {
             title : {
-                text: '套餐预约占比',
+                text: '男女占比',
                 subtext: '',
                 x:'center'
             },
@@ -65,7 +65,7 @@
             },
             series : [
                 {
-                    name: '套餐预约占比',
+                    name: '男女占比',
                     type: 'pie',
                     radius : '55%',
                     center: ['50%', '60%'],

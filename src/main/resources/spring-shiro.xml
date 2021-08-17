@@ -47,6 +47,7 @@
                     /index.jsp = anon
                     /user/login = anon
                     /user/ajaxQueryUsername =anon
+                    /stuManagement/upload =anon
                     /admin/**=roles[管理员]
                     /** = authc
 
