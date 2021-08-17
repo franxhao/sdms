@@ -211,4 +211,9 @@ public class StudentManagementServiceImpl implements StudentManagementService {
     public void addStuforStudent(Student student) {
         studentDao.addStuforStudent(student);
     }
+
+    @Override
+    public List<Student> queryLike(String inputVal) {
+        return studentDao.queryLike(inputVal);
+    }
 }

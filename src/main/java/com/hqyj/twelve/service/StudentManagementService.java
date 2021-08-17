@@ -61,4 +61,11 @@ public interface StudentManagementService {
      * @param student
      */
     void addStuforStudent(Student student);
+
+    /**
+     * 模糊查询
+     * @param value
+     * @return
+     */
+    List<Student> queryLike(String value);
 }

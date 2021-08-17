@@ -1,5 +1,6 @@
 package com.hqyj.twelve.controller;
 
+import com.hqyj.twelve.pojo.Administrator;
 import com.hqyj.twelve.pojo.PageData;
 import com.hqyj.twelve.pojo.Student;
 import com.hqyj.twelve.service.StudentManagementService;
@@ -114,6 +115,13 @@ public class StudentManagementController {
             e.printStackTrace();
             return "redirect:/";
         }
+    }
+
+    @RequestMapping("/queryLike")
+    @ResponseBody
+    //模糊查询
+    public List<Student> queryLike(String value){
+        return studentManagementService.queryLike(value);
     }
 
 }

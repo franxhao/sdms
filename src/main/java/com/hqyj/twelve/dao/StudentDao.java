@@ -78,4 +78,11 @@ public interface StudentDao {
      * @param student
      */
     void addStuforStudent(Student student);
+
+    /**
+     * 模糊查询
+     * @param inputVal
+     * @return
+     */
+    List<Student> queryLike(String inputVal);
 }

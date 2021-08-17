@@ -93,5 +93,18 @@
         insert into student (stu_key,stu_name,stu_sex,stu_enr,stu_birth,stu_college,stu_major,stu_class,stu_address,stu_tel,stu_state) values (#{stuKey},#{stuName},#{stuSex},#{stuEnr},#{stuBirth},#{stuCollege},#{stuMajor},#{stuClass},#{stuAddress},#{stuTel},'未入住')
     </insert>
 
+    <!-- 模糊查询 -->
+    <select id="queryLike" resultMap="baseStudentResultMap" parameterType="string">
+        <include refid="studentField"/> from student
+         <where>
+             <if test="value != null and value != ''">
+                 stu_name like concat("%",#{inputVal},"%")
+                 or stu_key like concat("%",#{inputVal},"%")
+                 or stu_Class like concat("%",#{inputVal},"%")
+                 or stu_State like concat("%",#{inputVal},"%")
+             </if>
+         </where>
+    </select>
+
 
 </mapper>

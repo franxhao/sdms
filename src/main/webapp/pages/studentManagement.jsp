@@ -20,6 +20,41 @@
 
 	<!--导入外部的css样式文件-->
 	<jsp:include page="/commons/css.jsp"/>
+	<style type="text/css">
+		.modal-dialog {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+
+		.modal-content {
+			/*overflow-y: scroll; */
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			width: 100%;
+		}
+
+		.modal-body {
+			overflow-y: scroll;
+			position: absolute;
+			top: 55px;
+			bottom: 65px;
+			width: 100%;
+		}
+
+		.modal-header .close {
+			margin-right: 15px;
+		}
+
+		.modal-footer {
+			position: absolute;
+			width: 100%;
+			bottom: 0;
+		}
+	</style>
 
 	<style>
 		.downlist{
@@ -36,8 +71,9 @@
 		.box-tools button:hover {
 			background-color: #d4d0c8;
 		}
-
 	</style>
+
+
 <body class="hold-transition skin-blue sidebar-mini">
 
 	<div class="wrapper">
@@ -223,6 +259,47 @@
 				</div><!-- /.modal-dialog -->
 			</div><!-- /.modal -->
 
+
+			<!-- 查询学生信息模态框 -->
+			<div id="queryModal" class="modal fade" tabindex="-1" role="dialog">
+				<div class="modal-dialog" role="document" style="width: 1100px">
+					<div class="modal-content" align="center">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title">查询结果</h4>
+						</div>
+						<div class="modal-body">
+							<%-- 模态框中间部分 --%>
+								<table id="dataList1"
+									   class="table table-bordered table-striped table-hover dataTable">
+									<thead>
+									<tr>
+										<th class="sorting_asc">学号</th>
+										<th class="sorting_desc">姓名</th>
+										<th class="sorting">性别</th>
+										<th class="sorting">入学日期</th>
+										<th class="sorting">出生日期</th>
+										<th class="sorting">学院</th>
+										<th class="sorting">专业</th>
+										<th class="sorting">班级</th>
+										<th class="sorting">家庭住址</th>
+										<th class="sorting">联系方式</th>
+									</tr>
+									</thead>
+									<tbody class="ttbody">
+
+									</tbody>
+
+								</table>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						</div>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+
 				<!-- 正文区域 -->
 				<section class="content"> <!-- .box-body -->
 				<div class="box box-primary">
@@ -263,10 +340,10 @@
 							</form>
 							</shiro:hasRole>
 							<select id="sel" class="selectpicker downlist" multiple title="-- 请选择查询方式 --">
-								<option value="sel1">按寝室查询</option>
 								<option value="sel2">按学号查询</option>
 								<option value="sel3">按姓名查询</option>
 								<option value="sel4">按班级查询</option>
+<%--								<option value="sel1">按寝室查询</option>--%>
 								<option value="sel5">按住宿情况查询</option>
 							</select>
 
@@ -488,10 +565,10 @@
 				if (e.keyCode == 13) {
 					var name = $("#search").val()
 					$.ajax({
-						url: "${pageContext.request.contextPath}/admin/queryAdminByUsernameLike",
+						url: "queryLike",
 						type: "post",
 						data: {
-							username: name
+							value: name
 						},
 						dataType: "json",
 						success: function (result) {
@@ -500,23 +577,19 @@
 							} else {
 								$("#queryModal").modal("show");
 								$.each(result, function (i, item) {
-									var a;
-									if(item.roleId ==1){
-										a= "管理员";
-									}else if(item.roleId ==2){
-										a="宿管"
-									};
+									console.log(result)
 									$(".ttbody").append(
 											`<tr>
-							<td >` + item.adUsername + `</td>
-							<td >` + item.adName + `</td>
-							<td >` + item.adSex + `</td>
-							<td >` + item.adAge + `</td>
-							<td >` + item.adJob + `</td>
-							<td >` + item.adPhone + `</td>
-							<td >` + item.adAddress + `</td>
-							<td >` + a + `</td>
-							<td >` + item.adDes + `</td>
+							<td >` + item.stuKey + `</td>
+							<td >` + item.stuName + `</td>
+							<td >` + item.stuSex + `</td>
+							<td >` + item.stuEnr + `</td>
+							<td >` + item.stuBirth + `</td>
+							<td >` + item.stuCollege + `</td>
+							<td >` + item.stuMajor + `</td>
+							<td >` + item.stuClass + `</td>
+							<td >` + item.stuAddress + `</td>
+							<td >` + item.stuTel + `</td>
 							</tr>`
 									)
 								})
@@ -529,6 +602,11 @@
 					})
 				}
 			})
+			//清空 <tbody class="ttbody">
+			$("#tremove").click(function () {
+				$(".ttbody").html("")
+			})
+
 	</script>
 </body>
 
