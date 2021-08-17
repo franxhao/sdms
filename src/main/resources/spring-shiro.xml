@@ -46,6 +46,7 @@
                     /kaptcha.jpg = anon
                     /index.jsp = anon
                     /user/login = anon
+                    /user/ajaxQueryUsername =anon
                     /admin/**=roles[管理员]
                     /** = authc
 

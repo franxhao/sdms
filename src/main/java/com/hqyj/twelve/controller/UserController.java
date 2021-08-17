@@ -1,5 +1,7 @@
 package com.hqyj.twelve.controller;
 
+import com.hqyj.twelve.pojo.Administrator;
+import com.hqyj.twelve.pojo.Employee;
 import com.hqyj.twelve.service.AdminService;
 import com.hqyj.twelve.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AdminService adminService;
 
     /**
      *
@@ -80,6 +85,30 @@ public class UserController {
     public String logout(){
          userService.logout();
       return "redirect:/login.jsp";
+    }
+
+    @RequestMapping("/ajaxQueryUsername")
+    @ResponseBody
+    //ajax查询用户名是否存在
+    public Map<String, Boolean> ajaxQueryUsername(String username){
+        Map<String,Boolean> map = new HashMap<>();
+        if(username ==null){
+            map.put("existsUsername",false);
+           return map;
+        }
+        Administrator admin = adminService.queryAdminByUsername(username);
+        if(admin == null){
+            Employee emp = adminService.queryEmpByUsername(username);
+            if(emp == null){
+                map.put("existsUsername",false);
+            }else{
+                map.put("existsUsername",true);
+            }
+        }else{
+           map.put("existsUsername",true);
+
+        }
+        return map;
     }
 
 }

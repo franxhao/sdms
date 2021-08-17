@@ -36,15 +36,15 @@
 			<form action="${pageContext.request.contextPath}/user/login"
 				method="post">
 				<div class="form-group has-feedback">
-					<input type="text" name="username" class="form-control"
+					<input type="text" id="username" name="username" class="form-control"
 						placeholder="用户名" value="${cookie.name.value}"> <span
 						class="glyphicon glyphicon-envelope form-control-feedback"></span>
+					<span id="errorMsg" style="color: red"></span>
 				</div>
 				<div class="form-group has-feedback">
 					<input type="password" name="password" id="password" class="form-control"
 						placeholder="密码" value="${cookie.password.value}"> <span
 						class="glyphicon glyphicon-lock form-control-feedback"></span>
-					<span id="errorMsg"></span>
 				</div>
 				<div class="form-group has-feedback">
 					管理员<input type="radio" name="flag" value="1" class="form-control">&nbsp; &nbsp; &nbsp; &nbsp;
@@ -87,6 +87,7 @@
 	<script
 		src="${pageContext.request.contextPath}/plugins/iCheck/icheck.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/plugins/layer-3.5.1/layer.js"></script>
+
 	<script>
 		$(function() {
 			$('input').iCheck({
@@ -95,6 +96,37 @@
 				increaseArea : '20%' // optional
 			});
 		});
+
+
+		$("#username").blur(function () {
+			//1.获取用户名
+			var username = this.value;
+			//2.
+			$.ajax({
+				url:"${pageContext.request.contextPath}/user/ajaxQueryUsername",
+				type:"post",
+				data:{
+					"username":username,
+				},
+				dataType:"json",
+				success:function (data) {
+					console.log(data);
+					if(data.existsUsername){
+						//true用户名已经存在
+						$("#errorMsg").text("用户名存在");
+					}else{
+						//false用户名不存在
+						if(username == ""){
+							//什么也不显示
+							$("#errorMsg").text("");
+						}else{
+							$("#errorMsg").text("用户名不存在");
+						}
+					}
+				}
+			});
+		});
+
 
 		//给验证码图片绑定单击事件
 		$("#code_img").click(function () {
