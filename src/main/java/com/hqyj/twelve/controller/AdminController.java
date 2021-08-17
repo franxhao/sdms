@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -155,5 +156,12 @@ public class AdminController {
         //将加密密码再次存入emp中。
         emp.setEmpPassword(hashPassword);
         int num = adminService.updateEmpById(emp);
+    }
+
+    @RequestMapping("/queryAdminByUsernameLike")
+    @ResponseBody
+    //通过用户名模糊查询管理员
+    public List<Administrator> queryAdminByUsernameLike(String username){
+      return adminService.queryAdminByUsernameLike(username);
     }
 }

@@ -109,4 +109,9 @@ public class AdminServiceImpl implements AdminService {
         pageData.setList(pageInfo.getList());
         return pageData;
     }
+
+    @Override
+    public List<Administrator> queryAdminByUsernameLike(String username) {
+        return adminDao.queryAdminByUsernameLike("%"+username+"%");
+    }
 }
