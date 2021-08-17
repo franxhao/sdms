@@ -58,7 +58,15 @@
         </div>
         <div class="form-group">
             <label>寝室楼栋</label>
-            <input id="buildId" type="text" name="buildId"   class="form-control"><br/>
+            <select id="buildId" class="selectpicker form-control" title="-- 请选择楼栋 --" >
+                <option class="buildId" value="2">海棠苑男</option>
+                <option class="buildId" value="3">桂花苑男</option>
+                <option class="buildId" value="4">桂花苑女</option>
+                <option class="buildId" value="5">蓝雾苑男</option>
+                <option class="buildId" value="6">蓝雾苑女</option>
+                <option class="buildId" value="8">海棠苑女</option>
+            </select>
+<%--            <input id="buildId" type="text" name="buildId"   class="form-control"><br/>--%>
         </div>
         <div class="form-group">
             <label>备注</label>
