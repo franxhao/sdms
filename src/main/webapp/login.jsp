@@ -41,9 +41,10 @@
 						class="glyphicon glyphicon-envelope form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
-					<input type="password" name="password" class="form-control"
+					<input type="password" name="password" id="password" class="form-control"
 						placeholder="密码" value="${cookie.password.value}"> <span
 						class="glyphicon glyphicon-lock form-control-feedback"></span>
+					<span id="errorMsg"></span>
 				</div>
 				<div class="form-group has-feedback">
 					管理员<input type="radio" name="flag" value="1" class="form-control">&nbsp; &nbsp; &nbsp; &nbsp;
@@ -100,7 +101,21 @@
 			//在事件响应的function函数中有一个this函数，这个this对象，是当前正在响应事假的dom对象。
 			this.src="${pageContext.request.contextPath}/kaptcha.jpg?d="+new Date();
 		});
-      $("#sub_btn").click(function () {
+       $("#sub_btn").click(function () {
+
+		   //验证用户密码：必须由字母，数字下划线组成，并且长度为5-12位
+		   //1.获取用户密码输入框里的内容
+		   var passwordText =  $("#password").val();
+		   //2.创建正则表达式对象
+		   var  passwordPatt =/^\w{5,10}$/;
+		   //3.使用test方法验证
+		   if(!passwordPatt.test(passwordText)){
+			   //4.返回false提示用户结果
+			   layer.msg("用户密码应在5-10位");
+			   return false;
+		   }
+
+
           //验证码，现在只需要验证用户已输入，因为还没讲到服务器，验证码生成
 		  var codeText = $("#code").val();
 		  //去掉验证码前后空格
