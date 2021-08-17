@@ -62,7 +62,7 @@
 					</div>
 					<!-- /.col -->
 					<div class="col-xs-4">
-						<button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
+						<button id="sub_btn" type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
 					</div>
 					<!-- /.col -->
 				</div>
@@ -85,6 +85,7 @@
 		src="${pageContext.request.contextPath}/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/plugins/iCheck/icheck.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/plugins/layer-3.5.1/layer.js"></script>
 	<script>
 		$(function() {
 			$('input').iCheck({
@@ -99,6 +100,17 @@
 			//在事件响应的function函数中有一个this函数，这个this对象，是当前正在响应事假的dom对象。
 			this.src="${pageContext.request.contextPath}/kaptcha.jpg?d="+new Date();
 		});
+      $("#sub_btn").click(function () {
+          //验证码，现在只需要验证用户已输入，因为还没讲到服务器，验证码生成
+		  var codeText = $("#code").val();
+		  //去掉验证码前后空格
+		  codeText =$.trim(codeText);
+		  if(codeText == null || codeText == ""){
+			  layer.msg("验证码不能为空");
+			  return false;
+		  }
+
+	  })
 
 	</script>
 </body>
