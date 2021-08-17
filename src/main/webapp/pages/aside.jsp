@@ -47,25 +47,30 @@
 						href="${pageContext.request.contextPath}/stuManagement/findAll"> <i
 							class="fa fa-circle-o"></i> 学生信息管理
 					</a></li>
-
+                    <shiro:hasRole name="管理员">
                     <li><a
                             href="${pageContext.request.contextPath}/admin/page">
                         <i class="fa fa-circle-o"></i> 管理员管理
                     </a></li>
-
+					</shiro:hasRole>
+                    <shiro:hasRole name="管理员">
 					<li><a
 							href="${pageContext.request.contextPath}/admin/listEmp">
 						<i class="fa fa-circle-o"></i> 员工管理
 					</a></li>
+					</shiro:hasRole>
+                    <shiro:hasRole name="管理员">
 					<li><a
 							href="${pageContext.request.contextPath}/building/queryAllBuild">
 						<i class="fa fa-circle-o"></i> 楼房管理
 					</a></li>
+					</shiro:hasRole>
+                    <shiro:hasRole name="管理员">
 					<li><a
 							href="${pageContext.request.contextPath}/dorm/queryAllDorm">
 						<i class="fa fa-circle-o"></i> 寝室管理
 					</a></li>
-
+                     </shiro:hasRole>
 
 
 				</ul></li>
@@ -85,9 +90,9 @@
 							<i class="fa fa-circle-o"></i> 订单管理
 					</a></li>--%>
 
-					<li><a href="${pageContext.request.contextPath}/pages/syslog-list.jsp">
-						<i class="fa fa-circle-o"></i> 访问日志
-					</a></li>
+<%--					<li><a href="${pageContext.request.contextPath}/pages/syslog-list.jsp">--%>
+<%--						<i class="fa fa-circle-o"></i> 访问日志--%>
+<%--					</a></li>--%>
 
 					<li><a
 							href="${pageContext.request.contextPath}/goods/getAll"> <i

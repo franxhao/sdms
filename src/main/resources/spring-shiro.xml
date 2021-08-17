@@ -42,14 +42,12 @@
                                              authc  已认证过的用户
                                              user  曾经认证过的用户
                                              roles[角色信息] 具有某个角色的用户
-                                             perms[权限名] 具有某个权限的用户
                 -->
-<!--                    /index.jsp = anon-->
-<!--                    /user/login = anon-->
-<!--                    /user/list = authc-->
-<!--                    /user/** = roles[管理员]-->
-<!--                    /admin/**=roles[管理员]-->
-<!--                    /** = authc-->
+                    /kaptcha.jpg = anon
+                    /index.jsp = anon
+                    /user/login = anon
+                    /admin/**=roles[管理员]
+                    /** = authc
 
             </value>
         </property>

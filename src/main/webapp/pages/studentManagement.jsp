@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -238,10 +239,11 @@
 							<div class="pull-left">
 								<div class="form-group form-inline">
 									 <div class="btn-group">
+										 <shiro:hasRole name="管理员">
 										<button type="button" class="btn btn-default" title="添加" onclick="add()">
 											<i class="fa fa-file-o"></i> 添加
 										</button>
-										
+										 </shiro:hasRole>
 										<button type="button" class="btn btn-default" onclick="location.reload()" title="刷新">
 											<i class="fa fa-refresh"></i> 刷新
 										</button>
@@ -251,10 +253,11 @@
 								</div>
 							</div>
 							<!-- 文件上传 -->
+							<shiro:hasRole name="管理员">
 							<form id="uploadForm" class="fileDown" name="uploadForm" action="${pageContext.request.contextPath}/stuManagement/upload" method="post" enctype="multipart/form-data">
 									<input type="file" name="excelFile" onchange="doUpload()"><br/>
 							</form>
-
+							</shiro:hasRole>
 							<select id="sel" class="selectpicker downlist" multiple title="-- 请选择查询方式 --">
 								<option value="sel1">按寝室查询</option>
 								<option value="sel2">按学号查询</option>
@@ -291,7 +294,10 @@
 										<th class="sorting">班级</th>
 										<th class="sorting">住宿状态</th>
 										<th class="sorting">联系方式</th>
+
+										<shiro:hasRole name="管理员">
 										<th class="sorting">操作</th>
+										</shiro:hasRole>
 
 									</tr>
 								</thead>
@@ -306,10 +312,14 @@
 										<td>${one.stuClass}</td>
 										<td>${one.stuState}</td>
 										<td>${one.stuTel}</td>
+
+										<shiro:hasRole name="管理员">
 										<td class="text-center">
 											<a href="javascript:" onclick="edit1('${one.stuKey}','${one.stuName}')" class="btn bg-olive btn-xs ">修改</a>
 											<a href="#" class="btn bg-red btn-xs" onclick="delete_do('${one.stuKey}','${one.stuName}')">删除</a>
 										</td>
+										</shiro:hasRole>
+
 									</tr>
 									</c:forEach>
 								</tbody>

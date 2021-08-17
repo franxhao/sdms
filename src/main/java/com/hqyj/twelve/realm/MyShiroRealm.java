@@ -93,22 +93,22 @@ public class MyShiroRealm extends AuthorizingRealm {
 
        //查询系统中待授权用户的权限信息：角色信息，权限信息
         if(flag.equals("admin")){
-           // Administrator admin = adminService.queryAdminByUsername(username);
-//        Set<String> roles = new HashSet<>();
-//        roles.add(roleService.queryRoleById(admin.getRoleId()).getRoleName());
+            Administrator admin = adminService.queryAdminByUsername(username);
+        Set<String> roles = new HashSet<>();
+        roles.add(roleService.queryRoleById(admin.getRoleId()).getRoleName());
             //赋予角色相关的授权信息
-//         info.setRoles(roles);
+         info.setRoles(roles);
         }
         if(flag.equals("emp")) {
-//          Employee emp = adminService.queryEmpByUsername(username);
-//        Set<String> roles = new HashSet<>();
-//        roles.add(roleService.queryRoleById(emp.getRoleId()).getRoleName());
+          Employee emp = adminService.queryEmpByUsername(username);
+        Set<String> roles = new HashSet<>();
+        roles.add(roleService.queryRoleById(emp.getRoleId()).getRoleName());
             //赋予角色相关的授权信息
-//         info.setRoles(roles);
+         info.setRoles(roles);
         }
 
-//         return info;
-          return  null;
+         return info;
+//          return  null;
     }
 
     @Override
